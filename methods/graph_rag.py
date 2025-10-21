@@ -26,11 +26,12 @@ def _extract_names_from_query(q: str) -> List[str]:
     for m in re.findall(r'(?:[A-Z][a-zA-Z0-9]+(?:\s+[A-Z][a-zA-Z0-9]+)+)', q):
         seeds.append(m.strip())
     
-    # Add common system names (case-insensitive)
+    # Add common system names (case-insensitive) - prioritize these
     common_systems = [
         'salesforce', 'sap', 'azure', 'aws', 'mulesoft', 'servicenow', 
         'oracle', 'microsoft', 'google', 'amazon', 'ibm', 'workday',
-        'snowflake', 'databricks', 'tableau', 'powerbi', 'qlik'
+        'snowflake', 'databricks', 'tableau', 'powerbi', 'qlik', 'ls',
+        'oanda', 'bitcoin', 'ecb', 'eam', 'planned'
     ]
     
     q_lower = q.lower()
@@ -38,9 +39,11 @@ def _extract_names_from_query(q: str) -> List[str]:
         if system in q_lower:
             seeds.append(system.title())  # Capitalize first letter
     
-    # Add single TitleCase words that might be system names
+    # Add single TitleCase words that might be system names (but exclude common words)
+    common_words = {'show', 'all', 'systems', 'connected', 'to', 'from', 'find', 'what', 'which', 'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'by', 'for', 'with', 'without', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'can', 'path', 'paths', 'interface', 'interfaces', 'data', 'flow', 'flows'}
+    
     for m in re.findall(r'\b[A-Z][a-zA-Z0-9]+\b', q):
-        if len(m) > 2:  # Avoid short words like "The", "To", etc.
+        if len(m) > 2 and m.lower() not in common_words:  # Avoid common words
             seeds.append(m)
     
     # Deduplicate while preserving order
@@ -55,7 +58,7 @@ def _extract_names_from_query(q: str) -> List[str]:
     return out
 
 
-def run(query: str, data: List[Dict[str, Any]] | None = None, max_hops: int = 2, path_limit: int = 5, **kwargs):
+def run(query: str, data: List[Dict[str, Any]] | None = None, max_hops: int = 2, path_limit: int = 5, llm_model: str = None, llm_manager = None, **kwargs):
     """
     Graph RAG: Query Neo4j graph database for relationship analysis
     
@@ -112,8 +115,8 @@ def run(query: str, data: List[Dict[str, Any]] | None = None, max_hops: int = 2,
             seed_variations = [seeds[0], seeds[0].lower(), seeds[0].upper(), seeds[0].title()]
             debug_info.append(f"  • Seed variations: {seed_variations}")
             
-            # Neighborhood around first seed (assume system name)
-            neighborhood = store.k_hop_neighborhood(seed_names=seed_variations, max_hops=max_hops, limit=200)
+            # Neighborhood around first seed (assume system name) - increased limit for comprehensive results
+            neighborhood = store.k_hop_neighborhood(seed_names=seed_variations, max_hops=max_hops, limit=1000)
             debug_info.append(f"  • Found {len(neighborhood)} neighborhood nodes")
 
         # If the query appears to mention a sender and a receiver (two seeds), try shortest path
@@ -143,19 +146,47 @@ def run(query: str, data: List[Dict[str, Any]] | None = None, max_hops: int = 2,
             name = node.get('name') if isinstance(node, dict) else None
             return f"{labels}:{name}" if name else f"{labels}"
 
-        neighborhood_lines = [label_and_name(r) for r in neighborhood][:20]
+        neighborhood_lines = [label_and_name(r) for r in neighborhood]  # Show ALL results, no limit
         path_count = len(paths)
         summary_lines: List[str] = []
-        summary_lines.append(f"Graph RAG (Neo4j) results for query '{query}':")
         
-        # Add debug info to summary
-        summary_lines.extend(debug_info)
-        
+        # Create a user-friendly summary
         if neighborhood_lines:
-            summary_lines.append("- Neighborhood (sample):")
-            summary_lines.extend([f"  • {line}" for line in neighborhood_lines])
+            summary_lines.append(f"🔍 **Found {len(neighborhood)} systems and interfaces connected to '{seeds[0] if seeds else 'your query'}':**")
+            summary_lines.append("")
+            
+            # Group by type for better readability
+            interfaces = []
+            systems = []
+            
+            for line in neighborhood_lines:
+                if 'Interface' in line:
+                    interfaces.append(line)
+                elif 'System' in line:
+                    systems.append(line)
+                else:
+                    interfaces.append(line)  # Default to interfaces
+            
+            if systems:
+                summary_lines.append("**Connected Systems:**")
+                for system in systems[:10]:
+                    name = system.split(':')[-1] if ':' in system else system
+                    summary_lines.append(f"  • {name}")
+                summary_lines.append("")
+            
+            if interfaces:
+                summary_lines.append("**Related Interfaces:**")
+                for interface in interfaces[:10]:
+                    name = interface.split(':')[-1] if ':' in interface else interface
+                    # Truncate long names
+                    if len(name) > 60:
+                        name = name[:57] + "..."
+                    summary_lines.append(f"  • {name}")
+                summary_lines.append("")
+                
         if path_count:
-            summary_lines.append(f"- Shortest paths found: {path_count} (showing up to {path_limit})")
+            summary_lines.append(f"🛤️ **Found {path_count} direct paths** between the specified systems.")
+            summary_lines.append("")
         
         if not neighborhood_lines and path_count == 0:
             # Try a fallback search for interfaces by name
@@ -196,14 +227,99 @@ def run(query: str, data: List[Dict[str, Any]] | None = None, max_hops: int = 2,
                 summary_lines.append("  • No relationships between the systems")
                 summary_lines.append("  • Neo4j connection issues")
 
+        # Always show raw Neo4j results first
+        raw_results = "\n".join(summary_lines)
+        
+        # If LLM model and manager are provided, add LLM synthesis
+        if llm_model and llm_manager:
+            try:
+                # Create a synthesis prompt with ALL available data (not limited)
+                synthesis_prompt = f"""Based on the complete graph analysis results, provide a comprehensive and natural answer to the user's question.
+
+User Question: {query}
+
+Complete Graph Analysis Results:
+- Found {len(neighborhood)} related systems and interfaces
+- Seeds identified: {', '.join(seeds)}
+- All related interfaces: {', '.join(neighborhood_lines)}
+
+Please provide a clear, well-structured answer that explains what systems and interfaces are connected, focusing on the most relevant information for the user's question."""
+
+                # Use the selected LLM model to generate response
+                llm_response = llm_manager.generate_response(
+                    model_name=llm_model,
+                    system_prompt="You are an expert in system integration and API analysis. Provide clear, helpful answers based on graph analysis results.",
+                    user_prompt=synthesis_prompt
+                )
+                
+                # Combine raw results and LLM response with clear headings
+                combined_response = f"""## 🔍 Neo4j Query Results
+
+{raw_results}
+
+---
+
+## 🤖 {llm_model} Response
+
+{llm_response}"""
+                
+                # Update metadata to include LLM usage
+                meta: Dict[str, Any] = {
+                    "method": "graph_rag",
+                    "backend": backend,
+                    "seeds": seeds,
+                    "neighborhood_count": len(neighborhood),
+                    "paths_count": path_count,
+                    "debug_info": debug_info,
+                    "llm_model_used": llm_model,
+                    "llm_synthesis": True,
+                    "raw_results_count": len(neighborhood_lines),
+                    "all_results_shown": True
+                }
+                
+                return combined_response, meta
+                
+            except Exception as e:
+                # If LLM synthesis fails, show raw results with error message
+                debug_info.append(f"  • LLM synthesis failed: {str(e)}")
+                error_response = f"""## 🔍 Neo4j Query Results
+
+{raw_results}
+
+---
+
+## ⚠️ LLM Synthesis Failed
+
+LLM synthesis failed with error: {str(e)}
+Showing raw Neo4j results above."""
+                
+                meta: Dict[str, Any] = {
+                    "method": "graph_rag",
+                    "backend": backend,
+                    "seeds": seeds,
+                    "neighborhood_count": len(neighborhood),
+                    "paths_count": path_count,
+                    "debug_info": debug_info,
+                    "llm_model_used": llm_model,
+                    "llm_synthesis": False,
+                    "llm_error": str(e),
+                    "raw_results_count": len(neighborhood_lines),
+                    "all_results_shown": True
+                }
+                
+                return error_response, meta
+
+        # If no LLM provided, just show raw results
         meta: Dict[str, Any] = {
             "method": "graph_rag",
             "backend": backend,
             "seeds": seeds,
             "neighborhood_count": len(neighborhood),
             "paths_count": path_count,
-            "debug_info": debug_info
+            "debug_info": debug_info,
+            "raw_results_count": len(neighborhood_lines),
+            "all_results_shown": True
         }
-        return "\n".join(summary_lines), meta
+        return raw_results, meta
     finally:
         store.close()

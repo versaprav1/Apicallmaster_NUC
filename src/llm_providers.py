@@ -363,10 +363,24 @@ class LLMProviderManager:
     def check_api_key_for_model(self, model_name: str) -> bool:
         """
         Check if the required API key for the given model is set.
+        For Ollama models, check if the Ollama service is accessible instead.
         """
         config = self.models.get(model_name)
         if not config:
             return False
+        
+        # Special handling for Ollama models
+        if config.provider == LLMProvider.OLLAMA:
+            # For Ollama, check if the service is accessible rather than requiring an API key
+            try:
+                import requests
+                ollama_url = os.getenv(config.api_key_env, "http://localhost:11434")
+                response = requests.get(f"{ollama_url}/api/tags", timeout=3)
+                return response.status_code == 200
+            except:
+                return False
+        
+        # For all other providers, check if API key is set
         return bool(os.getenv(config.api_key_env))
     
     def get_high_context_models(self, min_context: int = 200000) -> Dict[str, ModelConfig]:

@@ -1443,27 +1443,47 @@ def chat_page():
         # LLM Model Selection
         available_models = st.session_state.llm_manager.get_available_models(show_all=True)
         model_names = list(available_models.keys())
-        if model_names:
+
+        # Include local Ollama models in dropdown even if not in config
+        try:
+            local_ollama_models = get_local_ollama_models()
+        except Exception:
+            local_ollama_models = []
+        extra_ollama = [m for m in local_ollama_models if m not in model_names]
+        full_model_list = model_names + extra_ollama
+
+        if full_model_list:
+            default_index = full_model_list.index(st.session_state.selected_model) if st.session_state.selected_model in full_model_list else 0
             selected_model = st.selectbox(
                 "Select LLM Model",
-                model_names,
-                index=model_names.index(st.session_state.selected_model) if st.session_state.selected_model in model_names else 0,
+                full_model_list,
+                index=default_index,
                 key="llm_model_select"
             )
             st.session_state.selected_model = selected_model
-            # Show model info
-            model_info = available_models[selected_model]
-            st.markdown(f"**Model:** {model_info.name}")
-            st.markdown(f"**Provider:** {model_info.provider.value}")
-            st.markdown(f"**Context Length:** {model_info.context_length}")
-            # Show API key status
-            has_key = st.session_state.llm_manager.check_api_key_for_model(selected_model)
-            if has_key:
-                st.success("API key found for this model.")
+            
+            # Show model info (handle both configured and local-only Ollama models)
+            if selected_model in available_models:
+                model_info = available_models[selected_model]
+                st.markdown(f"**Model:** {model_info.name}")
+                st.markdown(f"**Provider:** {model_info.provider.value}")
+                st.markdown(f"**Context Length:** {model_info.context_length}")
+                # Show API key status where applicable
+                has_key = st.session_state.llm_manager.check_api_key_for_model(selected_model)
+                if model_info.provider.value.lower() == "ollama":
+                    st.success("Local Ollama model selected (no API key required).")
+                elif has_key:
+                    st.success("API key found for this model.")
+                else:
+                    st.warning(f"No API key found for {model_info.provider.value}. Add it in credentials to use this model.")
             else:
-                st.warning(f"No API key found for {model_info.provider.value}. You will need to add it before using this model.")
+                # Local-only Ollama model not present in config
+                st.markdown(f"**Model:** {selected_model}")
+                st.markdown("**Provider:** ollama")
+                st.markdown("**Context Length:** unknown")
+                st.success("Local Ollama model selected (no API key required).")
         else:
-            st.warning("No LLM models available. Please check your API keys.")
+            st.warning("No LLM models available. Please check your API keys or Ollama installation.")
     
     st.markdown("---")
     
@@ -1527,7 +1547,12 @@ def chat_page():
             selected_model = st.session_state.selected_model
             has_key = st.session_state.llm_manager.check_api_key_for_model(selected_model)
             if not has_key:
-                st.error(f"No API key found for the selected model's provider. Please add the API key in your credentials to use this model.")
+                # Get model info to check if it's Ollama
+                model_info = st.session_state.llm_manager.models.get(selected_model)
+                if model_info and model_info.provider.value.lower() == "ollama":
+                    st.error("Ollama service is not accessible. Please make sure Ollama is running on localhost:11434")
+                else:
+                    st.error(f"No API key found for the selected model's provider. Please add the API key in your credentials to use this model.")
                 return
             with st.spinner("Processing your question..."):
                 # Step 1: Determine data source type for routing
@@ -1585,8 +1610,12 @@ def chat_page():
                             if 'neo4j_password' in locals():
                                 os.environ['NEO4J_PASSWORD'] = neo4j_password
                         
+                        # Add LLM model and manager to method_params for GraphRAG
+                        method_params["llm_model"] = selected_model
+                        method_params["llm_manager"] = st.session_state.llm_manager
+                        
                         # GraphRAG works directly with Neo4j - no local data needed
-                        # It will query Neo4j database for relationships
+                        # It will query Neo4j database for relationships and use LLM for synthesis
                         result, meta = method_router.execute_method(method_name, method_params)
                         
                         # Calculate execution time
@@ -2167,6 +2196,179 @@ def interfaces_objects_matrix_page():
         st.info("Matrix analysis for Local JSON File is not yet implemented. Please use DuckDB source.")
 
 
+def get_local_ollama_models(host: str = "http://localhost:11434") -> list[str]:
+    """Get locally available Ollama models with better error handling"""
+    import requests
+    try:
+        response = requests.get(f"{host}/api/tags", timeout=5)
+        response.raise_for_status()
+        data = response.json()
+        models = [m["name"] for m in data.get("models", []) if "name" in m]
+        return models
+    except Exception as e:
+        print(f"Error fetching Ollama models: {str(e)}")
+        return []
+
+def models_page():
+    """Display available LLM models and their capabilities"""
+    import pandas as pd
+    import os
+    from src.llm_providers import LLMProviderManager, LLMProvider
+
+    st.title("🤖 LLM Models")
+    st.markdown("Browse available language models and their capabilities.")
+
+    # Initialize LLM provider manager
+    try:
+        llm_manager = LLMProviderManager()
+        all_models = llm_manager.get_available_models(show_all=True)
+    except Exception as e:
+        st.error(f"Error initializing LLM manager: {str(e)}")
+        return
+
+    # Get locally available Ollama models
+    with st.spinner("Checking for local Ollama models..."):
+        local_ollama_models = get_local_ollama_models()
+    
+    if local_ollama_models:
+        st.success(f"Found {len(local_ollama_models)} Ollama models")
+        # Show first few models as a preview
+        preview_models = local_ollama_models[:5]
+        st.info(f"Sample models: {', '.join(preview_models)}{'...' if len(local_ollama_models) > 5 else ''}")
+    else:
+        st.warning("No Ollama models found. Make sure Ollama is running on localhost:11434")
+
+    # Build model information table
+    rows = []
+    
+    # Add configured models
+    for model_name, config in all_models.items():
+        # Check if API key is available
+        api_key_available = bool(os.getenv(config.api_key_env))
+        
+        # Check if it's a local Ollama model
+        is_local_ollama = config.provider == LLMProvider.OLLAMA
+        is_installed = model_name in local_ollama_models if is_local_ollama else True
+        
+        # Determine availability status
+        if is_local_ollama:
+            status = "✅ Installed" if is_installed else "❌ Not Installed"
+        else:
+            status = "✅ Available" if api_key_available else "❌ No API Key"
+        
+        # Format capabilities
+        capabilities = []
+        if config.supports_json:
+            capabilities.append("JSON")
+        if config.supports_images:
+            capabilities.append("Images")
+        capabilities_str = ", ".join(capabilities) if capabilities else "Text only"
+        
+        # Format cost
+        if config.cost_per_1k_tokens == 0.0:
+            cost_str = "Free (Local)"
+        else:
+            cost_str = f"${config.cost_per_1k_tokens:.4f}/1k tokens"
+        
+        rows.append({
+            "Model": model_name,
+            "Provider": config.provider.value.title(),
+            "Context": f"{config.context_length:,}",
+            "Cost": cost_str,
+            "Capabilities": capabilities_str,
+            "Status": status,
+            "Description": config.description
+        })
+    
+    # Add any additional local Ollama models not in our config
+    for model_name in local_ollama_models:
+        if not any(row["Model"] == model_name for row in rows):
+            rows.append({
+                "Model": model_name,
+                "Provider": "Ollama",
+                "Context": "Unknown",
+                "Cost": "Free (Local)",
+                "Capabilities": "Text only",
+                "Status": "✅ Installed",
+                "Description": "Local Ollama model (not in config)"
+            })
+
+    if rows:
+        df = pd.DataFrame(rows)
+        
+        # Add filters
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            provider_filter = st.selectbox("Filter by Provider", ["All"] + list(df["Provider"].unique()))
+        with col2:
+            status_filter = st.selectbox("Filter by Status", ["All"] + list(df["Status"].unique()))
+        with col3:
+            show_available_only = st.checkbox("Show Available Only", value=True)
+        
+        # Apply filters
+        filtered_df = df.copy()
+        if provider_filter != "All":
+            filtered_df = filtered_df[filtered_df["Provider"] == provider_filter]
+        if status_filter != "All":
+            filtered_df = filtered_df[filtered_df["Status"] == status_filter]
+        if show_available_only:
+            filtered_df = filtered_df[filtered_df["Status"].str.contains("✅")]
+        
+        # Display the table
+        st.dataframe(
+            filtered_df,
+            use_container_width=True,
+            height=min(600, 100 + 28 * len(filtered_df)),
+            column_config={
+                "Model": st.column_config.TextColumn("Model", width="medium"),
+                "Provider": st.column_config.TextColumn("Provider", width="small"),
+                "Context": st.column_config.TextColumn("Context Length", width="small"),
+                "Cost": st.column_config.TextColumn("Cost", width="medium"),
+                "Capabilities": st.column_config.TextColumn("Capabilities", width="medium"),
+                "Status": st.column_config.TextColumn("Status", width="small"),
+                "Description": st.column_config.TextColumn("Description", width="large")
+            }
+        )
+        
+        # Summary stats
+        st.markdown("### 📊 Summary")
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("Total Models", len(df))
+        with col2:
+            available_count = len(df[df["Status"].str.contains("✅")])
+            st.metric("Available", available_count)
+        with col3:
+            ollama_count = len(df[df["Provider"] == "Ollama"])
+            st.metric("Ollama Models", ollama_count)
+        with col4:
+            free_count = len(df[df["Cost"].str.contains("Free")])
+            st.metric("Free Models", free_count)
+        
+        # Instructions
+        st.markdown("### 💡 Usage Tips")
+        st.info("""
+        - **Green checkmarks (✅)** indicate models ready to use
+        - **Red X (❌)** means missing API keys or models not installed
+        - **Ollama models** run locally and are free to use
+        - **Cloud models** require API keys (set in environment variables)
+        - Use the filters above to find models by provider or availability
+        """)
+        
+        # Debug section - show all detected models
+        with st.expander("🔍 Debug: All Detected Models", expanded=False):
+            st.markdown("**Configured Models:**")
+            for model_name, config in all_models.items():
+                st.text(f"- {model_name} ({config.provider.value})")
+            
+            st.markdown("**Local Ollama Models:**")
+            for model_name in local_ollama_models:
+                st.text(f"- {model_name}")
+        
+    else:
+        st.warning("No models found. Check your configuration.")
+
+
 def main():
     """Main application"""
     initialize_session_state()
@@ -2179,7 +2381,7 @@ def main():
             st.markdown("### Navigation")
             page = st.radio(
                 "Select Page",
-                ["💬 Chat", "🌐 Browser Automation", "🔍 Interfaces → Objects Matrix"],
+                ["💬 Chat", "🌐 Browser Automation", "🔍 Interfaces → Objects Matrix", "🧩 Models"],
                 key="page_navigation"
             )
         
@@ -2190,6 +2392,8 @@ def main():
             browser_automation_page()
         elif page == "🔍 Interfaces → Objects Matrix":
             interfaces_objects_matrix_page()
+        elif page == "🧩 Models":
+            models_page()
 
 if __name__ == "__main__":
     main()

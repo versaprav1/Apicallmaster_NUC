@@ -1,0 +1,36 @@
+{
+  "log_id": "80e8e1ff6f60d273",
+  "timestamp": "2025-10-21T16:39:21.432586",
+  "question": "Show all systems connected to Salesforce",
+  "answer": "\ud83d\udd0d **Found 13 systems and interfaces connected to 'Salesforce':**\n\n**Related Interfaces:**\n  \u2022 Replicate Business Partners from SAP S/4HANA to Salesforc...\n  \u2022 SALESFORCE | LS |  | ALEAUD | IN\n  \u2022 SALESFORCE | LS |  | ALEAUD | IN\n  \u2022 SALESFORCE | LS |  | ALEAUD | IN\n  \u2022 SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE0...\n  \u2022 SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE0...\n  \u2022 SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE0...\n  \u2022 SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE0...\n  \u2022 SALESFORCE | LS |  | ALEAUD | IN\n  \u2022 SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE0...\n",
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "neo4j",
+  "intent": "graph",
+  "requires_graph": true,
+  "query_type": "graph",
+  "graph_seeds": [
+    "Show",
+    "Salesforce"
+  ],
+  "api_query": null,
+  "endpoint": "neo4j",
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 131.502,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": "neo4j",
+    "seeds_used": [
+      "Salesforce"
+    ],
+    "sender_receiver": {
+      "sender": "show all systems connected",
+      "receiver": "salesforce"
+    }
+  }
+}

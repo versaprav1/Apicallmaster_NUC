@@ -1,0 +1,64 @@
+{
+  "log_id": "5d4e3e0d801a5643",
+  "timestamp": "2025-10-21T16:35:50.437936",
+  "question": "Show all systems connected to Salesforce",
+  "answer": [
+    "Graph RAG (Neo4j) results for query 'Show all systems connected to Salesforce':\n\ud83d\udd0d Graph RAG - Neo4j Query Mode:\n  \u2022 Query: 'Show all systems connected to Salesforce'\n  \u2022 Backend: neo4j\n  \u2022 Max hops: 2\n  \u2022 Path limit: 5\n  \u2022 Mode: Query existing Neo4j data (no ingestion)\n  \u2022 Extracted seeds: ['Salesforce', 'Show']\n  \u2022 Searching neighborhood around seed: 'Salesforce'\n  \u2022 Seed variations: ['Salesforce', 'salesforce', 'SALESFORCE', 'Salesforce']\n  \u2022 Found 13 neighborhood nodes\n  \u2022 Searching shortest path from 'Salesforce' to 'Show'\n  \u2022 Found 0 shortest paths\n  \u2022 Total nodes in Neo4j: 6028\n- Neighborhood (sample):\n  \u2022 ['Interface']:Replicate Business Partners from SAP S/4HANA to Salesforce marketing cloud\n  \u2022 ['Interface']:SALESFORCE | LS |  | ALEAUD | IN\n  \u2022 ['Interface']:SALESFORCE | LS |  | ALEAUD | IN\n  \u2022 ['Interface']:SALESFORCE | LS |  | ALEAUD | IN\n  \u2022 ['Interface']:SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | \n  \u2022 ['Interface']:SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | \n  \u2022 ['Interface']:SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | \n  \u2022 ['Interface']:SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | \n  \u2022 ['Interface']:SALESFORCE | LS |  | ALEAUD | IN\n  \u2022 ['Interface']:SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | \n  \u2022 ['Interface']:SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | \n  \u2022 ['Interface']:SALESFORCE | LS |  | ALEAUD | IN\n  \u2022 ['Interface']:SALESFORCE | LS |  | ALEAUD | IN",
+    {
+      "method": "graph_rag",
+      "backend": "neo4j",
+      "seeds": [
+        "Salesforce",
+        "Show"
+      ],
+      "neighborhood_count": 13,
+      "paths_count": 0,
+      "debug_info": [
+        "\ud83d\udd0d Graph RAG - Neo4j Query Mode:",
+        "  \u2022 Query: 'Show all systems connected to Salesforce'",
+        "  \u2022 Backend: neo4j",
+        "  \u2022 Max hops: 2",
+        "  \u2022 Path limit: 5",
+        "  \u2022 Mode: Query existing Neo4j data (no ingestion)",
+        "  \u2022 Extracted seeds: ['Salesforce', 'Show']",
+        "  \u2022 Searching neighborhood around seed: 'Salesforce'",
+        "  \u2022 Seed variations: ['Salesforce', 'salesforce', 'SALESFORCE', 'Salesforce']",
+        "  \u2022 Found 13 neighborhood nodes",
+        "  \u2022 Searching shortest path from 'Salesforce' to 'Show'",
+        "  \u2022 Found 0 shortest paths",
+        "  \u2022 Total nodes in Neo4j: 6028"
+      ]
+    }
+  ],
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "neo4j",
+  "intent": "graph",
+  "requires_graph": true,
+  "query_type": "graph",
+  "graph_seeds": [
+    "Show",
+    "Salesforce"
+  ],
+  "api_query": null,
+  "endpoint": "neo4j",
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 148.03,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": "neo4j",
+    "seeds_used": [
+      "Show",
+      "Salesforce"
+    ],
+    "sender_receiver": {
+      "sender": "show all systems connected",
+      "receiver": "salesforce"
+    }
+  }
+}

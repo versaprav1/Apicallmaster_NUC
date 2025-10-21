@@ -163,24 +163,32 @@ class MethodRouter:
             data = params.get('data')
             max_hops = params.get('max_hops', self.graph_max_hops)
             path_limit = params.get('path_limit', self.graph_path_limit)
+            llm_model = params.get('llm_model')
+            llm_manager = params.get('llm_manager')
             
             # Remove parameters that are already passed explicitly
             remaining_params = {k: v for k, v in params.items() 
-                              if k not in ['query', 'data', 'max_hops', 'path_limit']}
+                              if k not in ['query', 'data', 'max_hops', 'path_limit', 'llm_model', 'llm_manager']}
             
             result = graph_rag_run(
                 query=query,
                 data=data,
                 max_hops=max_hops,
                 path_limit=path_limit,
+                llm_model=llm_model,
+                llm_manager=llm_manager,
                 **remaining_params
             )
             
-            return result, {
+            # GraphRAG returns (summary_string, meta_dict), so we need to unpack it
+            summary, graph_meta = result
+            
+            return summary, {
                 "method": "graph_rag",
                 "backend": self.graph_backend,
                 "seeds": params.get('graph_seeds', []),
-                "sender_receiver": params.get('sender_receiver')
+                "sender_receiver": params.get('sender_receiver'),
+                **graph_meta  # Include the original GraphRAG metadata
             }
         
         except Exception as e:
