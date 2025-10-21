@@ -1,0 +1,40 @@
+{
+  "log_id": "4e5f670a2e3b1b6a",
+  "timestamp": "2025-10-05T07:30:08.756910",
+  "question": "which systems send data to salesforce",
+  "answer": [
+    "Graph RAG (Neo4j) results for query 'which systems send data to salesforce':",
+    {
+      "method": "graph_rag",
+      "backend": "neo4j",
+      "seeds": [],
+      "neighborhood_count": 0,
+      "paths_count": 0
+    }
+  ],
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "Local JSON File",
+  "intent": "graph",
+  "requires_graph": true,
+  "query_type": "graph",
+  "graph_seeds": [],
+  "api_query": null,
+  "endpoint": "neo4j",
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 112411.019,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": "neo4j",
+    "seeds_used": [],
+    "sender_receiver": {
+      "sender": "which systems send data",
+      "receiver": "salesforce"
+    }
+  }
+}

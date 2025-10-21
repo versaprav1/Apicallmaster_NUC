@@ -1,0 +1,284 @@
+═══════════════════════════════════════════════════════════════════════════
+  BROWSER-USE MCP SERVER - AGENT INTEGRATION REFERENCE
+═══════════════════════════════════════════════════════════════════════════
+
+[COPY THIS TO YOUR AGENT FOR BROWSER AUTOMATION CAPABILITIES]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. WHAT IS THIS?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Browser-Use MCP is a stdio-based server that provides browser automation 
+capabilities through the Model Context Protocol (MCP).
+
+It exposes tools for:
+  ✓ Web navigation and interaction
+  ✓ Content extraction and scraping
+  ✓ Tab and session management
+  ✓ Autonomous agent-based task delegation
+
+Protocol: MCP over stdio (JSON-RPC 2.0)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. CONNECTION DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SERVER COMMAND (Docker):
+  docker exec -i browseruse-mcp browser-use --mcp
+
+SERVER COMMAND (Local):
+  uvx browser-use --mcp
+
+TRANSPORT: stdio (stdin/stdout)
+
+REQUIRED ENVIRONMENT VARIABLES (one of):
+  • OPENAI_API_KEY=sk-...
+  • ANTHROPIC_API_KEY=...
+  • OPENROUTER_API_KEY=...
+
+OPTIONAL ENVIRONMENT VARIABLES:
+  • BROWSER_USE_HEADLESS=false  (show browser window)
+  • BROWSER_USE_DISABLE_SECURITY=true  (disable web security)
+
+DATA PERSISTENCE:
+  • Mount host directory to /data in container
+  • Stores browser profiles, downloads, screenshots
+
+CONTAINER LIFECYCLE:
+  • Container must be running before connecting
+  • MCP process is spawned per client connection via docker exec -i
+  • Process stays alive while client is connected (stdio attached)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. AVAILABLE TOOLS (MCP Methods)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NAVIGATION
+  • browser_navigate(url: str)
+    Navigate to a URL
+    
+  • browser_go_back()
+    Go back in browser history
+
+  • browser_get_state()
+    Get current page state (URL, title, DOM snapshot, screenshot)
+
+INTERACTION
+  • browser_click(selector: str)
+    Click an element (CSS selector)
+    
+  • browser_type(selector: str, text: str)
+    Type text into an input field
+    
+  • browser_scroll(direction: str, amount: int)
+    Scroll the page (direction: "up" | "down", amount: pixels)
+
+CONTENT EXTRACTION
+  • browser_extract_content(selector?: str)
+    Extract text content from elements
+    If no selector, extracts all visible text
+
+TAB MANAGEMENT
+  • browser_list_tabs()
+    List all open tabs
+    
+  • browser_switch_tab(tab_id: str)
+    Switch to a specific tab
+    
+  • browser_close_tab(tab_id: str)
+    Close a tab
+
+SESSION MANAGEMENT
+  • browser_list_sessions()
+    List all browser sessions
+    
+  • browser_close_session(session_id: str)
+    Close a specific session
+    
+  • browser_close_all()
+    Close all browser sessions
+
+AUTONOMOUS AGENT
+  • retry_with_browser_use_agent(task: str)
+    Delegate a complex task to the autonomous browser agent
+    The agent will use its LLM to figure out the steps and execute them
+    
+    Example tasks:
+      - "Go to GitHub, search for browser-use, and extract the first result"
+      - "Navigate to OpenAI pricing page and extract all plan prices"
+      - "Fill out the contact form with name 'John' and submit it"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. PROTOCOL SPECIFICATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MCP uses JSON-RPC 2.0 over stdio.
+
+REQUEST FORMAT:
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "method": "tools/call",
+  "params": {
+    "name": "browser_navigate",
+    "arguments": {
+      "url": "https://example.com"
+    }
+  }
+}
+
+RESPONSE FORMAT:
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "result": {
+    "success": true,
+    "data": { ... }
+  }
+}
+
+ERROR FORMAT:
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "error": {
+    "code": -32600,
+    "message": "Error description"
+  }
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+5. PYTHON CLIENT EXAMPLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+from src.browser_mcp_client import BrowserUseMCPClient
+import asyncio
+
+async def example():
+    # Initialize client
+    client = BrowserUseMCPClient(
+        mode="docker",
+        docker_container="browseruse-mcp"
+    )
+    
+    try:
+        # Connect to MCP server
+        await client.initialize()
+        
+        # Navigate to a page
+        await client.navigate("https://example.com")
+        
+        # Extract content
+        heading = await client.extract_content("h1")
+        print(f"Heading: {heading}")
+        
+        # Use autonomous agent for complex task
+        result = await client.run_agent_task(
+            "Find the 'More information' link and extract its text"
+        )
+        print(f"Agent result: {result}")
+        
+    finally:
+        # Clean up
+        await client.close()
+
+asyncio.run(example())
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+6. SETUP CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+To set up browser-use MCP in your environment:
+
+☐ 1. Have Docker Desktop installed and running
+☐ 2. Build the browseruse image:
+     cd browser-use && docker build -t browseruse .
+☐ 3. Create .env file with at least one LLM API key
+☐ 4. Start the idle container:
+     .\scripts\maintenance\start_browser_mcp_container.ps1
+☐ 5. Verify container is running:
+     docker ps | Select-String browseruse-mcp
+☐ 6. Test connection:
+     python scripts/examples/test_browser_mcp.py
+☐ 7. Use BrowserUseMCPClient in your code
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7. COMMON USE CASES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WEB SCRAPING
+  client.navigate("https://site.com")
+  content = client.extract_content(".main-content")
+
+FORM AUTOMATION
+  client.navigate("https://form.com")
+  client.type_text("#name", "John Doe")
+  client.type_text("#email", "john@example.com")
+  client.click("button[type='submit']")
+
+DATA EXTRACTION
+  task = "Go to company.com/pricing and extract all plan names and prices"
+  result = client.run_agent_task(task)
+
+RESEARCH AUTOMATION
+  task = "Search Google for 'browser automation' and extract top 5 results"
+  result = client.run_agent_task(task)
+
+MONITORING & TESTING
+  state = client.get_state()
+  assert "Expected Title" in state['title']
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8. TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CONTAINER STOPS IMMEDIATELY
+  Problem: MCP is stdio-based; needs attached client
+  Solution: Use idle container + docker exec -i approach
+
+NO API KEY ERRORS
+  Problem: Missing LLM API key
+  Solution: Add OPENAI_API_KEY (or other) to .env file
+
+CONNECTION REFUSED
+  Problem: Container not running or MCP process failed
+  Solution: Check docker ps, restart container, check logs
+
+CHROMIUM CRASHES
+  Problem: Shared memory limit too low
+  Solution: Use --shm-size=2g when starting container
+
+PERMISSION ERRORS (WINDOWS)
+  Problem: Volume mount permissions
+  Solution: Run container with --user root
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9. PERFORMANCE NOTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Each tool call requires communication over stdio (fast, <100ms typically)
+• Autonomous agent tasks can take 10-60 seconds depending on complexity
+• Browser rendering is CPU-intensive; use headless mode for production
+• Each client connection spawns a new MCP process and browser instance
+• Sessions persist until explicitly closed
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+10. REFERENCES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Documentation:
+  • Quick Start: docs/BROWSER_MCP_QUICK_START.md
+  • Full Guide: docs/BROWSER_USE_MCP_INTEGRATION_GUIDE.md
+  • Browser-Use Docs: https://docs.browser-use.com/customize/mcp-server
+  • MCP Spec: https://spec.modelcontextprotocol.io/
+
+Code:
+  • Python Client: src/browser_mcp_client.py
+  • Test Script: scripts/examples/test_browser_mcp.py
+  • Container Startup: scripts/maintenance/start_browser_mcp_container.ps1
+
+═══════════════════════════════════════════════════════════════════════════
+  END OF REFERENCE
+═══════════════════════════════════════════════════════════════════════════
+
+

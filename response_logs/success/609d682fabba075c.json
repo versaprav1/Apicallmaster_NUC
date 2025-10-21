@@ -1,0 +1,28 @@
+{
+  "log_id": "609d682fabba075c",
+  "timestamp": "2025-10-05T07:25:04.416609",
+  "question": "which systems send data to salesforce",
+  "answer": "Graph RAG failed: methods.graph_rag.run() got multiple values for keyword argument 'query'",
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "Local JSON File",
+  "intent": "graph",
+  "requires_graph": true,
+  "query_type": "graph",
+  "graph_seeds": [],
+  "api_query": null,
+  "endpoint": null,
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 1434.413,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": null,
+    "seeds_used": [],
+    "sender_receiver": null
+  }
+}

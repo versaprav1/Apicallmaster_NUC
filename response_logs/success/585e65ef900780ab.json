@@ -1,0 +1,31 @@
+{
+  "log_id": "585e65ef900780ab",
+  "timestamp": "2025-10-07T13:44:45.561708",
+  "question": "List SAP interfaces",
+  "answer": "Graph RAG failed: {neo4j_code: Neo.ClientError.Statement.SyntaxError} {message: shortestPath(...) requires a pattern containing a single relationship (line 3, column 27 (offset: 90))\n\"        MATCH p = shortestPath((s)<-[:SENT_BY]-(:Interface)-[:RECEIVED_BY]->(r))\"\n                   ^} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. shortestPath(...) requires a pattern containing a single relationship (line 3, column 27 (offset: 90))\n\"        MATCH p = shortestPath((s)<-[:SENT_BY]-(:Interface)-[:RECEIVED_BY]->(r))\"\n                   ^}",
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "gemini-2.5-pro",
+  "data_source": "API",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": "api",
+  "graph_seeds": [
+    "List",
+    "SAP interfaces"
+  ],
+  "api_query": null,
+  "endpoint": null,
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 31872.424,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": null,
+    "seeds_used": [],
+    "sender_receiver": null
+  }
+}

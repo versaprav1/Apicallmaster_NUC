@@ -1,0 +1,13 @@
+[server]
+# Use polling-based file watcher (more stable on Windows)
+fileWatcherType = "poll"
+
+# Disable runOnSave to reduce file watching issues
+runOnSave = false
+
+# Increase debounce time to avoid rapid reloads
+fileCacheExpirationTime = 300
+
+[runner]
+# Prevent magic commands to avoid import issues
+magicEnabled = false

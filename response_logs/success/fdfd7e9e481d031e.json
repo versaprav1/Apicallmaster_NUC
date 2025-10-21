@@ -1,0 +1,77 @@
+{
+  "log_id": "fdfd7e9e481d031e",
+  "timestamp": "2025-10-15T15:25:40.690425",
+  "question": "Exclude EAM and PLANNED interfaces",
+  "answer": [
+    "Graph RAG (Neo4j) results for query 'Exclude EAM and PLANNED interfaces':\n\ud83d\udd0d Graph RAG Debug Info:\n  \u2022 Query: 'Exclude EAM and PLANNED interfaces'\n  \u2022 Backend: neo4j\n  \u2022 Max hops: 2\n  \u2022 Path limit: 5\n  \u2022 Data provided: True\n  \u2022 Data records count: 5771\n  \u2022 Sample data keys: ['name', 'type', 'description', 'sender_name', 'receiver_name', 'metadata', 'properties', 'tags', 'sender', 'receiver']\n  \u2022 Analyzing data structure...\n  \u2022 Records with sender: 6\n  \u2022 Records with receiver: 0\n  \u2022 Records with both: 0\n  \u2022 Salesforce mentions: 0\n  \u2022 Adapting data for Graph RAG...\n  \u2022 Adapted 5743 records\n  \u2022 Ingesting 5743 records into Neo4j...\n  \u2022 \u2705 Data ingestion completed\n  \u2022 Extracted seeds: ['Exclude EAM', 'Exclude', 'EAM', 'PLANNED']\n  \u2022 Searching neighborhood around seed: 'Exclude EAM'\n  \u2022 Seed variations: ['Exclude EAM', 'exclude eam', 'EXCLUDE EAM', 'Exclude Eam']\n  \u2022 Found 0 neighborhood nodes\n  \u2022 Searching shortest path from 'Exclude EAM' to 'Exclude'\n  \u2022 Found 0 shortest paths\n  \u2022 Total nodes in Neo4j: 3222\n- \ud83d\udd0d Found related interfaces (by name):\n  \u2022 CSI_EAM_CockpitTest_LUY (20)\n  \u2022 WHINT EAM SAP CI IFC to LUY (20)\n  \u2022 WHINT EAM SAP CI IFC to LeanIX | T8PMSHQ0VNY (22)\n  \u2022 Dummy_Teams |  | DUMMY (21)\n  \u2022 MessageTriggerRequest_Out |  | IMS | InterfaceMonitoringSnapshotTeams_In (21)\n  \u2022 MessageTriggerRequest_Out |  | TEST_IMS_DUR | InterfaceMonitoringSnapshotTeams_In (21)\n  \u2022 TestMessageAMQPTopic_Out |  | TestMessage_In (21)\n  \u2022 Dummy_Teams |  | Dummy_Teams (21)\n  \u2022 FileStream_Out |  | FileStream_In (21)\n  \u2022 WHINT EAM SAP CI IFC to LeanIX (20)",
+    {
+      "method": "graph_rag",
+      "backend": "neo4j",
+      "seeds": [
+        "Exclude EAM",
+        "Exclude",
+        "EAM",
+        "PLANNED"
+      ],
+      "neighborhood_count": 0,
+      "paths_count": 0,
+      "debug_info": [
+        "\ud83d\udd0d Graph RAG Debug Info:",
+        "  \u2022 Query: 'Exclude EAM and PLANNED interfaces'",
+        "  \u2022 Backend: neo4j",
+        "  \u2022 Max hops: 2",
+        "  \u2022 Path limit: 5",
+        "  \u2022 Data provided: True",
+        "  \u2022 Data records count: 5771",
+        "  \u2022 Sample data keys: ['name', 'type', 'description', 'sender_name', 'receiver_name', 'metadata', 'properties', 'tags', 'sender', 'receiver']",
+        "  \u2022 Analyzing data structure...",
+        "  \u2022 Records with sender: 6",
+        "  \u2022 Records with receiver: 0",
+        "  \u2022 Records with both: 0",
+        "  \u2022 Salesforce mentions: 0",
+        "  \u2022 Adapting data for Graph RAG...",
+        "  \u2022 Adapted 5743 records",
+        "  \u2022 Ingesting 5743 records into Neo4j...",
+        "  \u2022 \u2705 Data ingestion completed",
+        "  \u2022 Extracted seeds: ['Exclude EAM', 'Exclude', 'EAM', 'PLANNED']",
+        "  \u2022 Searching neighborhood around seed: 'Exclude EAM'",
+        "  \u2022 Seed variations: ['Exclude EAM', 'exclude eam', 'EXCLUDE EAM', 'Exclude Eam']",
+        "  \u2022 Found 0 neighborhood nodes",
+        "  \u2022 Searching shortest path from 'Exclude EAM' to 'Exclude'",
+        "  \u2022 Found 0 shortest paths",
+        "  \u2022 Total nodes in Neo4j: 3222",
+        "  \u2022 No relationships found, trying fallback search...",
+        "  \u2022 Fallback search found 10 interfaces"
+      ]
+    }
+  ],
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "Local Engine (DuckDB)",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": "api",
+  "graph_seeds": [
+    "Exclude"
+  ],
+  "api_query": null,
+  "endpoint": "neo4j",
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 555.689,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": "neo4j",
+    "seeds_used": [
+      "Exclude"
+    ],
+    "sender_receiver": {
+      "sender": "exclude eam",
+      "receiver": "planned interfaces"
+    }
+  }
+}

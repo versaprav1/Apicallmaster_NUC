@@ -1,0 +1,12 @@
+[
+  "Based on the data chunk, the interfaces are:\n\n*   WHINT Document to SharePoint | SLBC_Complexity_3_hight\n*   LTC Create Business Partner | LTC Hubspot\n*   WIC DEMO Trigger Flow | WIC DEMO Receiver A | WIC DEMO Receiver C",
+  "Based on the provided data chunk, here are the interfaces listed:\n\n*   OrderCreateRequest | | RIC_SAP_ERP | SalesOrderERPCreateRequest_In\n*   TRAIN Adam 06 Query EZB Distribute",
+  "Based on the provided data chunk, which appears to be a list of inventory items from the WHINT Integration Cockpit, the following interfaces are present:\n\n*   SR | WS_DIAGLS_GET_TECH_SYSTS\n*   AOSSERV_SRV\n*   EPM_OIA_L_1_SRV_02\n*   OTC Customer Salesforce SC SAP",
+  "Based on the `name` field in the data chunk, the interfaces are:\n\n*   `MessageTriggerRequest_Out | | IntegrationDirectory | ReceiverRules_In`\n*   `MessageTriggerRequest_Out | | IntegrationDirectory | ReceiverAgreements_In`",
+  "Based on the provided data chunk, here are the interfaces listed:\n\n*   `QueueMessageRequestConfirmation_Out | | QueueMessageConfirmation_In`\n*   `OrderCreateRequest | | SalesOrderERPCreateRequest_In`\n*   `OrderCreateRequest | | SalesOrderERPCreateRe` (partially shown)",
+  "Based on the data chunk, the following interfaces (inventory items) are listed:\n\n*   Postman | GWSAMPLE_BASIC\n*   Test_Product_B | Dummy_Whint\n*   Postman | HelloWorldAPI",
+  "Based on the provided data chunk, here is a list of the interfaces found:\n\n*   EPM_VP_LT_30_SRV\n*   CATALOGSERVICE\n*   USAGEEXTRACTOR\n*   AGS_AI\n*   FileWithAttachment_test_out | | FileTransfer_In",
+  "Based on the provided data chunk, here is a list of the interfaces:\n\n*   lnr@diamondadapter-q-markets-dlq\n*   lnr@diamondadapter-q-nonfinishedproducts-prices\n*   lnr@equipmentadapter-q-equipment-error\n*   lnr@equipmentadapter-s-equipment",
+  "Based on the data chunk, here are the interfaces listed:\n\n*   `MessageTriggerRequest_Out | | InterfaceCatalog_In`\n*   `MessageTriggerRequest_Out | | SystemCatalog_In`",
+  "Based on the provided data chunk, here are the interfaces listed:\n\n*   SR | E2EEM_DATA_COLLECTION_PUSH\n*   MessageTriggerRequest_Out | | DMA | LandscapeCheck_In\n*   AI_SMCP_GW_ODATA_SRV\n*   MessageTriggerRequest_Out | | WHINT_MMA_TEST | Protocol_In"
+]

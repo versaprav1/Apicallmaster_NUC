@@ -1,0 +1,35 @@
+{
+  "log_id": "ac8f7f80d18cb548",
+  "timestamp": "2025-10-20T20:41:27.001995",
+  "question": "List SAP interfaces",
+  "answer": [
+    "\u274c Direct semantic search failed: sequence item 0: expected str instance, dict found",
+    {
+      "method": "vector_rag",
+      "error": "sequence item 0: expected str instance, dict found",
+      "retrieved": 0,
+      "strategy": "direct_search"
+    }
+  ],
+  "status": "success",
+  "method_used": "vector_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "local_json",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": null,
+  "graph_seeds": null,
+  "api_query": null,
+  "endpoint": null,
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 7449.728,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "method": "vector_rag",
+    "top_k": 5
+  }
+}

@@ -1,0 +1,13 @@
+﻿[server]
+fileWatcherType = "poll"
+# Common Streamlit configurations
+[browser]
+title = "API Call Master"
+favicon = "🤖"
+
+[global]
+disableWatchdogWarning = true
+
+
+[client]
+showSidebarNavigation = true

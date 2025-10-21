@@ -1,0 +1,10 @@
+streamlit
+requests
+openai
+psycopg2-binary
+sqlalchemy
+langchain
+llama-index
+llama-index-llms-ollama
+llama-index-llms-openai
+dotenv

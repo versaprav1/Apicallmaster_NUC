@@ -1,0 +1,69 @@
+{
+  "log_id": "a12477ca3f16e141",
+  "timestamp": "2025-10-09T13:02:03.903604",
+  "question": "Get interfaces with objects included",
+  "answer": [
+    "Graph RAG (Neo4j) results for query 'Get interfaces with objects included':\n\ud83d\udd0d Graph RAG Debug Info:\n  \u2022 Query: 'Get interfaces with objects included'\n  \u2022 Backend: neo4j\n  \u2022 Max hops: 2\n  \u2022 Path limit: 5\n  \u2022 Data provided: True\n  \u2022 Data records count: 5771\n  \u2022 Sample data keys: ['name', 'type', 'description', 'sender_name', 'receiver_name', 'metadata', 'properties', 'tags', 'sender', 'receiver']\n  \u2022 Analyzing data structure...\n  \u2022 Records with sender: 6\n  \u2022 Records with receiver: 0\n  \u2022 Records with both: 0\n  \u2022 Salesforce mentions: 0\n  \u2022 Adapting data for Graph RAG...\n  \u2022 Adapted 5743 records\n  \u2022 Ingesting 5743 records into Neo4j...\n  \u2022 \u2705 Data ingestion completed\n  \u2022 Extracted seeds: ['Get']\n  \u2022 Searching neighborhood around seed: 'Get'\n  \u2022 Seed variations: ['Get', 'get', 'GET', 'Get']\n  \u2022 Found 0 neighborhood nodes\n  \u2022 Total nodes in Neo4j: 3222\n- \ud83d\udd0d Found related interfaces (by name):\n  \u2022 ReadRequest |  | BAPI_VENDOR_GETDETAIL (21)\n  \u2022 MessageTriggerRequest_Out |  | IntegrationDirectoryPRD | BusinessSystem_In (21)\n  \u2022 SR | WS_DIAGLS_GET_TECH_SYSTS (SAP_IS_APIM)\n  \u2022 MessageTriggerRequest_Out |  | ICO | MessageVolumeReport_In (21)\n  \u2022 CR | CO_SISEHUB_MI_O_S_SHB_GET_EX (SAP_IS_APIM)\n  \u2022 MessageTriggerRequest_Out |  | LandscapeCheck_Scenario | ScenarioRequest_In (21)\n  \u2022 MessageTriggerRequest_Out |  | IntegrationDirectoryPRD | CommunicationChannels_In (21)\n  \u2022 MessageTriggerRequest_Out |  | IntegrationDirectory | BusinessComponent_In (21)\n  \u2022 MessageTriggerRequest_Out |  | ESRObjects | ESRObjects_In (21)\n  \u2022 MessageTriggerRequest_Out |  | ESRObjects | SoftwareComponent_In (21)",
+    {
+      "method": "graph_rag",
+      "backend": "neo4j",
+      "seeds": [
+        "Get"
+      ],
+      "neighborhood_count": 0,
+      "paths_count": 0,
+      "debug_info": [
+        "\ud83d\udd0d Graph RAG Debug Info:",
+        "  \u2022 Query: 'Get interfaces with objects included'",
+        "  \u2022 Backend: neo4j",
+        "  \u2022 Max hops: 2",
+        "  \u2022 Path limit: 5",
+        "  \u2022 Data provided: True",
+        "  \u2022 Data records count: 5771",
+        "  \u2022 Sample data keys: ['name', 'type', 'description', 'sender_name', 'receiver_name', 'metadata', 'properties', 'tags', 'sender', 'receiver']",
+        "  \u2022 Analyzing data structure...",
+        "  \u2022 Records with sender: 6",
+        "  \u2022 Records with receiver: 0",
+        "  \u2022 Records with both: 0",
+        "  \u2022 Salesforce mentions: 0",
+        "  \u2022 Adapting data for Graph RAG...",
+        "  \u2022 Adapted 5743 records",
+        "  \u2022 Ingesting 5743 records into Neo4j...",
+        "  \u2022 \u2705 Data ingestion completed",
+        "  \u2022 Extracted seeds: ['Get']",
+        "  \u2022 Searching neighborhood around seed: 'Get'",
+        "  \u2022 Seed variations: ['Get', 'get', 'GET', 'Get']",
+        "  \u2022 Found 0 neighborhood nodes",
+        "  \u2022 Total nodes in Neo4j: 3222",
+        "  \u2022 No relationships found, trying fallback search...",
+        "  \u2022 Fallback search found 10 interfaces"
+      ]
+    }
+  ],
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "Local Engine (DuckDB)",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": "api",
+  "graph_seeds": [
+    "Get"
+  ],
+  "api_query": null,
+  "endpoint": "neo4j",
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 1682.606,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": "neo4j",
+    "seeds_used": [
+      "Get"
+    ],
+    "sender_receiver": null
+  }
+}

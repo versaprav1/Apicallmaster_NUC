@@ -1,0 +1,105 @@
+class LLMProviderManager:
+    """Manages multiple LLM providers and model selection"""
+    
+    def __init__(self):
+        self.models = {
+            # OpenAI Models
+            "gpt-4o": ModelConfig(
+                name="gpt-4o",
+                provider=LLMProvider.OPENAI,
+                context_length=128000,
+                cost_per_1k_tokens=0.015,
+                supports_json=True,
+                supports_images=True,
+                api_key_env="OPENAI_API_KEY",
+                description="GPT-4O - Latest OpenAI model with vision"
+            ),
+            "gpt-4o-mini": ModelConfig(
+                name="gpt-4o-mini",
+                provider=LLMProvider.OPENAI,
+                context_length=128000,
+                cost_per_1k_tokens=0.0015,
+                supports_json=True,
+                supports_images=True,
+                api_key_env="OPENAI_API_KEY",
+                description="GPT-4O Mini - Cost-effective OpenAI model"
+            ),
+            
+            # Google Models
+            "gemini-2.0-flash": ModelConfig(
+                name="gemini-2.0-flash",
+                provider=LLMProvider.GOOGLE,
+                context_length=2000000,  # 2M context
+                cost_per_1k_tokens=0.00025,
+                supports_json=True,
+                supports_images=True,
+                api_key_env="GEMINI_API_KEY",
+                description="Gemini 2.0 Flash - Ultra-high context, fast inference"
+            ),
+            "gemini-2.5-pro": ModelConfig(
+                name="gemini-2.5-pro",
+                provider=LLMProvider.GOOGLE,
+                context_length=2000000,  # 2M context
+                cost_per_1k_tokens=0.00125,
+                supports_json=True,
+                supports_images=True,
+                api_key_env="GEMINI_API_KEY",
+                description="Gemini 2.5 Pro - Ultra-high context, advanced reasoning"
+            ),
+            
+            # Anthropic Models
+            "claude-3-5-sonnet-20241022": ModelConfig(
+                name="claude-3-5-sonnet-20241022",
+                provider=LLMProvider.ANTHROPIC,
+                context_length=200000,
+                cost_per_1k_tokens=0.015,
+                supports_json=True,
+                supports_images=True,
+                api_key_env="ANTHROPIC_API_KEY",
+                description="Claude 3.5 Sonnet - High context, excellent reasoning"
+            ),
+            
+            # Groq Models (fast inference)
+            "llama-3.3-70b-versatile": ModelConfig(
+                name="llama-3.3-70b-versatile",
+                provider=LLMProvider.GROQ,
+                context_length=131072,
+                cost_per_1k_tokens=0.0008,
+                supports_json=True,
+                supports_images=False,
+                api_key_env="GROQ_API_KEY",
+                description="Llama 3.3 70B - Fast inference, high context"
+            ),
+            "llama-3.1-8b-instant": ModelConfig(
+                name="llama-3.1-8b-instant",
+                provider=LLMProvider.GROQ,
+                context_length=131072,
+                cost_per_1k_tokens=0.0001,
+                supports_json=True,
+                supports_images=False,
+                api_key_env="GROQ_API_KEY",
+                description="Llama 3.1 8B - Ultra-fast inference, cost-effective"
+            ),
+            
+            # OpenRouter Models (OpenAI-compatible)
+            "deepseek/deepseek-chat": ModelConfig(
+                name="deepseek/deepseek-chat",
+                provider=LLMProvider.OPENROUTER,
+                context_length=128000,
+                cost_per_1k_tokens=0.00014,
+                supports_json=True,
+                supports_images=False,
+                api_key_env="OPENROUTER_API_KEY",
+                description="DeepSeek Chat - Cost-effective, high context"
+            ),
+            "meta-llama/llama-3.1-405b-instruct": ModelConfig(
+                name="meta-llama/llama-3.1-405b-instruct",
+                provider=LLMProvider.OPENROUTER,
+                context_length=131072,
+                cost_per_1k_tokens=0.0054,
+                supports_json=True,
+                supports_images=False,
+                api_key_env="OPENROUTER_API_KEY",
+                description="Llama 3.1 405B - Largest open model, excellent performance"
+            ),
+        }

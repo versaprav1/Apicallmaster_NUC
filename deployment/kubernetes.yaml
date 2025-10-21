@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whint-ai-assistant
+  labels:
+    app: whint-ai-assistant
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: whint-ai-assistant
+  template:
+    metadata:
+      labels:
+        app: whint-ai-assistant
+    spec:
+      containers:
+      - name: whint-ai-assistant
+        image: whint-ai-assistant:latest
+        ports:
+        - containerPort: 8501
+        env:
+        - name: WHINT_API_BASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: whint-secrets
+              key: api-base-url
+        - name: WHINT_API_X_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: whint-secrets
+              key: api-x-key
+        - name: WHINT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: whint-secrets
+              key: username
+        - name: WHINT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: whint-secrets
+              key: password
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: whint-secrets
+              key: openai-api-key
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /_stcore/health
+            port: 8501
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /_stcore/health
+            port: 8501
+          initialDelaySeconds: 5
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whint-ai-assistant-service
+spec:
+  selector:
+    app: whint-ai-assistant
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8501
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: whint-secrets
+type: Opaque
+stringData:
+  api-base-url: "https://whint.prod.apimanagement.eu10.hana.ondemand.com:443/wic"
+  api-x-key: "your_api_key_here"
+  username: "your_username_here"
+  password: "your_password_here"
+  openai-api-key: "your_openai_key_here"

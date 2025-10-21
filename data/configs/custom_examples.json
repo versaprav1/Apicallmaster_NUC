@@ -1,0 +1,44 @@
+{
+    "examples": [
+        {
+            "question": "List all API products along with their associated proxies and data sources.",
+            "sql": "SELECT p.id AS product_id, p.data_source_id AS product_data_source, pr.id AS proxy_id, d.hostname AS data_source_hostname FROM btp_api_management_products p LEFT JOIN btp_api_management_proxy_products pp ON p.id = pp.btp_api_management_product_id LEFT JOIN btp_api_management_proxies pr ON pp.btp_api_management_proxy_id = pr.id LEFT JOIN data_sources d ON pr.data_source_id = d.id;"
+        },
+        {
+            "question": "Get all service bus topics and their associated resource groups.",
+            "sql": "SELECT t.id AS topic_id, rg.id AS resource_group_id, rg.subscription_id FROM azure_service_bus_topics t JOIN azure_resource_groups rg ON t.resource_group_id = rg.id;"
+        },
+        {
+            "question": "Find all systems with their corresponding data sources and proxies.",
+            "sql": "SELECT s.id AS system_id, ds.id AS data_source_id, ds.hostname AS data_source_hostname, p.id AS proxy_id, p.data_source_id AS proxy_data_source_id FROM systems s LEFT JOIN data_sources ds ON s.data_source_id = ds.id LEFT JOIN btp_api_management_proxies p ON ds.proxy_id = p.id;"
+        },
+        {
+            "question": "Show me all inventories created in the last 7 days.",
+            "sql": "SELECT id, name, create_time, type, vendor FROM inventories WHERE create_time >= DATEADD(day, -7, CURRENT_TIMESTAMP) ORDER BY create_time DESC;"
+        },
+        {
+            "question": "List all inventories with their associated tags.",
+            "sql": "SELECT i.name as inventory_name, t.name as tag_name, tv.value as tag_value FROM inventories i JOIN inventory_tags it ON i.id = it.inventory_id JOIN tag_values tv ON it.tag_value_id = tv.id JOIN tags t ON tv.tag_id = t.id;"
+        },
+        {
+            "question": "Show me all connections between systems and their data flow counts.",
+            "sql": "SELECT s1.hostname as sender_system, s2.hostname as receiver_system, COUNT(df.id) as flow_count, COUNT(DISTINCT i.id) as inventory_count FROM systems s1 JOIN data_flows df ON s1.id = df.sender_id JOIN systems s2 ON s2.id = df.receiver_id LEFT JOIN inventories i ON (df.sender_id = i.sender_id AND df.receiver_id = i.receiver_id) GROUP BY s1.hostname, s2.hostname ORDER BY flow_count DESC;"
+        },
+        {
+            "question": "Find all inventories tagged as 'Critical' with their associated systems.",
+            "sql": "SELECT i.name as inventory_name, i.type, t.name as tag_name, tv.value as tag_value, s1.hostname as source_system, s2.hostname as target_system FROM inventories i JOIN inventory_tags it ON i.id = it.inventory_id JOIN tag_values tv ON it.tag_value_id = tv.id JOIN tags t ON tv.tag_id = t.id JOIN systems s1 ON i.sender_id = s1.id JOIN systems s2 ON i.receiver_id = s2.id WHERE t.name = 'Priority' AND tv.value = 'Critical';"
+        },
+        {
+            "question": "Show inventory creation trends by month with change frequency.",
+            "sql": "SELECT DATE_TRUNC('month', create_time) as month, COUNT(*) as new_inventories, COUNT(CASE WHEN change_time > create_time THEN 1 END) as modified_inventories, AVG(DATEDIFF(minute, create_time, change_time)) as avg_time_to_first_change FROM inventories GROUP BY DATE_TRUNC('month', create_time) ORDER BY month DESC;"
+        },
+        {
+            "question": "Analyze data flow patterns with their associated properties and types.",
+            "sql": "SELECT df.name as flow_name, pt.name as property_type, pt.kind, COUNT(p.id) as property_count, COUNT(DISTINCT i.id) as involved_inventories FROM data_flows df LEFT JOIN properties p ON df.id = p.data_flow_id LEFT JOIN property_types pt ON p.type_id = pt.id LEFT JOIN data_flow_items dfi ON df.id = dfi.data_flow_id LEFT JOIN inventories i ON dfi.inventory_id = i.id GROUP BY df.name, pt.name, pt.kind ORDER BY involved_inventories DESC;"
+        },
+        {
+            "question": "Give me a complete system health overview with inventory and flow metrics.",
+            "sql": "SELECT s.hostname as system_name, COUNT(DISTINCT i_send.id) as outgoing_inventories, COUNT(DISTINCT i_recv.id) as incoming_inventories, COUNT(DISTINCT df_send.id) as outgoing_flows, COUNT(DISTINCT df_recv.id) as incoming_flows, COUNT(DISTINCT p.id) as total_properties, MAX(i_send.change_time) as last_activity FROM systems s LEFT JOIN inventories i_send ON s.id = i_send.sender_id LEFT JOIN inventories i_recv ON s.id = i_recv.receiver_id LEFT JOIN data_flows df_send ON s.id = df_send.sender_id LEFT JOIN data_flows df_recv ON s.id = df_recv.receiver_id LEFT JOIN properties p ON s.id = p.system_id GROUP BY s.hostname ORDER BY last_activity DESC;"
+        }
+    ]
+}

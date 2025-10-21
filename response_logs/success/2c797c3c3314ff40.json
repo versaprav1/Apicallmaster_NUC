@@ -1,0 +1,30 @@
+{
+  "log_id": "2c797c3c3314ff40",
+  "timestamp": "2025-10-09T12:42:48.282301",
+  "question": "Get interfaces with tags included",
+  "answer": "Graph RAG failed: {neo4j_code: Neo.ClientError.Security.Unauthorized} {message: The client is unauthorized due to authentication failure.} {gql_status: 50N42} {gql_status_description: error: general processing exception - unexpected error. The client is unauthorized due to authentication failure.}",
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "Local Engine (DuckDB)",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": "api",
+  "graph_seeds": [
+    "Get"
+  ],
+  "api_query": null,
+  "endpoint": null,
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 826.5369999999999,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": null,
+    "seeds_used": [],
+    "sender_receiver": null
+  }
+}
