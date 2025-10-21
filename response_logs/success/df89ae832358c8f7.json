@@ -1,0 +1,34 @@
+{
+  "log_id": "df89ae832358c8f7",
+  "timestamp": "2025-10-21T17:07:25.061659",
+  "question": "Show Azure interfaces",
+  "answer": "## \ud83d\udd0d Neo4j Query Results\n\n- \ud83d\udd0d Found related interfaces (by name):\n  \u2022 WHINT IMS Azure IS - API Management (20)\n  \u2022 WHINT IFD Azure Service Bus (20)\n  \u2022 WHINT IFM Azure IS Event Grid (20)\n  \u2022 WHINT IFM Azure IS API Management (20)\n  \u2022 Azure DevOps - Bee360: Azure DevOps Interface (22)\n  \u2022 TestMsg_Out |  | AzureMsg_In (21)\n  \u2022 WHINT IMS Azure IS (20)\n  \u2022 Azure Active Directory - Bee360: AAD Interface (22)\n  \u2022 WHINT IMS Azure IS - Service Bus (20)\n  \u2022 WHINT IMS Azure IS - Event Grid (20)\n\n---\n\n## \ud83e\udd16 llama3.2:latest Response\n\nBased on the complete graph analysis results, I can see that there is a strong connection between \"Show Azure\" and another instance of \"Azure\". However, no related systems or interfaces were found in the analysis.\n\nGiven your request to show Azure interfaces, it appears that the system or interface you are looking for might be directly related to the term \"Azure\". Unfortunately, without more specific information about what kind of interfaces you're interested in (e.g., API endpoints, data sources, etc.), I can only provide a general overview of what Azure offers.\n\nAzure is a comprehensive cloud computing platform that provides a wide range of services and tools for building, deploying, and managing applications. Some examples of Azure interfaces include:\n\n1. **API Endpoints**: Azure provides various APIs (Application Programming Interfaces) that allow developers to interact with its services programmatically. These endpoints can be used to automate tasks, retrieve data, or send notifications.\n2. **Data Sources**: Azure offers several data storage options like Azure Blob Storage, Azure File Storage, and Azure Data Lake Storage Gen2, which provide interfaces for storing, retrieving, and managing data.\n3. **Service Interfaces**: Azure services such as Azure Functions, Azure Logic Apps, and Azure Service Bus offer interfaces for integrating with other systems or building custom workflows.\n\nTo further assist you in identifying the specific interface you're looking for, could you please provide more context or clarify what kind of interface you're interested in (e.g., API endpoint, data source, service interface)?",
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "llama3.2:latest",
+  "data_source": "neo4j",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": "api",
+  "graph_seeds": [
+    "Azure interfaces",
+    "Show Azure"
+  ],
+  "api_query": null,
+  "endpoint": "neo4j",
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 38312.958,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": "neo4j",
+    "seeds_used": [
+      "Show Azure",
+      "Azure"
+    ],
+    "sender_receiver": null
+  }
+}

@@ -366,8 +366,22 @@ class LLMProviderManager:
         For Ollama models, check if the Ollama service is accessible instead.
         """
         config = self.models.get(model_name)
+        
+        # If model not in config, check if it's a dynamic Ollama model
         if not config:
-            return False
+            # Check if it's a dynamic Ollama model by testing if Ollama service is accessible
+            try:
+                import requests
+                ollama_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
+                response = requests.get(f"{ollama_url}/api/tags", timeout=3)
+                if response.status_code == 200:
+                    # Check if this model exists in Ollama
+                    models = [m["name"] for m in response.json().get("models", [])]
+                    if model_name in models:
+                        return True  # It's a valid Ollama model
+                return False
+            except:
+                return False
         
         # Special handling for Ollama models
         if config.provider == LLMProvider.OLLAMA:
