@@ -125,6 +125,44 @@ def initialize_session_state():
         st.session_state.knowledge_store = KnowledgeStore()
     if 'vector_store' not in st.session_state:
         st.session_state.vector_store = VectorKnowledgeStore()
+    if 'result_saver' not in st.session_state:
+        try:
+            import sys
+            import os
+            # Add current directory to path if not already there
+            if os.getcwd() not in sys.path:
+                sys.path.insert(0, os.getcwd())
+            from src.result_saver import ResultSaver
+            st.session_state.result_saver = ResultSaver()
+        except ImportError as e:
+            # Fallback: create a simple result saver
+            class SimpleResultSaver:
+                def __init__(self):
+                    self.results = []
+                
+                def save_result(self, question, answer, method, model, data_source, metadata=None):
+                    result = {
+                        "id": len(self.results) + 1,
+                        "timestamp": datetime.now().isoformat(),
+                        "question": question,
+                        "answer": answer,
+                        "method": method,
+                        "model": model,
+                        "data_source": data_source,
+                        "metadata": metadata or {}
+                    }
+                    self.results.append(result)
+                    return result["id"]
+                
+                def get_all_results(self):
+                    return self.results
+                
+                def get_stats(self):
+                    if not self.results:
+                        return {"total": 0}
+                    return {"total": len(self.results)}
+            
+            st.session_state.result_saver = SimpleResultSaver()
     if 'llm_manager' not in st.session_state:
         st.session_state.llm_manager = LLMProviderManager()
     if 'method_router' not in st.session_state:
@@ -1233,6 +1271,53 @@ def show_response_logs():
     except Exception as e:
         st.error(f"Failed to display response logs: {str(e)}")
 
+def show_saved_results():
+    """Display saved results in an expandable section"""
+    if hasattr(st.session_state, 'result_saver'):
+        results = st.session_state.result_saver.get_all_results()
+        stats = st.session_state.result_saver.get_stats()
+        
+        if results:
+            st.markdown("### 💾 Saved Results")
+            st.markdown(f"**Total Results:** {stats['total']}")
+            
+            # Show statistics
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.markdown("**By Method:**")
+                for method, count in stats.get('methods', {}).items():
+                    st.text(f"  {method}: {count}")
+            
+            with col2:
+                st.markdown("**By Data Source:**")
+                for source, count in stats.get('data_sources', {}).items():
+                    st.text(f"  {source}: {count}")
+            
+            with col3:
+                st.markdown("**By Model:**")
+                for model, count in stats.get('models', {}).items():
+                    st.text(f"  {model}: {count}")
+            
+            # Show recent results
+            st.markdown("**Recent Results:**")
+            for result in results[-5:]:  # Show last 5 results
+                with st.expander(f"ID {result['id']}: {result['question'][:50]}...", expanded=False):
+                    st.markdown(f"**Question:** {result['question']}")
+                    st.markdown(f"**Method:** {result['method']}")
+                    st.markdown(f"**Model:** {result['model']}")
+                    st.markdown(f"**Data Source:** {result['data_source']}")
+                    st.markdown(f"**Timestamp:** {result['timestamp']}")
+                    st.markdown("**Answer:**")
+                    st.markdown(result['answer'][:500] + "..." if len(result['answer']) > 500 else result['answer'])
+                    
+                    if result.get('metadata'):
+                        with st.expander("Metadata", expanded=False):
+                            st.json(result['metadata'])
+        else:
+            st.info("No saved results yet. Results will be saved automatically after each query.")
+    else:
+        st.warning("Result saver not initialized.")
+
 def chat_page():
     """Display main chat interface"""
     st.title("🔍 WHINT API AI Assistant")
@@ -1299,6 +1384,9 @@ def chat_page():
         if st.button("📊 View Response Logs"):
             show_response_logs()
         
+        if st.button("💾 View Saved Results"):
+            show_saved_results()
+        
         # Show current connection details
         creds = st.session_state.get('credentials', {})
         storage_source = st.session_state.get('credential_source', 'Session Only')
@@ -1312,7 +1400,24 @@ def chat_page():
                 selected_model = st.session_state.selected_model
                 available_models = st.session_state.llm_manager.get_available_models(show_all=True)
                 
-                # Check if model exists in available_models (handles dynamic Ollama models)
+                # Always determine provider dynamically for better accuracy
+                def get_provider_from_model_name(model_name):
+                    """Determine provider from model name"""
+                    model_lower = model_name.lower()
+                    if 'gemini' in model_lower:
+                        return "Google"
+                    elif 'gpt' in model_lower or 'openai' in model_lower:
+                        return "OpenAI"
+                    elif 'claude' in model_lower:
+                        return "Anthropic"
+                    elif 'groq' in model_lower:
+                        return "Groq"
+                    elif 'ollama' in model_lower or any(x in model_lower for x in ['llama', 'mistral', 'qwen', 'granite', 'deepseek', 'kimi']):
+                        return "Ollama"
+                    else:
+                        return "Unknown"
+                
+                # Check if model exists in available_models
                 if selected_model in available_models:
                     model_info = available_models[selected_model]
                     provider = model_info.provider.value
@@ -1320,8 +1425,13 @@ def chat_page():
                     key_present = bool(os.getenv(key_env)) or bool(creds.get(f"{provider.lower()}_key"))
                     st.text(f"{provider.capitalize()}: {'✓' if key_present else '✗'}")
                 else:
-                    # Handle dynamic Ollama models not in config
-                    st.text("Ollama: ✓ (Local model)")
+                    # Handle dynamic models - use dynamic provider detection
+                    provider = get_provider_from_model_name(selected_model)
+                    # Check if it's a local model (Ollama) or cloud model
+                    if provider == "Ollama":
+                        st.text(f"{provider}: ✓ (Local model)")
+                    else:
+                        st.text(f"{provider}: ✓ (Cloud model)")
             else:
                 st.text("No model selected")
             st.text(f"Storage: {storage_source}")
@@ -1482,7 +1592,11 @@ def chat_page():
                 index=default_index,
                 key="llm_model_select"
             )
-            st.session_state.selected_model = selected_model
+            # Check if model actually changed
+            if st.session_state.selected_model != selected_model:
+                st.session_state.selected_model = selected_model
+                # Force refresh to update sidebar immediately
+                st.rerun()
             
             # Show model info (all models are now in available_models)
             model_info = available_models[selected_model]
@@ -1513,42 +1627,101 @@ def chat_page():
     # Main question input
     st.markdown("### Ask Your Question")
 
-    # Example presets for quick selection
+    # Example presets for quick selection - organized by category
     presets = [
         "— None —",
-        # Interfaces (inventory + type routing)
-        "Show interfaces where name contains \"Connect\"",
-        "List SAP interfaces",
-        "List MULE applications",
-        "Show Azure interfaces",
-        "Show APIM interfaces",
-        "Exclude EAM and PLANNED interfaces",
-        "Find interfaces by sender name 'Enterprise Alert'",
-        "Find interfaces where receiver datasource name is 'BEE360'",
-        "Get interfaces with metadata included",
-        "Get interfaces with properties included",
-        "Get interfaces with tags included",
-        "Get interfaces with objects included",
-        # Tasks
-        "List all tasks with failed runs",
-        # Logs
-        "Show all log entries",
-        # Datasources/Systems/Dataflows
-        "List all datasources",
-        "List all systems containing 'SAP'",
-        "List all dataflows containing 'sync'",
-        # Neo4j Graph queries (only work with Neo4j Graph source)
-        "Show all systems connected to Salesforce",
-        "What is the path from SAP to Azure?",
-        "Find all interfaces that connect to MuleSoft",
-        "Show the data flow between System A and System B",
-        "What systems are 2 hops away from SAP?",
+        
+        # ═══════════════════════════════════════════════════════════
+        # 📊 TYPE-BASED QUERIES (DuckDB/API)
+        # ═══════════════════════════════════════════════════════════
+        "📊 Show APIM interfaces",
+        "📊 List SAP interfaces",
+        "📊 Find SAP IDOC interfaces",
+        "📊 Show SAP ODATA interfaces",
+        "📊 List SAP Process Orchestration (PO) interfaces",
+        "📊 Show SAP EventMesh interfaces",
+        "📊 List MuleSoft applications",
+        "📊 Find Azure interfaces",
+        "📊 Show all EAM interfaces",
+        
+        # ═══════════════════════════════════════════════════════════
+        # 🔍 NAME & TEXT SEARCH (DuckDB/API)
+        # ═══════════════════════════════════════════════════════════
+        "🔍 Show interfaces where name contains 'Connect'",
+        "🔍 Find interfaces with 'Business Partner' in name",
+        "🔍 List interfaces containing 'EXCHANGE_RATE'",
+        "🔍 Show interfaces starting with 'AGS_'",
+        "🔍 Find all Salesforce interfaces",
+        
+        # ═══════════════════════════════════════════════════════════
+        # 🔗 SENDER & RECEIVER QUERIES (DuckDB/API)
+        # ═══════════════════════════════════════════════════════════
+        "🔗 Find interfaces from SAP Solution Manager",
+        "🔗 Show interfaces to Workday HCM",
+        "🔗 List interfaces from SAP S/4HANA",
+        "🔗 Find interfaces with sender 'Enterprise Alert'",
+        "🔗 Show interfaces where receiver is 'B2B Supplier'",
+        "🔗 Find interfaces with no sender",
+        "🔗 Show interfaces with no receiver",
+        
+        # ═══════════════════════════════════════════════════════════
+        # 📈 ANALYTICAL QUERIES (DuckDB)
+        # ═══════════════════════════════════════════════════════════
+        "📈 Show all interfaces (complete dataset)",
+        "📈 Count interfaces by type",
+        "📈 Show top 10 most common senders",
+        "📈 Find interfaces with missing descriptions",
+        "📈 List first 50 interfaces alphabetically",
+        
+        # ═══════════════════════════════════════════════════════════
+        # 🏷️ METADATA & PROPERTIES (DuckDB/API)
+        # ═══════════════════════════════════════════════════════════
+        "🏷️ Get interfaces with metadata included",
+        "🏷️ Show interfaces with properties",
+        "🏷️ List interfaces with tags",
+        "🏷️ Find interfaces with all objects included",
+        
+        # ═══════════════════════════════════════════════════════════
+        # 🌐 BUSINESS SCENARIOS (DuckDB/API)
+        # ═══════════════════════════════════════════════════════════
+        "🌐 Show currency exchange rate interfaces",
+        "🌐 Find business partner replication flows",
+        "🌐 List all OANDA integrations",
+        "🌐 Show European Central Bank interfaces",
+        "🌐 Find marketing cloud integrations",
+        
+        # ═══════════════════════════════════════════════════════════
+        # 🚫 EXCLUSION QUERIES (DuckDB/API)
+        # ═══════════════════════════════════════════════════════════
+        "🚫 Exclude EAM and PLANNED interfaces",
+        "🚫 Show interfaces that are NOT type 21",
+        "🚫 List non-SAP interfaces",
+        
+        # ═══════════════════════════════════════════════════════════
+        # 🕸️ GRAPH QUERIES (Neo4j Only)
+        # ═══════════════════════════════════════════════════════════
+        "🕸️ Show all systems connected to Salesforce",
+        "🕸️ What is the path from SAP to Azure?",
+        "🕸️ Find all interfaces that connect to MuleSoft",
+        "🕸️ Show the data flow between System A and System B",
+        "🕸️ What systems are 2 hops away from SAP?",
+        "🕸️ Find shortest path from SharePoint to SAP",
+        
+        # ═══════════════════════════════════════════════════════════
+        # 📋 OTHER ENTITIES (API)
+        # ═══════════════════════════════════════════════════════════
+        "📋 List all tasks with failed runs",
+        "📋 Show all log entries",
+        "📋 List all datasources",
+        "📋 Find systems containing 'SAP'",
+        "📋 Show dataflows containing 'sync'",
     ]
     preset = st.selectbox("Example Presets", presets, index=0, help="Select to prefill a query example")
 
     default_question = ""
     if preset and preset != "— None —":
-        default_question = preset
+        # Remove emoji prefix (e.g., "📊 " from "📊 Show APIM interfaces")
+        default_question = preset.split(' ', 1)[1] if ' ' in preset else preset
 
     user_question = st.text_area(
         "What would you like to know about your integration landscape?",
@@ -1657,6 +1830,21 @@ def chat_page():
                             }
                         )
                         
+                        # Save result for future reference
+                        st.session_state.result_saver.save_result(
+                            question=user_question,
+                            answer=result,
+                            method="graph_rag",
+                            model=selected_model,
+                            data_source="neo4j",
+                            metadata={
+                                "execution_time_ms": execution_time,
+                                "seeds_used": meta.get("seeds", []),
+                                "neighborhood_count": meta.get("neighborhood_count", 0),
+                                "llm_synthesis": meta.get("llm_synthesis", False)
+                            }
+                        )
+                        
                         st.markdown("### Answer (from Neo4j Graph RAG)")
                         st.markdown(result)
                         
@@ -1714,8 +1902,14 @@ def chat_page():
                             st.error("Vector RAG is only supported for Local JSON File source.")
                             return
                         
-                        # Execute vector_rag
+                        # Add LLM model and manager to method_params for VectorRAG
                         method_params["data"] = data
+                        method_params["top_k"] = st.session_state.get('vector_rag_top_k', 1000)
+                        method_params["similarity_threshold"] = st.session_state.get('vector_rag_similarity_threshold', 0.3)
+                        method_params["llm_model"] = selected_model
+                        method_params["llm_manager"] = st.session_state.llm_manager
+                        
+                        # Execute vector_rag with LLM synthesis
                         result, meta = method_router.execute_method(method_name, method_params)
                         
                         # Calculate execution time
@@ -1732,6 +1926,21 @@ def chat_page():
                             intent=routing_info["intent"].get("query_type"),
                             execution_time_ms=execution_time,
                             metadata=meta
+                        )
+                        
+                        # Save result for future reference
+                        st.session_state.result_saver.save_result(
+                            question=user_question,
+                            answer=result,
+                            method="vector_rag",
+                            model=selected_model,
+                            data_source="local_json",
+                            metadata={
+                                "execution_time_ms": execution_time,
+                                "retrieved": meta.get("retrieved", 0),
+                                "avg_similarity": meta.get("avg_similarity", 0),
+                                "llm_synthesis": meta.get("llm_synthesis", False)
+                            }
                         )
                         
                         st.markdown("### Answer (from Vector RAG)")
@@ -1845,7 +2054,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:**")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -1973,7 +2182,7 @@ def show_qa_explorer():
     st.markdown("## 📚 Q&A Pairs Explorer")
     
     # Data source selection
-    data_source = st.selectbox("Data Source", ["duckdb", "api"], key="qa_explorer_source")
+    data_source = st.selectbox("Data Source", ["duckdb", "api", "local_json"], key="qa_explorer_source")
     
     # Get recent Q&A pairs
     try:
@@ -1990,14 +2199,60 @@ def show_qa_explorer():
                     metadata = qa.get('metadata', {})
                     if metadata:
                         st.markdown("**Metadata:**")
+                        
+                        # Row 1: Method, Strategy, Data Source
                         col1, col2, col3 = st.columns(3)
                         with col1:
-                            st.text(f"Intent: {metadata.get('intent', 'N/A')}")
+                            method = metadata.get('method', 'N/A')
+                            st.text(f"🔧 Method: {method}")
                         with col2:
-                            st.text(f"Endpoint: {metadata.get('endpoint', 'N/A')}")
+                            strategy = metadata.get('strategy', 'N/A')
+                            st.text(f"📋 Strategy: {strategy}")
                         with col3:
-                            st.text(f"Items: {metadata.get('total_items', 'N/A')}")
+                            data_src = metadata.get('data_source', 'N/A')
+                            st.text(f"💾 Source: {data_src}")
                         
+                        # Row 2: top_k, similarity_threshold, retrieved items
+                        col1, col2, col3 = st.columns(3)
+                        with col1:
+                            top_k = metadata.get('top_k', 'N/A')
+                            st.text(f"🔝 top_k: {top_k}")
+                        with col2:
+                            sim_threshold = metadata.get('similarity_threshold', 'N/A')
+                            st.text(f"📊 Threshold: {sim_threshold}")
+                        with col3:
+                            retrieved = metadata.get('retrieved', metadata.get('total_items', 'N/A'))
+                            st.text(f"✅ Retrieved: {retrieved}")
+                        
+                        # Row 3: Intent, Endpoint, Timestamp
+                        col1, col2, col3 = st.columns(3)
+                        with col1:
+                            intent = metadata.get('intent', 'N/A')
+                            st.text(f"🎯 Intent: {intent}")
+                        with col2:
+                            endpoint = metadata.get('endpoint', 'N/A')
+                            st.text(f"🔗 Endpoint: {endpoint}")
+                        with col3:
+                            timestamp = metadata.get('timestamp', 'N/A')
+                            if timestamp != 'N/A' and len(timestamp) > 10:
+                                timestamp = timestamp[:19]  # Truncate to datetime
+                            st.text(f"🕐 Time: {timestamp}")
+                        
+                        # Row 4: LLM info if available
+                        llm_synthesis = metadata.get('llm_synthesis', 'false')
+                        llm_model = metadata.get('llm_model_used', 'none')
+                        avg_sim = metadata.get('avg_similarity', 'N/A')
+                        
+                        if llm_synthesis != 'false' or llm_model != 'none':
+                            col1, col2, col3 = st.columns(3)
+                            with col1:
+                                st.text(f"🤖 LLM: {llm_model}")
+                            with col2:
+                                st.text(f"✨ Synthesis: {llm_synthesis}")
+                            with col3:
+                                st.text(f"📈 Avg Sim: {avg_sim}")
+                        
+                        # SQL Query if available
                         if metadata.get('sql_query'):
                             st.markdown("**SQL Query:**")
                             st.code(metadata['sql_query'][:200] + "..." if len(metadata['sql_query']) > 200 else metadata['sql_query'])
@@ -2393,6 +2648,41 @@ def main():
     else:
         # Sidebar navigation
         with st.sidebar:
+            # Vector RAG Configuration
+            st.markdown("### ⚙️ Vector RAG Settings")
+            
+            # Initialize session state for settings if not exists
+            if 'vector_rag_top_k' not in st.session_state:
+                st.session_state.vector_rag_top_k = 1000
+            if 'vector_rag_similarity_threshold' not in st.session_state:
+                st.session_state.vector_rag_similarity_threshold = 0.3
+            
+            # top_k slider
+            top_k_value = st.slider(
+                "Max Results (top_k)",
+                min_value=5,
+                max_value=1000,
+                value=st.session_state.vector_rag_top_k,
+                step=5,
+                help="Maximum number of results to return from vector search",
+                key="top_k_slider"
+            )
+            st.session_state.vector_rag_top_k = top_k_value
+            
+            # similarity_threshold slider
+            sim_threshold_value = st.slider(
+                "Similarity Threshold",
+                min_value=0.0,
+                max_value=1.0,
+                value=st.session_state.vector_rag_similarity_threshold,
+                step=0.05,
+                help="Minimum similarity score (0-1) for results",
+                key="similarity_threshold_slider"
+            )
+            st.session_state.vector_rag_similarity_threshold = sim_threshold_value
+            
+            st.markdown("---")
+            
             st.markdown("### Navigation")
             page = st.radio(
                 "Select Page",

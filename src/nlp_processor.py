@@ -3,7 +3,7 @@ import re
 from typing import Dict, List, Any, Optional
 from openai import OpenAI
 from src.query_builder import QueryBuilder
-from src.inventory_types import INVENTORY_TYPES
+from src.inventory_types import INVENTORY_TYPES, get_types_from_search_term, TYPE_ALIASES
 from src.prompt_builder import build_system_prompt_translation
 
 class NLPProcessor:
@@ -195,6 +195,104 @@ class NLPProcessor:
                 return entity
         return None
     
+    def _detect_query_intent(self, query: str, entity: str) -> Dict[str, Any]:
+        """
+        Detect the primary intent of the query to choose correct filter strategy.
+        
+        Returns:
+            {
+                "filter_type": "name" | "type" | "sender" | "receiver" | "metadata" | "mixed",
+                "filter_value": extracted value or list of values,
+                "operator": "like" | "eq" | "in"
+            }
+        """
+        query_lower = query.lower()
+        
+        # Priority 1: "Connect to" / "Send to" / "Receive from" patterns
+        # These are ALWAYS name/sender/receiver searches, NEVER type searches
+        connection_patterns = [
+            (r'(?:connect|connecting|connected|interface)\s+(?:to|with)\s+["\']?([^"\']+?)["\']?(?:\s|$|\?)', 'name'),
+            (r'(?:send|sending|sends)\s+(?:to|data\s+to)\s+["\']?([^"\']+?)["\']?(?:\s|$|\?)', 'receiver'),
+            (r'(?:receive|receiving|receives)\s+(?:from|data\s+from)\s+["\']?([^"\']+?)["\']?(?:\s|$|\?)', 'sender'),
+            (r'(?:from|source)\s+["\']?([^"\']+?)["\']?(?:\s|$|\?)', 'sender'),
+            (r'(?:to|destination|target)\s+["\']?([^"\']+?)["\']?(?:\s|$|\?)', 'receiver'),
+        ]
+        
+        for pattern, field_type in connection_patterns:
+            match = re.search(pattern, query_lower)
+            if match:
+                value = match.group(1).strip()
+                return {
+                    "filter_type": field_type,
+                    "filter_value": value,
+                    "operator": "like"
+                }
+        
+        # Priority 2: "Contains" / "with...in name" patterns
+        name_patterns = [
+            r'(?:name\s+)?contains?\s+["\']?([^"\']+?)["\']?(?:\s|$|\?)',
+            r'with\s+["\']?([^"\']+?)["\']?\s+in\s+(?:the\s+)?name',
+            r'(?:starting|starts)\s+with\s+["\']?([^"\']+?)["\']?(?:\s|$|\?)',
+            r'interfaces?\s+(?:named|called)\s+["\']?([^"\']+?)["\']?(?:\s|$|\?)',
+            r'where\s+name\s+(?:contains?|includes?|like)\s+["\']?([^"\']+?)["\']?(?:\s|$|\?)',
+        ]
+        
+        for pattern in name_patterns:
+            match = re.search(pattern, query_lower)
+            if match:
+                return {
+                    "filter_type": "name",
+                    "filter_value": match.group(1).strip(),
+                    "operator": "like"
+                }
+        
+        # Priority 3: Explicit sender/receiver patterns
+        if 'sender' in query_lower and 'receiver' not in query_lower:
+            match = re.search(r'sender[:\s]+["\']?([^"\']+?)["\']?(?:\s|$|\?)', query_lower)
+            if match:
+                return {
+                    "filter_type": "sender_name",
+                    "filter_value": match.group(1).strip(),
+                    "operator": "like"
+                }
+        
+        if 'receiver' in query_lower and 'sender' not in query_lower:
+            match = re.search(r'receiver[:\s]+["\']?([^"\']+?)["\']?(?:\s|$|\?)', query_lower)
+            if match:
+                return {
+                    "filter_type": "receiver_name",
+                    "filter_value": match.group(1).strip(),
+                    "operator": "like"
+                }
+        
+        # Priority 4: Type-based queries (only if explicit type keywords)
+        # Must have clear type indicators and NOT be connection queries
+        type_indicators = [
+            r'(?:show|list|find|get)\s+(?:all\s+)?(\w+)\s+interfaces?(?:\s|$)',
+            r'(?:show|list|find|get)\s+(?:all\s+)?(\w+)\s+type',
+            r'interfaces?\s+(?:of\s+)?type\s+(\w+)',
+            r'^(\w+)\s+interfaces?(?:\s|$)',  # "SAP interfaces" or "APIM interfaces" at start
+        ]
+        
+        for pattern in type_indicators:
+            match = re.search(pattern, query_lower, re.IGNORECASE)
+            if match:
+                keyword = match.group(1).upper()
+                # Check if it's a valid type alias
+                if keyword.lower() in TYPE_ALIASES or keyword in ['APIM', 'SAP', 'AZURE', 'MULE', 'MULESOFT', 'IDOC', 'ODATA', 'SOAP', 'PO', 'EAM', 'EVENTMESH']:
+                    return {
+                        "filter_type": "type",
+                        "filter_value": keyword,
+                        "operator": "in"
+                    }
+        
+        # Default: unclear intent
+        return {
+            "filter_type": "unknown",
+            "filter_value": None,
+            "operator": None
+        }
+    
     def _extract_fields(self, query: str, entity: str) -> List[str]:
         """Extract fields to select from query"""
         fields = []
@@ -214,15 +312,126 @@ class NLPProcessor:
         return fields
     
     def _extract_filters(self, query: str, entity: str) -> List[Dict[str, Any]]:
-        """Extract filter conditions from query"""
+        """Extract filter conditions from query using intent detection"""
+        filters = []
+        
+        if entity != 'inventory':
+            # For non-inventory entities, use old logic
+            return self._extract_filters_legacy(query, entity)
+        
+        # Step 1: Detect query intent
+        intent = self._detect_query_intent(query, entity)
+        
+        # Step 2: Generate appropriate filter based on intent
+        if intent["filter_type"] == "name":
+            # Name search
+            filters.append({
+                "field": {
+                    "name": "name",
+                    "like": intent["filter_value"]
+                }
+            })
+        
+        elif intent["filter_type"] == "sender" or intent["filter_type"] == "sender_name":
+            # Sender search
+            filters.append({
+                "field": {
+                    "name": "sender_name",
+                    "like": intent["filter_value"]
+                }
+            })
+        
+        elif intent["filter_type"] == "receiver" or intent["filter_type"] == "receiver_name":
+            # Receiver search
+            filters.append({
+                "field": {
+                    "name": "receiver_name",
+                    "like": intent["filter_value"]
+                }
+            })
+        
+        elif intent["filter_type"] == "type":
+            # Type-based search using aliases
+            matched_types = get_types_from_search_term(intent["filter_value"])
+            
+            if matched_types:
+                if len(matched_types) == 1:
+                    filters.append({
+                        "field": {
+                            "name": "type",
+                            "eq": matched_types[0]
+                        }
+                    })
+                else:
+                    filters.append({
+                        "field": {
+                            "name": "type",
+                            "in": matched_types
+                        }
+                    })
+        
+        # Step 3: Handle special cases
+        # Check for "no sender" or "no receiver" or "missing"
+        if re.search(r'\b(?:no|missing|without|null)\s+sender\b', query, re.IGNORECASE):
+            filters.append({
+                "field": {
+                    "name": "sender_name",
+                    "eq": None  # NULL check
+                }
+            })
+        
+        if re.search(r'\b(?:no|missing|without|null)\s+receiver\b', query, re.IGNORECASE):
+            filters.append({
+                "field": {
+                    "name": "receiver_name",
+                    "eq": None  # NULL check
+                }
+            })
+        
+        if re.search(r'\b(?:missing|without|null)\s+description\b', query, re.IGNORECASE):
+            filters.append({
+                "field": {
+                    "name": "description",
+                    "eq": None
+                }
+            })
+        
+        # Check for exclusions (NOT/exclude patterns)
+        exclude_patterns = [
+            r'(?:exclude|not|without)\s+(\w+)(?:\s+(?:and|or)\s+(\w+))?',
+            r'(?:that\s+are\s+)?(?:not|isn\'t|aren\'t)\s+type\s+(\w+)',
+        ]
+        
+        for pattern in exclude_patterns:
+            match = re.search(pattern, query, re.IGNORECASE)
+            if match:
+                excluded_keywords = [m for m in match.groups() if m]
+                excluded_types = []
+                for keyword in excluded_keywords:
+                    types = get_types_from_search_term(keyword)
+                    excluded_types.extend(types)
+                
+                if excluded_types:
+                    # Remove duplicates
+                    excluded_types = list(dict.fromkeys(excluded_types))
+                    filters.append({
+                        "field": {
+                            "name": "type",
+                            "not_in": excluded_types
+                        }
+                    })
+                    break
+        
+        return filters
+    
+    def _extract_filters_legacy(self, query: str, entity: str) -> List[Dict[str, Any]]:
+        """Legacy filter extraction for non-inventory entities"""
         filters = []
         
         # Look for specific value patterns
-        # Pattern: "where X is Y" or "with X = Y"
         value_patterns = [
             r'where\s+(\w+)\s+(?:is|equals?|=)\s+["\']?([^"\']+)["\']?',
             r'with\s+(\w+)\s+(?:is|equals?|=)\s+["\']?([^"\']+)["\']?',
-            r'(\w+)\s+(?:is|equals?|=)\s+["\']?([^"\']+)["\']?'
         ]
         
         for pattern in value_patterns:
@@ -236,37 +445,6 @@ class NLPProcessor:
                             "eq": value.strip()
                         }
                     })
-        
-        # Look for LIKE patterns
-        like_patterns = [
-            r'(\w+)\s+(?:contains?|includes?|like)\s+["\']?([^"\']+)["\']?',
-            r'find\s+.*?with\s+(\w+).*?["\']([^"\']+)["\']',
-            r'search\s+.*?(\w+).*?["\']([^"\']+)["\']'
-        ]
-        
-        for pattern in like_patterns:
-            matches = re.finditer(pattern, query, re.IGNORECASE)
-            for match in matches:
-                field, value = match.groups()
-                if field in self.common_fields.get(entity, []):
-                    filters.append({
-                        "field": {
-                            "name": field,
-                            "like": value.strip()
-                        }
-                    })
-        
-        # Handle inventory type filters
-        if entity == 'inventory':
-            for type_id, type_name in INVENTORY_TYPES.items():
-                if type_name.lower() in query or str(type_id) in query:
-                    filters.append({
-                        "field": {
-                            "name": "type",
-                            "eq": str(type_id)
-                        }
-                    })
-                    break
         
         return filters
     

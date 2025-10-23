@@ -3,6 +3,8 @@ Inventory types mapping for WHINT Integration Cockpit
 Based on the official API documentation
 """
 
+from typing import List
+
 # Official WHINT API Inventory Types
 INVENTORY_TYPES = {
     0: "MULE_API",
@@ -151,6 +153,52 @@ def search_inventory_types(search_term: str) -> dict:
             results[type_id] = type_name
     
     return results
+
+# Type aliases for common search terms
+TYPE_ALIASES = {
+    'apim': ['APIM', 'SAP_IS_APIM', 'AZURE_APIM'],
+    'sap': ['SAP_ODATA', 'SAP_SOAP', 'SAP_EVENTMESH', 'SAP_IDOC', 'SAP_IS_APIM', 'SAP_IS_CI', 'SAP_PO'],
+    'azure': ['AZURE_APIM', 'AZURE_EVENTGRID', 'AZURE_LA_CON', 'AZURE_LA_STD', 'AZURE_SB_QUEUE', 'AZURE_SB_TOPIC'],
+    'mule': ['MULE_API', 'MULE_APP'],
+    'mulesoft': ['MULE_API', 'MULE_APP'],
+    'idoc': ['SAP_IDOC'],
+    'odata': ['SAP_ODATA'],
+    'soap': ['SAP_SOAP'],
+    'eventmesh': ['SAP_EVENTMESH'],
+    'event mesh': ['SAP_EVENTMESH'],
+    'po': ['SAP_PO'],
+    'process orchestration': ['SAP_PO'],
+    'cloud integration': ['SAP_IS_CI'],
+    'ci': ['SAP_IS_CI'],
+    'eam': ['EAM'],
+}
+
+def get_types_from_search_term(search_term: str) -> List[str]:
+    """
+    Get all type names that match a search term using aliases.
+    Returns list of type name strings (not IDs).
+    """
+    search_lower = search_term.lower().strip()
+    
+    # Check for exact alias match first
+    if search_lower in TYPE_ALIASES:
+        return TYPE_ALIASES[search_lower]
+    
+    # Check for partial matches in aliases
+    matched_types = []
+    for alias, type_names in TYPE_ALIASES.items():
+        if search_lower in alias or alias in search_lower:
+            matched_types.extend(type_names)
+    
+    # If no alias match, search in type names directly
+    if not matched_types:
+        search_upper = search_term.upper()
+        for type_id, type_name in INVENTORY_TYPES.items():
+            if search_upper in type_name:
+                matched_types.append(type_name)
+    
+    # Remove duplicates while preserving order
+    return list(dict.fromkeys(matched_types))
 
 def get_inventory_type_stats(data: list) -> dict:
     """Calculate statistics for inventory types in a dataset"""

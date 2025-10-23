@@ -100,19 +100,27 @@ class VectorKnowledgeStore:
     def store_qa_pair(self, question: str, answer: str, query: Dict[str, Any], 
                      endpoint: str, intent: str, data_source: str = "duckdb",
                      response_data: Optional[Dict[str, Any]] = None,
-                     sql_query: Optional[str] = None) -> str:
+                     sql_query: Optional[str] = None,
+                     method: Optional[str] = None,
+                     top_k: Optional[int] = None,
+                     similarity_threshold: Optional[float] = None,
+                     extra_metadata: Optional[Dict[str, Any]] = None) -> str:
         """
         Store a Q&A pair in the appropriate collection.
         
         Args:
             question: User's question
             answer: Generated answer
-            query: WHINT API query
-            endpoint: API endpoint used
-            intent: Detected intent (list_all, count, search, analyze)
-            data_source: Source of data (duckdb, api)
+            query: WHINT API query or empty dict for vector searches
+            endpoint: API endpoint used or "local_json" for local files
+            intent: Detected intent (list_all, count, search, analyze, api, etc.)
+            data_source: Source of data (duckdb, api, local_json)
             response_data: Raw response data for entity extraction
             sql_query: SQL query used (for DuckDB)
+            method: Method used (vector_rag, graph_rag, db_lookup, etc.)
+            top_k: Number of top results retrieved
+            similarity_threshold: Similarity threshold used
+            extra_metadata: Additional metadata to store
             
         Returns:
             Q&A pair ID
@@ -142,12 +150,30 @@ class VectorKnowledgeStore:
                 "total_items": len(response_data.get('data', [])) if response_data else 0
             }
             
+            # Add method-specific metadata (for vector_rag, graph_rag, etc.)
+            if method:
+                metadata["method"] = method
+            if top_k is not None:
+                metadata["top_k"] = str(top_k)  # Convert to string for ChromaDB compatibility
+            if similarity_threshold is not None:
+                metadata["similarity_threshold"] = str(similarity_threshold)
+            
+            # Add any extra metadata passed in
+            if extra_metadata:
+                for key, value in extra_metadata.items():
+                    # Convert non-string values to strings for ChromaDB
+                    metadata[key] = str(value) if not isinstance(value, str) else value
+            
             # Add SQL query for DuckDB responses
             if sql_query:
                 metadata["sql_query"] = sql_query[:500]  # Truncate for storage
             
             # Choose collection based on data source
-            collection = self.duckdb_collection if data_source == "duckdb" else self.api_collection
+            # Use duckdb_collection for local_json since it's similar to duckdb (local processing)
+            if data_source in ["duckdb", "local_json"]:
+                collection = self.duckdb_collection
+            else:
+                collection = self.api_collection
             
             # Store in ChromaDB
             collection.add(
@@ -178,7 +204,7 @@ class VectorKnowledgeStore:
         """
         try:
             # Choose collection based on data source
-            if data_source == "duckdb":
+            if data_source in ["duckdb", "local_json"]:
                 collection = self.duckdb_collection
             elif data_source == "api":
                 collection = self.api_collection
@@ -262,7 +288,10 @@ class VectorKnowledgeStore:
     def get_recent_qa_pairs(self, data_source: str = "duckdb", limit: int = 10) -> List[Dict[str, Any]]:
         """Get recent Q&A pairs for display."""
         try:
-            collection = self.duckdb_collection if data_source == "duckdb" else self.api_collection
+            if data_source in ["duckdb", "local_json"]:
+                collection = self.duckdb_collection
+            else:
+                collection = self.api_collection
             
             # Get all documents (this is a simple approach, could be optimized)
             results = collection.get()

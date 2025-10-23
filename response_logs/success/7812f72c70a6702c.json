@@ -1,0 +1,37 @@
+{
+  "log_id": "7812f72c70a6702c",
+  "timestamp": "2025-10-23T11:00:04.717582",
+  "question": "Show APIM interfaces",
+  "answer": [
+    "\ud83d\udd0d No items found with similarity >= 0.7",
+    {
+      "method": "vector_rag",
+      "retrieved": 0,
+      "total_candidates": 408,
+      "strategy": "direct_search_filtered",
+      "prefiltered_count": 408,
+      "original_count": 5771
+    }
+  ],
+  "status": "success",
+  "method_used": "vector_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "local_json",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": null,
+  "graph_seeds": null,
+  "api_query": null,
+  "endpoint": null,
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 19969.893,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "method": "vector_rag",
+    "top_k": 5
+  }
+}

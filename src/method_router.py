@@ -111,7 +111,7 @@ class MethodRouter:
             return {
                 **base_params,
                 "top_k": kwargs.get('top_k', 5),
-                "similarity_threshold": kwargs.get('similarity_threshold', 0.7)
+                "similarity_threshold": kwargs.get('similarity_threshold', 0.3)
             }
         
         elif method_name == 'db_lookup':
@@ -206,15 +206,19 @@ class MethodRouter:
             query = params['query']
             data = params.get('data')
             top_k = params.get('top_k', 5)
+            llm_model = params.get('llm_model')
+            llm_manager = params.get('llm_manager')
             
             # Remove parameters that are already passed explicitly
             remaining_params = {k: v for k, v in params.items() 
-                              if k not in ['query', 'data', 'top_k']}
+                              if k not in ['query', 'data', 'top_k', 'llm_model', 'llm_manager']}
             
             result = vector_rag_run(
                 query=query,
                 data=data,
                 top_k=top_k,
+                llm_model=llm_model,
+                llm_manager=llm_manager,
                 **remaining_params
             )
             

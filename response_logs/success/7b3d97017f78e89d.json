@@ -1,0 +1,38 @@
+{
+  "log_id": "7b3d97017f78e89d",
+  "timestamp": "2025-10-23T11:09:36.731694",
+  "question": "Show APIM interfaces",
+  "answer": [
+    "\ud83d\udd0d Found 5 relevant items from direct search:\n\n\n**Result 1** (Similarity: 40.4%)\n**Name:** apim-hello-world-srvc | echo-api\n**Type:** AZURE_LA_STD\n**Description:** adam test\n\n\n**Result 2** (Similarity: 39.5%)\n**Name:** test\n**Type:** 22\n**Description:** \n\n\n**Result 3** (Similarity: 39.4%)\n**Name:** bee360_interfaces\n**Type:** 19\n**Description:** \n\n\n**Result 4** (Similarity: 39.2%)\n**Name:** apim-hello-world-srvc | echo-api\n**Type:** AZURE_LA_STD\n**Description:** \n\n\n**Result 5** (Similarity: 38.6%)\n**Name:** WHINT IFM Azure IS API Management\n**Type:** 20\n**Description:** \n",
+    {
+      "method": "vector_rag",
+      "retrieved": 5,
+      "total_candidates": 408,
+      "avg_similarity": 0.3944445788860321,
+      "strategy": "direct_search_filtered",
+      "prefiltered_count": 408,
+      "original_count": 5771
+    }
+  ],
+  "status": "success",
+  "method_used": "vector_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "local_json",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": null,
+  "graph_seeds": null,
+  "api_query": null,
+  "endpoint": null,
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 19021.578,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "method": "vector_rag",
+    "top_k": 5
+  }
+}

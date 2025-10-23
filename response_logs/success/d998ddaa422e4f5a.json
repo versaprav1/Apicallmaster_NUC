@@ -1,0 +1,35 @@
+{
+  "log_id": "d998ddaa422e4f5a",
+  "timestamp": "2025-10-23T10:12:24.311003",
+  "question": "Show APIM interfaces",
+  "answer": [
+    "\ud83d\udd0d No items found with similarity >= 0.7",
+    {
+      "method": "vector_rag",
+      "retrieved": 0,
+      "total_candidates": 5771,
+      "strategy": "direct_search"
+    }
+  ],
+  "status": "success",
+  "method_used": "vector_rag",
+  "model_used": "gpt-oss:20b-cloud",
+  "data_source": "local_json",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": null,
+  "graph_seeds": null,
+  "api_query": null,
+  "endpoint": null,
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 110470.20000000001,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "method": "vector_rag",
+    "top_k": 5
+  }
+}

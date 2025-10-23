@@ -1,0 +1,42 @@
+{
+  "log_id": "a0acaa788fa6e052",
+  "timestamp": "2025-10-23T11:55:46.493425",
+  "question": "Show APIM interfaces",
+  "answer": [
+    "# \ud83d\udcca Vector RAG Analysis Report\n\n## \ud83d\udd0d Vector Search Results\n**Found:** 408 items  \n**Strategy:** direct_search_filtered  \n**Average Similarity:** 30.9%  \n\n### \ud83d\udcca Vector Search Statistics\n- **Total Results Found:** 408\n- **Average Similarity:** 30.9%\n- **Similarity Range:** 40.4% - 11.6%\n- **Threshold Applied:** 0%\n\n---\n\n### \ud83d\udd0d Search Results\n\n#### Top 20 Results (Detailed View)\n\n**#1** - Similarity: **40.4%** \ud83d\udd25\n```\nName: apim-hello-world-srvc | echo-api\nType: AZURE_LA_STD\n**Sender:** Travel App\nDescription: adam test\n```\n\n**#2** - Similarity: **39.5%** \u2705\n```\nName: test\nType: 22\n\n```\n\n**#3** - Similarity: **39.4%** \u2705\n```\nName: bee360_interfaces\nType: 19\n\n```\n\n**#4** - Similarity: **39.2%** \u2705\n```\nName: apim-hello-world-srvc | echo-api\nType: AZURE_LA_STD\n**Sender:** Check-In Support\n\n```\n\n**#5** - Similarity: **38.6%** \u2705\n```\nName: WHINT IFM Azure IS API Management\nType: 20\n**Sender:** SAP CI\n**Receiver:** Azure DevOps\n\n```\n\n**#6** - Similarity: **37.8%** \u2705\n```\nName: apim-hello-world-srvc | http-bin\nType: AZURE_LA_STD\n**Sender:** Payroll Management System\n\n```\n\n**#7** - Similarity: **37.5%** \u2705\n```\nName: WHINT IFM Azure IS API Management\nType: 20\n**Sender:** SAP CI\n**Receiver:** Azure DevOps\n\n```\n\n**#8** - Similarity: **37.5%** \u2705\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#9** - Similarity: **37.5%** \u2705\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#10** - Similarity: **37.5%** \u2705\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#11** - Similarity: **37.5%** \u2705\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#12** - Similarity: **37.3%** \u2705\n```\nName: CR | CO_E2E_SERVICE_METERING_DATA\nType: SAP_IS_APIM\n\n```\n\n**#13** - Similarity: **37.3%** \u2705\n```\nName: technical-testapi-ic\nType: AZURE_LA_STD\n\n```\n\n**#14** - Similarity: **36.9%** \u2705\n```\nName: apim-hello-world-srvc | orders\nType: AZURE_LA_STD\n**Sender:** Payroll Management System\n\n```\n\n**#15** - Similarity: **36.8%** \u2705\n```\nName: Test_API\nType: 19\n\n```\n\n**#16** - Similarity: **36.7%** \u2705\n```\nName: SR | ZWIC_XI_INBOUND\nType: SAP_IS_APIM\n**Receiver:** SAP Solution Manager\n\n```\n\n**#17** - Similarity: **36.7%** \u2705\n```\nName: SR | ZWIC_XI_INBOUND\nType: SAP_IS_APIM\n**Receiver:** SAP Solution Manager\n\n```\n\n**#18** - Similarity: **36.7%** \u2705\n```\nName: apim-hello-world-srvc | orders\nType: AZURE_LA_STD\n**Sender:** Check-In Support\n\n```\n\n**#19** - Similarity: **36.5%** \u2705\n```\nName: CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI\nType: SAP_IS_APIM\n\n```\n\n**#20** - Similarity: **36.5%** \u2705\n```\nName: CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI\nType: SAP_IS_APIM\n\n```\n\n---\n\n#### \ud83d\udccb Remaining 388 Results (Summary by Type)\n\n**Type: SAP_IS_APIM** - 282 more items (Avg Similarity: 31.1%)\n  \u2022 SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  \u2022 SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  \u2022 SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  \u2022 SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  \u2022 SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  \u2022 ... and 277 more\n\n**Type: 19** - 68 more items (Avg Similarity: 29.3%)\n  \u2022 WIC_REPORTING_SP (36.2%)\n  \u2022 HelloWorldAPI (35.7%)\n  \u2022 Proxy_1 (35.6%)\n  \u2022 Postman | HelloWorldAPI (35.4%)\n  \u2022 HelloWorldAPI (34.9%)\n  \u2022 ... and 63 more\n\n**Type: 20** - 14 more items (Avg Similarity: 31.2%)\n  \u2022 WHINT IMS (33.3%)\n  \u2022 WIC E2E Demo 1.5 FxRates EM 2 APIM (32.9%)\n  \u2022 TEST_IMS_APIM_WEEKLY (32.2%)\n  \u2022 WHINT IMS Azure IS - API Management (31.3%)\n  \u2022 TEST_IMS_APIM_DAILY (30.9%)\n  \u2022 ... and 9 more\n\n**Type: AZURE_LA_STD** - 7 more items (Avg Similarity: 35.6%)\n  \u2022 apim-hello-world-srvc | orders (36.4%)\n  \u2022 apim-hello-world-srvc | testwsapi (36.4%)\n  \u2022 apim-hello-world-srvc | orders;rev=2 (36.3%)\n  \u2022 apim-hello-world-srvc | orders;rev=2 (35.9%)\n  \u2022 apim-hello-world-srvc | orders;rev=2 (35.8%)\n  \u2022 ... and 2 more\n\n**Type: AZURE_APIM** - 8 more items (Avg Similarity: 25.0%)\n  \u2022 database-sapi-app (31.7%)\n  \u2022 test-amq-1.0.0-mule-application (28.3%)\n  \u2022 test-amq-java8 (27.8%)\n  \u2022 test-amq-java8-1.0.2-SNAPSHOT-mule-application (22.8%)\n  \u2022 CustomerChange API from SFSC  (22.7%)\n  \u2022 ... and 3 more\n\n**Type: 23** - 6 more items (Avg Similarity: 33.0%)\n  \u2022 apim@facade-callback-rdp (35.9%)\n  \u2022 apimqasmoke-v-mock-dlq (35.3%)\n  \u2022 apimqasmoke-v-mock (35.1%)\n  \u2022 apim@facade-callback-rdp-dlq (33.6%)\n  \u2022 apimqasmoke-v-mock-error (30.6%)\n  \u2022 ... and 1 more\n\n**Type: 22** - 2 more items (Avg Similarity: 32.3%)\n  \u2022 WHINT IFD API Management (34.5%)\n  \u2022 JMA: LinkedIn - Talent.io (LeanIX,E2E) (23.0%)\n\n**Type: SAP_IS_CI** - 1 more item (Avg Similarity: 25.0%)\n  \u2022 whint/em/test/mkutopic | whint/em/test/mku | MKUWebhook (25.0%)\n\n\n---\n\n## \ud83e\udd16 AI Analysis by llama3.2:latest\n\n**Summary of Vector Search Results**\n\nThe vector search results reveal 408 relevant items, with an average similarity score of 30.9%. The search strategy employed is direct_search_filtered, indicating that the most similar items were found using this approach.\n\n**Top 20 Relevant Interfaces/Items**\n\nHere are the top 20 results, along with their similarity scores:\n\n1. **apim-hello-world-srvc | echo-api**: 40.4%\n2. **test**: 39.5%\n3. **bee360_interfaces**: 39.4%\n4. **apim-hello-world-srvc | echo-api**: 39.2% ( duplicate)\n5. **WHINT IFM Azure IS API Management**: 38.6%\n6. **apim-hello-world-srvc | http-bin**: 37.8%\n7. **WHINT IFM Azure IS API Management**: 37.5%\n8. **CR | ZSBCO_SI_OB_IB_TEST**: 37.5% (x3)\n9. **CR | CO_E2E_SERVICE_METERING_DATA**: 37.3%\n10. **technical-testapi-ic**: 37.3%\n11. **apim-hello-world-srvc | orders**: 36.9%\n12. **Test_API**: 36.8%\n13. **SR | ZWIC_XI_INBOUND**: 36.7% (x2)\n14. **apim-hello-world-srvc | orders**: 36.4%\n15. **CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI**: 36.5% (x2)\n\n**Important Patterns and Insights**\n\n* The top results are primarily from the `apim-hello-world-srvc` namespace, indicating a strong connection between this API and the search query.\n* There is a high concentration of similar items with similarity scores above 35%, suggesting that these APIs have similar characteristics or functionality.\n* The presence of duplicates (e.g., `apim-hello-world-srvc | echo-api`) highlights the need for careful handling of duplicate results in the search output.\n\n**Remaining Results**\n\nThe remaining 388 results are summarized by type, with the following key findings:\n\n* SAP_IS_APIM: 282 more items with an average similarity score of 31.1%\n* 19: 68 more items with an average similarity score of 29.3%\n* 20: 14 more items with an average similarity score of 31.2%\n* AZURE_LA_STD: 7 more items with an average similarity score of 35.6%\n* AZURE_APIM: 8 more items with an average similarity score of 25.0%\n\nThese results suggest that there are many more relevant APIs in the SAP IS APIM namespace, as well as other namespaces with similar characteristics or functionality.\n\n---\n\n### \ud83d\udca1 Analysis Metadata\n- **LLM Model:** llama3.2:latest\n- **Total Candidates Searched:** 408\n- **Results Retrieved:** 408\n- **Pre-filtered:** 408 from 5771 total items",
+    {
+      "method": "vector_rag",
+      "retrieved": 408,
+      "total_candidates": 408,
+      "avg_similarity": 0.3086019850829068,
+      "strategy": "direct_search_filtered",
+      "prefiltered_count": 408,
+      "original_count": 5771,
+      "llm_model_used": "llama3.2:latest",
+      "llm_synthesis": true,
+      "raw_results_count": 408,
+      "all_results_shown": true
+    }
+  ],
+  "status": "success",
+  "method_used": "vector_rag",
+  "model_used": "llama3.2:latest",
+  "data_source": "local_json",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": null,
+  "graph_seeds": null,
+  "api_query": null,
+  "endpoint": null,
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 253087.06399999998,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "method": "vector_rag",
+    "top_k": 1000
+  }
+}

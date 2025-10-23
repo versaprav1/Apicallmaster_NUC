@@ -173,12 +173,35 @@ class DuckDBTranslator:
             
             # Handle special field types
             if field_name == 'type':
-                sql_field, value = self._resolve_inventory_type_filter(field_condition)
-                if sql_field and value is not None:
-                    param_name = f"param_{param_counter}"
-                    params[param_name] = value
+                # Type filter - handle both string and numeric values
+                value = None
+                for key in ['eq', 'ne', 'like', 'in', 'not_in', 'value']:
+                    if key in field_condition:
+                        value = field_condition[key]
+                        if key not in ['in', 'not_in']:
+                            operator = key
+                        break
+                
+                if value is not None:
                     sql_operator = self.operator_mapping.get(operator, '=')
-                    return f"{sql_field} {sql_operator} :{param_name}", params
+                    
+                    # Handle IN operator for multiple types
+                    if operator in ['in', 'not_in']:
+                        if isinstance(value, list):
+                            # Create placeholders for each value
+                            placeholders = []
+                            for i, v in enumerate(value):
+                                param_name = f"param_{param_counter}_{i}"
+                                params[param_name] = str(v)  # Cast to string
+                                placeholders.append(f":{param_name}")
+                            param_counter += len(value)
+                            
+                            return f"CAST(norm_type AS VARCHAR) {sql_operator} ({', '.join(placeholders)})", params
+                    else:
+                        # Single value comparison - use string comparison
+                        param_name = f"param_{param_counter}"
+                        params[param_name] = str(value)
+                        return f"CAST(norm_type AS VARCHAR) {sql_operator} :{param_name}", params
             else:
                 # Regular field condition
                 value = field_condition.get('value')
@@ -278,7 +301,7 @@ class DuckDBTranslator:
 
     def _build_limit_offset(self, query_part: Dict[str, Any]) -> str:
         """Build LIMIT and OFFSET clause."""
-        limit = query_part.get('limit', 300)  # Default limit
+        limit = query_part.get('limit')  # No default limit - return all results
         offset = query_part.get('offset', 0)
         
         if limit and limit > 0:
