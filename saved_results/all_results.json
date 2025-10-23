@@ -314,5 +314,373 @@
       "llm_synthesis": false
     },
     "id": 13
+  },
+  {
+    "timestamp": "2025-10-23T14:55:20.362599",
+    "question": "Find SAP IDOC interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n- 🔍 Found related interfaces (by name):\n  • Replicate Business Partners from SAP S/4HANA to Salesforce marketing cloud (SAP_EVENTMESH)\n  • SAP HCM - SAP PS:  (22)\n  • RMQ Test Send via SAP Std Adapter (20)\n  • OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPCreateRequest_In (21)\n  • JMA Top-Byke App - SAP ERP ECC 6.0 #2 (22)\n  • SAP QM - SAP Signavio:  (22)\n  • SAP S/4 HANA Cloud - Bee360:  (22)\n  • OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPCreateRequest_In (21)\n  • OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPChangeRequest_In (21)\n  • BP Replication SAP to SSFS-1 (SAP_EVENTMESH)\n\n---\n\n## ⚠️ LLM Synthesis Failed\n\nLLM synthesis failed with error: Rate limit exceeded for deepseek-r1:14b. This model is temporarily unavailable.\n\nSuggested alternatives: gpt-4o-mini, openai/gpt-4o-mini, llama-3.3-70b-versatile\nShowing raw Neo4j results above.",
+    "method": "graph_rag",
+    "model": "deepseek-r1:14b",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 321.204,
+      "seeds_used": [
+        "Find SAP IDOC",
+        "Sap",
+        "SAP",
+        "IDOC"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": false
+    },
+    "id": 14
+  },
+  {
+    "timestamp": "2025-10-23T14:56:52.608035",
+    "question": "Find SAP IDOC interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n- 🔍 Found related interfaces (by name):\n  • Replicate Business Partners from SAP S/4HANA to Salesforce marketing cloud (SAP_EVENTMESH)\n  • SAP HCM - SAP PS:  (22)\n  • RMQ Test Send via SAP Std Adapter (20)\n  • OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPCreateRequest_In (21)\n  • JMA Top-Byke App - SAP ERP ECC 6.0 #2 (22)\n  • SAP QM - SAP Signavio:  (22)\n  • SAP S/4 HANA Cloud - Bee360:  (22)\n  • OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPCreateRequest_In (21)\n  • OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPChangeRequest_In (21)\n  • BP Replication SAP to SSFS-1 (SAP_EVENTMESH)\n\n---\n\n## ⚠️ LLM Synthesis Failed\n\nLLM synthesis failed with error: Rate limit exceeded for deepseek-r1:14b. This model is temporarily unavailable.\n\nSuggested alternatives: gpt-4o-mini, openai/gpt-4o-mini, llama-3.3-70b-versatile\nShowing raw Neo4j results above.",
+    "method": "graph_rag",
+    "model": "deepseek-r1:14b",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 173.028,
+      "seeds_used": [
+        "Find SAP IDOC",
+        "Sap",
+        "SAP",
+        "IDOC"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": false
+    },
+    "id": 15
+  },
+  {
+    "timestamp": "2025-10-23T15:01:08.801158",
+    "question": "Show APIM interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n- ⚠️ No results found. Possible reasons:\n  • No data in Neo4j database\n  • Seeds not found in the data\n  • No relationships between the systems\n  • Neo4j connection issues\n\n---\n\n## ⚠️ LLM Synthesis Failed\n\nLLM synthesis failed with error: Model deepseek-r1:14b not found or unavailable.\nShowing raw Neo4j results above.",
+    "method": "graph_rag",
+    "model": "deepseek-r1:14b",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 528.898,
+      "seeds_used": [
+        "Show APIM",
+        "APIM"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": false
+    },
+    "id": 16
+  },
+  {
+    "timestamp": "2025-10-23T15:08:13.725683",
+    "question": "Show APIM interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n- ⚠️ No results found. Possible reasons:\n  • No data in Neo4j database\n  • Seeds not found in the data\n  • No relationships between the systems\n  • Neo4j connection issues\n\n---\n\n## ⚠️ LLM Synthesis Failed\n\nLLM synthesis failed with error: Cannot connect to Ollama at localhost:11434. Make sure Ollama is running and the model 'deepseek-r1:32b' is available.\nShowing raw Neo4j results above.",
+    "method": "graph_rag",
+    "model": "deepseek-r1:32b",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 300381.352,
+      "seeds_used": [
+        "Show APIM",
+        "APIM"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": false
+    },
+    "id": 17
+  },
+  {
+    "timestamp": "2025-10-23T15:15:09.675187",
+    "question": "Show APIM interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n- ⚠️ No results found. Possible reasons:\n  • No data in Neo4j database\n  • Seeds not found in the data\n  • No relationships between the systems\n  • Neo4j connection issues\n\n---\n\n## 🤖 qwen3-coder:480b-cloud Response\n\nBased on the graph analysis results, I can provide the following information about APIM interfaces:\n\n## APIM Interface Analysis\n\n**Key Findings:**\n- The analysis identified \"Show APIM\" and \"APIM\" as seed terms\n- **No related systems or interfaces** were found in the graph analysis\n- **Zero interfaces** are currently connected or related to APIM in the analyzed dataset\n\n## Current Status\n\nThe analysis indicates that there are **no active interfaces** associated with APIM in the current system landscape. This could mean one of several things:\n\n1. **APIM may not be implemented** or deployed in the current environment\n2. **Interface connections may not be documented** in the analyzed sources\n3. **APIM might be isolated** without any system integrations\n4. **Data limitations** - the analysis may not have access to complete interface documentation\n\n## Next Steps\n\nTo get a complete picture of APIM interfaces, I recommend:\n- Verifying APIM deployment status\n- Checking additional documentation sources\n- Reviewing system integration diagrams\n- Consulting with APIM administrators or development teams\n\nWould you like me to help you explore alternative approaches to identify APIM interfaces or investigate why no connections were found?",
+    "method": "graph_rag",
+    "model": "qwen3-coder:480b-cloud",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 17540.809,
+      "seeds_used": [
+        "Show APIM",
+        "APIM"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": true
+    },
+    "id": 18
+  },
+  {
+    "timestamp": "2025-10-23T15:22:18.976526",
+    "question": "Show APIM interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n- ⚠️ No results found. Possible reasons:\n  • No data in Neo4j database\n  • Seeds not found in the data\n  • No relationships between the systems\n  • Neo4j connection issues\n\n---\n\n## 🤖 qwen3-coder:480b-cloud Response\n\nBased on the graph analysis results, I can provide the following information about APIM interfaces:\n\n## APIM Interface Analysis\n\n**Key Findings:**\n- The analysis identified \"Show APIM\" and \"APIM\" as seed terms\n- **No related systems or interfaces** were found in the graph analysis\n- **Zero interfaces** are currently connected or related to APIM in the analyzed dataset\n\n## Current State\nThe analysis indicates that there are no documented interfaces or system connections associated with APIM in the current graph database. This could mean one of several things:\n\n1. **No interfaces exist** - APIM may not have any active or configured interfaces\n2. **Documentation gap** - Interfaces may exist but are not properly documented in the system\n3. **Scope limitation** - The analysis may not have access to the complete APIM interface data\n4. **Configuration issue** - APIM interfaces may not be properly linked in the system architecture\n\n## Next Steps\nTo get a complete view of APIM interfaces, I recommend:\n- Verifying APIM configuration and active interfaces directly in the APIM management console\n- Checking system documentation for any missing interface mappings\n- Expanding the graph analysis scope to include additional data sources\n- Reviewing APIM integration patterns and connected services manually\n\nWould you like me to help you explore any specific aspect of APIM interface configuration or documentation?",
+    "method": "graph_rag",
+    "model": "qwen3-coder:480b-cloud",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 12766.57,
+      "seeds_used": [
+        "Show APIM",
+        "APIM"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": true
+    },
+    "id": 19
+  },
+  {
+    "timestamp": "2025-10-23T15:35:35.270793",
+    "question": "Show APIM interfaces",
+    "answer": [
+      "# 📊 Vector RAG Analysis Report\n\n## 🔍 Vector Search Results\n**Found:** 280 items  \n**Strategy:** direct_search_filtered  \n\n### 📊 Vector Search Statistics\n- **Total Results Found:** 280\n- **Average Similarity:** 32.9%\n- **Similarity Range:** 40.4% - 30.0%\n- **Threshold Applied:** 30%\n\n---\n\n### 🔍 Search Results\n\n#### Top 20 Results (Detailed View)\n\n**#1** - Similarity: **40.4%** 🔥\n```\nName: apim-hello-world-srvc | echo-api\nType: AZURE_LA_STD\n**Sender:** Travel App\nDescription: adam test\n```\n\n**#2** - Similarity: **39.5%** ✅\n```\nName: test\nType: 22\n\n```\n\n**#3** - Similarity: **39.4%** ✅\n```\nName: bee360_interfaces\nType: 19\n\n```\n\n**#4** - Similarity: **39.2%** ✅\n```\nName: apim-hello-world-srvc | echo-api\nType: AZURE_LA_STD\n**Sender:** Check-In Support\n\n```\n\n**#5** - Similarity: **38.6%** ✅\n```\nName: WHINT IFM Azure IS API Management\nType: 20\n**Sender:** SAP CI\n**Receiver:** Azure DevOps\n\n```\n\n**#6** - Similarity: **37.8%** ✅\n```\nName: apim-hello-world-srvc | http-bin\nType: AZURE_LA_STD\n**Sender:** Payroll Management System\n\n```\n\n**#7** - Similarity: **37.5%** ✅\n```\nName: WHINT IFM Azure IS API Management\nType: 20\n**Sender:** SAP CI\n**Receiver:** Azure DevOps\n\n```\n\n**#8** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#9** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#10** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#11** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#12** - Similarity: **37.3%** ✅\n```\nName: CR | CO_E2E_SERVICE_METERING_DATA\nType: SAP_IS_APIM\n\n```\n\n**#13** - Similarity: **37.3%** ✅\n```\nName: technical-testapi-ic\nType: AZURE_LA_STD\n\n```\n\n**#14** - Similarity: **36.9%** ✅\n```\nName: apim-hello-world-srvc | orders\nType: AZURE_LA_STD\n**Sender:** Payroll Management System\n\n```\n\n**#15** - Similarity: **36.8%** ✅\n```\nName: Test_API\nType: 19\n\n```\n\n**#16** - Similarity: **36.7%** ✅\n```\nName: SR | ZWIC_XI_INBOUND\nType: SAP_IS_APIM\n**Receiver:** SAP Solution Manager\n\n```\n\n**#17** - Similarity: **36.7%** ✅\n```\nName: SR | ZWIC_XI_INBOUND\nType: SAP_IS_APIM\n**Receiver:** SAP Solution Manager\n\n```\n\n**#18** - Similarity: **36.7%** ✅\n```\nName: apim-hello-world-srvc | orders\nType: AZURE_LA_STD\n**Sender:** Check-In Support\n\n```\n\n**#19** - Similarity: **36.5%** ✅\n```\nName: CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI\nType: SAP_IS_APIM\n\n```\n\n**#20** - Similarity: **36.5%** ✅\n```\nName: CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI\nType: SAP_IS_APIM\n\n```\n\n---\n\n#### 📋 Remaining 260 Results (Summary by Type)\n\n**Type: SAP_IS_APIM** - 202 more items (Avg Similarity: 32.6%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • ... and 197 more\n\n**Type: 19** - 36 more items (Avg Similarity: 33.2%)\n  • WIC_REPORTING_SP (36.2%)\n  • HelloWorldAPI (35.7%)\n  • Proxy_1 (35.6%)\n  • Postman | HelloWorldAPI (35.4%)\n  • HelloWorldAPI (34.9%)\n  • ... and 31 more\n\n**Type: 20** - 10 more items (Avg Similarity: 32.4%)\n  • WHINT IMS (33.3%)\n  • WIC E2E Demo 1.5 FxRates EM 2 APIM (32.9%)\n  • TEST_IMS_APIM_WEEKLY (32.2%)\n  • WHINT IMS Azure IS - API Management (31.3%)\n  • TEST_IMS_APIM_DAILY (30.9%)\n  • ... and 5 more\n\n**Type: AZURE_LA_STD** - 5 more items (Avg Similarity: 37.2%)\n  • apim-hello-world-srvc | orders (36.4%)\n  • apim-hello-world-srvc | testwsapi (36.4%)\n  • apim-hello-world-srvc | orders;rev=2 (36.3%)\n  • apim-hello-world-srvc | orders;rev=2 (35.9%)\n  • apim-hello-world-srvc | orders;rev=2 (35.8%)\n\n**Type: 23** - 5 more items (Avg Similarity: 34.1%)\n  • apim@facade-callback-rdp (35.9%)\n  • apimqasmoke-v-mock-dlq (35.3%)\n  • apimqasmoke-v-mock (35.1%)\n  • apim@facade-callback-rdp-dlq (33.6%)\n  • apimqasmoke-v-mock-error (30.6%)\n\n**Type: 22** - 1 more item (Avg Similarity: 37.0%)\n  • WHINT IFD API Management (34.5%)\n\n**Type: AZURE_APIM** - 1 more item (Avg Similarity: 31.7%)\n  • database-sapi-app (31.7%)\n\n\n---\n\n## ⚠️ LLM Synthesis Failed\n\n**Error:** Provider ollama not available (missing API key)\n\nThe raw vector search results are shown above. LLM synthesis could not be completed.",
+      {
+        "method": "vector_rag",
+        "retrieved": 280,
+        "total_candidates": 408,
+        "avg_similarity": 0.32941840599690164,
+        "strategy": "direct_search_filtered",
+        "prefiltered_count": 408,
+        "original_count": 5771,
+        "llm_model_used": "llama3.2:latest",
+        "llm_synthesis": false,
+        "llm_error": "Provider ollama not available (missing API key)",
+        "raw_results_count": 280,
+        "all_results_shown": true
+      }
+    ],
+    "method": "vector_rag",
+    "model": "llama3.2:latest",
+    "data_source": "local_json",
+    "metadata": {
+      "execution_time_ms": 22321.997,
+      "retrieved": 0,
+      "avg_similarity": 0,
+      "llm_synthesis": false
+    },
+    "id": 20
+  },
+  {
+    "timestamp": "2025-10-23T15:38:03.253894",
+    "question": "Show APIM interfaces",
+    "answer": [
+      "# 📊 Vector RAG Analysis Report\n\n## 🔍 Vector Search Results\n**Found:** 280 items  \n**Strategy:** direct_search_filtered  \n**Average Similarity:** 32.9%  \n\n### 📊 Vector Search Statistics\n- **Total Results Found:** 280\n- **Average Similarity:** 32.9%\n- **Similarity Range:** 40.4% - 30.0%\n- **Threshold Applied:** 30%\n\n---\n\n### 🔍 Search Results\n\n#### Top 20 Results (Detailed View)\n\n**#1** - Similarity: **40.4%** 🔥\n```\nName: apim-hello-world-srvc | echo-api\nType: AZURE_LA_STD\n**Sender:** Travel App\nDescription: adam test\n```\n\n**#2** - Similarity: **39.5%** ✅\n```\nName: test\nType: 22\n\n```\n\n**#3** - Similarity: **39.4%** ✅\n```\nName: bee360_interfaces\nType: 19\n\n```\n\n**#4** - Similarity: **39.2%** ✅\n```\nName: apim-hello-world-srvc | echo-api\nType: AZURE_LA_STD\n**Sender:** Check-In Support\n\n```\n\n**#5** - Similarity: **38.6%** ✅\n```\nName: WHINT IFM Azure IS API Management\nType: 20\n**Sender:** SAP CI\n**Receiver:** Azure DevOps\n\n```\n\n**#6** - Similarity: **37.8%** ✅\n```\nName: apim-hello-world-srvc | http-bin\nType: AZURE_LA_STD\n**Sender:** Payroll Management System\n\n```\n\n**#7** - Similarity: **37.5%** ✅\n```\nName: WHINT IFM Azure IS API Management\nType: 20\n**Sender:** SAP CI\n**Receiver:** Azure DevOps\n\n```\n\n**#8** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#9** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#10** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#11** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#12** - Similarity: **37.3%** ✅\n```\nName: CR | CO_E2E_SERVICE_METERING_DATA\nType: SAP_IS_APIM\n\n```\n\n**#13** - Similarity: **37.3%** ✅\n```\nName: technical-testapi-ic\nType: AZURE_LA_STD\n\n```\n\n**#14** - Similarity: **36.9%** ✅\n```\nName: apim-hello-world-srvc | orders\nType: AZURE_LA_STD\n**Sender:** Payroll Management System\n\n```\n\n**#15** - Similarity: **36.8%** ✅\n```\nName: Test_API\nType: 19\n\n```\n\n**#16** - Similarity: **36.7%** ✅\n```\nName: SR | ZWIC_XI_INBOUND\nType: SAP_IS_APIM\n**Receiver:** SAP Solution Manager\n\n```\n\n**#17** - Similarity: **36.7%** ✅\n```\nName: SR | ZWIC_XI_INBOUND\nType: SAP_IS_APIM\n**Receiver:** SAP Solution Manager\n\n```\n\n**#18** - Similarity: **36.7%** ✅\n```\nName: apim-hello-world-srvc | orders\nType: AZURE_LA_STD\n**Sender:** Check-In Support\n\n```\n\n**#19** - Similarity: **36.5%** ✅\n```\nName: CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI\nType: SAP_IS_APIM\n\n```\n\n**#20** - Similarity: **36.5%** ✅\n```\nName: CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI\nType: SAP_IS_APIM\n\n```\n\n---\n\n#### 📋 Remaining 260 Results (Summary by Type)\n\n**Type: SAP_IS_APIM** - 202 more items (Avg Similarity: 32.6%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • ... and 197 more\n\n**Type: 19** - 36 more items (Avg Similarity: 33.2%)\n  • WIC_REPORTING_SP (36.2%)\n  • HelloWorldAPI (35.7%)\n  • Proxy_1 (35.6%)\n  • Postman | HelloWorldAPI (35.4%)\n  • HelloWorldAPI (34.9%)\n  • ... and 31 more\n\n**Type: 20** - 10 more items (Avg Similarity: 32.4%)\n  • WHINT IMS (33.3%)\n  • WIC E2E Demo 1.5 FxRates EM 2 APIM (32.9%)\n  • TEST_IMS_APIM_WEEKLY (32.2%)\n  • WHINT IMS Azure IS - API Management (31.3%)\n  • TEST_IMS_APIM_DAILY (30.9%)\n  • ... and 5 more\n\n**Type: AZURE_LA_STD** - 5 more items (Avg Similarity: 37.2%)\n  • apim-hello-world-srvc | orders (36.4%)\n  • apim-hello-world-srvc | testwsapi (36.4%)\n  • apim-hello-world-srvc | orders;rev=2 (36.3%)\n  • apim-hello-world-srvc | orders;rev=2 (35.9%)\n  • apim-hello-world-srvc | orders;rev=2 (35.8%)\n\n**Type: 23** - 5 more items (Avg Similarity: 34.1%)\n  • apim@facade-callback-rdp (35.9%)\n  • apimqasmoke-v-mock-dlq (35.3%)\n  • apimqasmoke-v-mock (35.1%)\n  • apim@facade-callback-rdp-dlq (33.6%)\n  • apimqasmoke-v-mock-error (30.6%)\n\n**Type: 22** - 1 more item (Avg Similarity: 37.0%)\n  • WHINT IFD API Management (34.5%)\n\n**Type: AZURE_APIM** - 1 more item (Avg Similarity: 31.7%)\n  • database-sapi-app (31.7%)\n\n\n---\n\n## 💡 Insights from Results\n\n### 📊 Type Distribution\n- **SAP_IS_APIM**: 211 items (75.4%)\n- **19**: 38 items (13.6%)\n- **20**: 12 items (4.3%)\n- **AZURE_LA_STD**: 11 items (3.9%)\n- **23**: 5 items (1.8%)\n- **Others**: 3 items (1.1%)\n\n### 🎯 Quality Matches\n- **Excellent (≥40%)**: 1 item 🔥\n- **Good (35-40%)**: 53 items ✅\n- **Acceptable (30-35%)**: 226 items 📌\n\n### 🏆 Top Match\n**Winner**: `apim-hello-world-srvc | echo-api` (40.4% similarity)\n- **Type**: AZURE_LA_STD\n- **Sender**: Travel App\n\n\n---\n\n## 🤖 gemini-2.0-flash Response\n\nOkay, here's a summary of the APIM interfaces found, based on the vector search results:\n\n**Summary:**\n\nThe search identified 280 potential APIM interfaces. The results are diverse, spanning different types and origins, suggesting a heterogeneous API landscape.  The similarity scores, while averaging around 33%, reach up to 40.4%, indicating some strong matches to the search query. The most prevalent interface types are `SAP_IS_APIM` and those categorized numerically (e.g., `19`, `20`, `22`, `23`), along with `AZURE_LA_STD` and `AZURE_APIM`.\n\n**Most Relevant Interfaces (Top Examples):**\n\nHere's a breakdown of some of the most relevant interfaces, grouped by type, based on similarity score and information provided:\n\n*   **`AZURE_LA_STD`:**\n    *   `apim-hello-world-srvc | echo-api` (Sender: Travel App, Check-In Support)\n    *   `apim-hello-world-srvc | http-bin` (Sender: Payroll Management System)\n    *   `apim-hello-world-srvc | orders` (Sender: Payroll Management System, Check-In Support)\n    *   `technical-testapi-ic`\n    *   `apim-hello-world-srvc | testwsapi`\n*   **`SAP_IS_APIM`:**\n    *   `CR | ZSBCO_SI_OB_IB_TEST`\n    *   `CR | CO_E2E_SERVICE_METERING_DATA`\n    *   `SR | ZWIC_XI_INBOUND` (Receiver: SAP Solution Manager)\n    *   `CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI`\n    *   `SR | WS_DIAGLS_SOLMAN_PING`\n*   **Type `19`:**\n    *   `bee360_interfaces`\n    *   `Test_API`\n    *   `WIC_REPORTING_SP`\n    *   `HelloWorldAPI`\n    *   `Proxy_1`\n    *   `Postman | HelloWorldAPI`\n*   **Type `20`:**\n    *   `WHINT IFM Azure IS API Management` (Sender: SAP CI, Receiver: Azure DevOps)\n    *   `WHINT IMS`\n    *   `WIC E2E Demo 1.5 FxRates EM 2 APIM`\n    *   `TEST_IMS_APIM_WEEKLY`\n    *   `WHINT IMS Azure IS - API Management`\n    *   `TEST_IMS_APIM_DAILY`\n*   **Other Types:**\n    *   `WHINT IFD API Management` (Type `22`)\n    *   `apim@facade-callback-rdp` (Type `23`)\n    *   `database-sapi-app` (Type `AZURE_APIM`)\n\n**Important Patterns and Insights:**\n\n*   **Naming Conventions:**  There's a mix of descriptive names (e.g., `apim-hello-world-srvc | echo-api`) and more generic names (e.g., `Test_API`, `Proxy_1`).  The presence of prefixes like `CR` and `SR` in `SAP_IS_APIM` interfaces likely denote \"Configuration Request\" and \"Service Request\" respectively, common in SAP environments.\n*   **Technology Diversity:** The presence of `AZURE_LA_STD` and `SAP_IS_APIM` indicates integration across different platforms (Azure and SAP).\n*   **\"Hello World\" Pattern:** The frequent appearance of \"apim-hello-world-srvc\" suggests this might be a common testing or demonstration API.\n*   **Sender/Receiver Information:**  Some interfaces include sender and receiver information, which is valuable for understanding the API's purpose and integration points.  This is particularly useful for interfaces like `WHINT IFM Azure IS API Management`.\n*   **WHINT Interfaces:** The \"WHINT\" prefix appears in several interfaces, suggesting a specific vendor or project related to integration and API management.\n*   **Numeric Types:** The interfaces categorized by numbers (19, 20, 22, 23) lack descriptive type names. This suggests a need for better categorization and documentation of these interfaces.\n*   **Similarity Scores:** While the top results have decent similarity scores, the average similarity across all results is relatively low. This could indicate that the search query could be refined for more precise results, or that the API landscape contains many interfaces that are only loosely related to the core APIM functionality.\n\nIn conclusion, the search results reveal a diverse API landscape with integrations across different platforms and systems. Further investigation and refinement of the search criteria may be needed to gain a more complete and accurate understanding of the specific APIM interfaces in use.\n\n\n---\n\n### 💡 Metadata\n- **LLM Model:** gemini-2.0-flash\n- **Total Candidates Searched:** 408\n- **Results Retrieved:** 280\n- **Pre-filtered:** 408 from 5771 total items",
+      {
+        "method": "vector_rag",
+        "retrieved": 280,
+        "total_candidates": 408,
+        "avg_similarity": 0.32941840599690164,
+        "strategy": "direct_search_filtered",
+        "prefiltered_count": 408,
+        "original_count": 5771,
+        "llm_model_used": "gemini-2.0-flash",
+        "llm_synthesis": true,
+        "raw_results_count": 280,
+        "all_results_shown": true
+      }
+    ],
+    "method": "vector_rag",
+    "model": "gemini-2.0-flash",
+    "data_source": "local_json",
+    "metadata": {
+      "execution_time_ms": 30343.298000000003,
+      "retrieved": 0,
+      "avg_similarity": 0,
+      "llm_synthesis": false
+    },
+    "id": 21
+  },
+  {
+    "timestamp": "2025-10-23T15:39:46.749042",
+    "question": "Find SAP IDOC interfaces",
+    "answer": [
+      "# 📊 Vector RAG Analysis Report\n\n## 🔍 Vector Search Results\n**Found:** 1000 items  \n**Strategy:** direct_search_filtered  \n\n### 📊 Vector Search Statistics\n- **Total Results Found:** 1000\n- **Average Similarity:** 61.4%\n- **Similarity Range:** 69.7% - 57.2%\n- **Threshold Applied:** 30%\n\n---\n\n### 🔍 Search Results\n\n#### Top 20 Results (Detailed View)\n\n**#1** - Similarity: **69.7%** 🔥\n```\nName: AI_UXMON\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#2** - Similarity: **69.7%** 🔥\n```\nName: AI_UXMON\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#3** - Similarity: **69.7%** 🔥\n```\nName: ICMON_SRV\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#4** - Similarity: **69.2%** 🔥\n```\nName: ICMON_SRV\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#5** - Similarity: **69.2%** 🔥\n```\nName: CATALOGSERVICE\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#6** - Similarity: **68.8%** 🔥\n```\nName: E2E_ICIDB_OD\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#7** - Similarity: **68.8%** 🔥\n```\nName: CATALOGSERVICE\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#8** - Similarity: **68.7%** 🔥\n```\nName: E2E_ICIDB_OD\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#9** - Similarity: **68.5%** 🔥\n```\nName: EEMON\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#10** - Similarity: **68.5%** 🔥\n```\nName: EEMON\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#11** - Similarity: **68.4%** 🔥\n```\nName: AGS_AI\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#12** - Similarity: **68.4%** 🔥\n```\nName: AGS_AI\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#13** - Similarity: **68.3%** 🔥\n```\nName: ROADMAP_SAPUI5\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#14** - Similarity: **68.3%** 🔥\n```\nName: ROADMAP_SAPUI5\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#15** - Similarity: **68.2%** 🔥\n```\nName: CATALOGSERVICE\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#16** - Similarity: **68.2%** 🔥\n```\nName: CATALOGSERVICE\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#17** - Similarity: **68.1%** 🔥\n```\nName: IRWC\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#18** - Similarity: **68.1%** 🔥\n```\nName: GWDEMO\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#19** - Similarity: **68.1%** 🔥\n```\nName: GWDEMO\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#20** - Similarity: **67.7%** 🔥\n```\nName: TECHMON\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n---\n\n#### 📋 Remaining 980 Results (Summary by Type)\n\n**Type: SAP_IDOC** - 798 more items (Avg Similarity: 61.7%)\n  • IRWC (67.7%)\n  • E2EBPCC_UI_SRV (67.6%)\n  • E2EBPCC_UI_SRV (67.6%)\n  • CATALOGSERVICE (67.5%)\n  • CATALOGSERVICE (67.5%)\n  • ... and 793 more\n\n**Type: SAP_IS_APIM** - 98 more items (Avg Similarity: 60.2%)\n  • SR | ZWIC_XI_INBOUND (64.9%)\n  • SR | ZWIC_XI_INBOUND (64.9%)\n  • SR | ZWIC_XI_INBOUND (64.7%)\n  • SR | WS_DIAGLS_GET_TECH_SYSTS (64.5%)\n  • SR | WS_DIAGLS_GET_TECH_SYSTS (64.5%)\n  • ... and 93 more\n\n**Type: SAP_PO** - 70 more items (Avg Similarity: 60.1%)\n  • ALMCLNT001 | LS |  | RSINFO | OUT | RSINFO |  (65.7%)\n  • SALESFORCE | LS |  | ALEAUD | IN (64.5%)\n  • CPI | LS |  | RSINFO | OUT | RSINFO |  (64.4%)\n  • CPI | LS |  | RSINFO | OUT | RSINFO |  (64.4%)\n  • CPI | LS |  | RSINFO | OUT | RSINFO |  (64.4%)\n  • ... and 65 more\n\n**Type: 22** - 9 more items (Avg Similarity: 58.9%)\n  • I01-600 EHP7 für SAP ERP 6.0 ->> E41-000 SAP SOLUTION MANAGER 7.2 (60.5%)\n  • Manually created interface in SAP LeanIX (59.8%)\n  • I01-600 EHP7 für SAP ERP 6.0 ->> E41-066 SAP SOLUTION MANAGER 7.2 (59.5%)\n  • E41 SAP SOLUTION MANAGER 7.2 ->> I01-600 EHP7 für SAP ERP 6.0 (58.8%)\n  • E41 SAP SOLUTION MANAGER 7.2 ->> I01 EHP7 für SAP ERP 6.0 (58.8%)\n  • ... and 4 more\n\n**Type: 20** - 3 more items (Avg Similarity: 58.4%)\n  • Fraport Basis SAP IDoc (59.5%)\n  • SAP ABAP Backend Call RFC XI (58.0%)\n  • SAP ABAP Backend Call RFC XI option (57.9%)\n\n**Type: 24** - 2 more items (Avg Similarity: 57.2%)\n  • SAPIRCONTROLLER (57.2%)\n  • SAPIRCONTROLLER (57.2%)\n\n\n---\n\n## ⚠️ LLM Synthesis Failed\n\n**Error:** Provider ollama not available (missing API key)\n\nThe raw vector search results are shown above. LLM synthesis could not be completed.",
+      {
+        "method": "vector_rag",
+        "retrieved": 1000,
+        "total_candidates": 2151,
+        "avg_similarity": 0.6142910081148147,
+        "strategy": "direct_search_filtered",
+        "prefiltered_count": 2151,
+        "original_count": 5771,
+        "llm_model_used": "deepseek-r1:32b",
+        "llm_synthesis": false,
+        "llm_error": "Provider ollama not available (missing API key)",
+        "raw_results_count": 1000,
+        "all_results_shown": true
+      }
+    ],
+    "method": "vector_rag",
+    "model": "deepseek-r1:32b",
+    "data_source": "local_json",
+    "metadata": {
+      "execution_time_ms": 68953.751,
+      "retrieved": 0,
+      "avg_similarity": 0,
+      "llm_synthesis": false
+    },
+    "id": 22
+  },
+  {
+    "timestamp": "2025-10-23T15:56:17.598179",
+    "question": "Show APIM interfaces",
+    "answer": [
+      "# 📊 Vector RAG Analysis Report\n\n## 🔍 Vector Search Results\n**Found:** 280 items  \n**Strategy:** direct_search_filtered  \n**Average Similarity:** 32.9%  \n\n### 📊 Vector Search Statistics\n- **Total Results Found:** 280\n- **Average Similarity:** 32.9%\n- **Similarity Range:** 40.4% - 30.0%\n- **Threshold Applied:** 30%\n\n---\n\n### 🔍 Search Results\n\n#### Top 20 Results (Detailed View)\n\n**#1** - Similarity: **40.4%** 🔥\n```\nName: apim-hello-world-srvc | echo-api\nType: AZURE_LA_STD\n**Sender:** Travel App\nDescription: adam test\n```\n\n**#2** - Similarity: **39.5%** ✅\n```\nName: test\nType: 22\n\n```\n\n**#3** - Similarity: **39.4%** ✅\n```\nName: bee360_interfaces\nType: 19\n\n```\n\n**#4** - Similarity: **39.2%** ✅\n```\nName: apim-hello-world-srvc | echo-api\nType: AZURE_LA_STD\n**Sender:** Check-In Support\n\n```\n\n**#5** - Similarity: **38.6%** ✅\n```\nName: WHINT IFM Azure IS API Management\nType: 20\n**Sender:** SAP CI\n**Receiver:** Azure DevOps\n\n```\n\n**#6** - Similarity: **37.8%** ✅\n```\nName: apim-hello-world-srvc | http-bin\nType: AZURE_LA_STD\n**Sender:** Payroll Management System\n\n```\n\n**#7** - Similarity: **37.5%** ✅\n```\nName: WHINT IFM Azure IS API Management\nType: 20\n**Sender:** SAP CI\n**Receiver:** Azure DevOps\n\n```\n\n**#8** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#9** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#10** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#11** - Similarity: **37.5%** ✅\n```\nName: CR | ZSBCO_SI_OB_IB_TEST\nType: SAP_IS_APIM\n\n```\n\n**#12** - Similarity: **37.3%** ✅\n```\nName: CR | CO_E2E_SERVICE_METERING_DATA\nType: SAP_IS_APIM\n\n```\n\n**#13** - Similarity: **37.3%** ✅\n```\nName: technical-testapi-ic\nType: AZURE_LA_STD\n\n```\n\n**#14** - Similarity: **36.9%** ✅\n```\nName: apim-hello-world-srvc | orders\nType: AZURE_LA_STD\n**Sender:** Payroll Management System\n\n```\n\n**#15** - Similarity: **36.8%** ✅\n```\nName: Test_API\nType: 19\n\n```\n\n**#16** - Similarity: **36.7%** ✅\n```\nName: SR | ZWIC_XI_INBOUND\nType: SAP_IS_APIM\n**Receiver:** SAP Solution Manager\n\n```\n\n**#17** - Similarity: **36.7%** ✅\n```\nName: SR | ZWIC_XI_INBOUND\nType: SAP_IS_APIM\n**Receiver:** SAP Solution Manager\n\n```\n\n**#18** - Similarity: **36.7%** ✅\n```\nName: apim-hello-world-srvc | orders\nType: AZURE_LA_STD\n**Sender:** Check-In Support\n\n```\n\n**#19** - Similarity: **36.5%** ✅\n```\nName: CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI\nType: SAP_IS_APIM\n\n```\n\n**#20** - Similarity: **36.5%** ✅\n```\nName: CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI\nType: SAP_IS_APIM\n\n```\n\n---\n\n#### 📋 Remaining 260 Results (Summary by Type)\n\n**Type: SAP_IS_APIM** - 202 more items (Avg Similarity: 32.6%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • SR | WS_DIAGLS_SOLMAN_PING (36.3%)\n  • ... and 197 more\n\n**Type: 19** - 36 more items (Avg Similarity: 33.2%)\n  • WIC_REPORTING_SP (36.2%)\n  • HelloWorldAPI (35.7%)\n  • Proxy_1 (35.6%)\n  • Postman | HelloWorldAPI (35.4%)\n  • HelloWorldAPI (34.9%)\n  • ... and 31 more\n\n**Type: 20** - 10 more items (Avg Similarity: 32.4%)\n  • WHINT IMS (33.3%)\n  • WIC E2E Demo 1.5 FxRates EM 2 APIM (32.9%)\n  • TEST_IMS_APIM_WEEKLY (32.2%)\n  • WHINT IMS Azure IS - API Management (31.3%)\n  • TEST_IMS_APIM_DAILY (30.9%)\n  • ... and 5 more\n\n**Type: AZURE_LA_STD** - 5 more items (Avg Similarity: 37.2%)\n  • apim-hello-world-srvc | orders (36.4%)\n  • apim-hello-world-srvc | testwsapi (36.4%)\n  • apim-hello-world-srvc | orders;rev=2 (36.3%)\n  • apim-hello-world-srvc | orders;rev=2 (35.9%)\n  • apim-hello-world-srvc | orders;rev=2 (35.8%)\n\n**Type: 23** - 5 more items (Avg Similarity: 34.1%)\n  • apim@facade-callback-rdp (35.9%)\n  • apimqasmoke-v-mock-dlq (35.3%)\n  • apimqasmoke-v-mock (35.1%)\n  • apim@facade-callback-rdp-dlq (33.6%)\n  • apimqasmoke-v-mock-error (30.6%)\n\n**Type: 22** - 1 more item (Avg Similarity: 37.0%)\n  • WHINT IFD API Management (34.5%)\n\n**Type: AZURE_APIM** - 1 more item (Avg Similarity: 31.7%)\n  • database-sapi-app (31.7%)\n\n\n---\n\n## 💡 Insights from Results\n\n### 📊 Type Distribution\n- **SAP_IS_APIM**: 211 items (75.4%)\n- **19**: 38 items (13.6%)\n- **20**: 12 items (4.3%)\n- **AZURE_LA_STD**: 11 items (3.9%)\n- **23**: 5 items (1.8%)\n- **Others**: 3 items (1.1%)\n\n### 🎯 Quality Matches\n- **Excellent (≥40%)**: 1 item 🔥\n- **Good (35-40%)**: 53 items ✅\n- **Acceptable (30-35%)**: 226 items 📌\n\n### 🏆 Top Match\n**Winner**: `apim-hello-world-srvc | echo-api` (40.4% similarity)\n- **Type**: AZURE_LA_STD\n- **Sender**: Travel App\n\n\n---\n\n## 🤖 gemini-2.0-flash Response\n\nOkay, here's a summary of the APIM interfaces found, based on the vector search results:\n\n**Summary:**\n\nThe search identified 280 potential APIM interfaces.  The results are categorized by \"Type,\" with `SAP_IS_APIM` being the most prevalent, followed by types `19`, `20`, `AZURE_LA_STD`, `23`, `22`, and `AZURE_APIM`.  The similarity scores suggest varying degrees of relevance, with the top results showing the highest confidence. There are several \"apim-hello-world-srvc\" interfaces, suggesting a common naming convention or test service.  SAP integration scenarios appear frequently, indicated by the `SAP_IS_APIM` type and senders/receivers like \"SAP CI\" and \"SAP Solution Manager.\"\n\n**Most Relevant Interfaces (Top Examples from Each Type):**\n\n*   **`AZURE_LA_STD`:**\n    *   `apim-hello-world-srvc | echo-api` (Sender: Travel App, Check-In Support, Payroll Management System)\n    *   `apim-hello-world-srvc | http-bin` (Sender: Payroll Management System)\n    *   `apim-hello-world-srvc | orders` (Sender: Payroll Management System, Check-In Support)\n    *   `technical-testapi-ic`\n*   **`SAP_IS_APIM`:**\n    *   `CR | ZSBCO_SI_OB_IB_TEST`\n    *   `CR | CO_E2E_SERVICE_METERING_DATA`\n    *   `SR | ZWIC_XI_INBOUND` (Receiver: SAP Solution Manager)\n    *   `CR | CO_E2E_PI_ADAPTER_MESSAGE_MONI`\n    *   `SR | WS_DIAGLS_SOLMAN_PING`\n*   **Type `19`:**\n    *   `bee360_interfaces`\n    *   `Test_API`\n    *   `WIC_REPORTING_SP`\n    *   `HelloWorldAPI`\n*   **Type `20`:**\n    *   `WHINT IFM Azure IS API Management` (Sender: SAP CI, Receiver: Azure DevOps)\n    *   `WHINT IMS`\n    *   `WIC E2E Demo 1.5 FxRates EM 2 APIM`\n*   **Type `23`:**\n    *   `apim@facade-callback-rdp`\n    *   `apimqasmoke-v-mock-dlq`\n    *   `apimqasmoke-v-mock`\n*   **Type `22`:**\n    *   `test`\n    *   `WHINT IFD API Management`\n*   **`AZURE_APIM`:**\n    *   `database-sapi-app`\n\n**Important Patterns and Insights:**\n\n*   **Naming Conventions:** The `apim-hello-world-srvc` prefix suggests a standardized naming convention, likely related to a specific API Management instance or project. The presence of \"echo-api\", \"http-bin\", and \"orders\" indicates the types of functionalities exposed by these APIs.\n*   **SAP Integration:** A significant portion of the interfaces are related to SAP integration, using the `SAP_IS_APIM` type. These interfaces often involve senders and receivers within the SAP ecosystem (e.g., SAP CI, SAP Solution Manager).  The \"CR\" and \"SR\" prefixes likely denote \"Configuration Repository\" and \"Service Repository\" respectively, common terms in SAP landscapes.\n*   **WHINT Interfaces:** The \"WHINT\" prefix appears in several interfaces, suggesting a specific vendor or project related to integration solutions.\n*   **Azure API Management:** The presence of `AZURE_LA_STD` and `AZURE_APIM` types indicates the use of Azure API Management. `AZURE_LA_STD` might refer to APIs deployed using a standard Azure Logic Apps approach.\n*   **Testing and Mocking:** The names \"technical-testapi-ic\", \"apimqasmoke-v-mock\", and \"Test_API\" suggest the existence of test APIs and mocking services within the API Management environment.\n*   **Interface Types:** The numerical types (19, 20, 22, 23) are less descriptive and would require further investigation to understand their specific meaning within the context of the API Management system.\n\nThis information should provide a good starting point for understanding the APIM interfaces identified by the search. Further investigation into the specific configurations and functionalities of each interface would be necessary for a complete understanding.\n\n\n---\n\n### 💡 Metadata\n- **LLM Model:** gemini-2.0-flash\n- **Total Candidates Searched:** 408\n- **Results Retrieved:** 280\n- **Pre-filtered:** 408 from 5771 total items",
+      {
+        "method": "vector_rag",
+        "retrieved": 280,
+        "total_candidates": 408,
+        "avg_similarity": 0.32941840599690164,
+        "strategy": "direct_search_filtered",
+        "prefiltered_count": 408,
+        "original_count": 5771,
+        "llm_model_used": "gemini-2.0-flash",
+        "llm_synthesis": true,
+        "raw_results_count": 280,
+        "all_results_shown": true
+      }
+    ],
+    "method": "vector_rag",
+    "model": "gemini-2.0-flash",
+    "data_source": "local_json",
+    "metadata": {
+      "execution_time_ms": 28819.699,
+      "retrieved": 0,
+      "avg_similarity": 0,
+      "llm_synthesis": false
+    },
+    "id": 23
+  },
+  {
+    "timestamp": "2025-10-23T15:57:42.444831",
+    "question": "Show SAP ODATA interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n- ⚠️ No results found. Possible reasons:\n  • No data in Neo4j database\n  • Seeds not found in the data\n  • No relationships between the systems\n  • Neo4j connection issues\n\n---\n\n## 🤖 gemini-2.0-flash Response\n\nOkay, based on the graph analysis, I've looked for SAP ODATA interfaces.\n\n**Unfortunately, the analysis found no related systems or interfaces connected to your query \"Show SAP ODATA interfaces.\"**\n\nThis means that, based on the data available to the graph analysis, there are no explicitly defined connections or relationships between systems and interfaces that are identified as SAP ODATA interfaces.\n\n**Possible Reasons for No Results:**\n\n*   **Data Availability:** The graph database might not contain information about the specific SAP ODATA interfaces you're looking for. The data source might be incomplete or not up-to-date.\n*   **Naming Conventions:** The interfaces might be named differently in the system, not explicitly using the terms \"SAP\" or \"ODATA\" in their names or descriptions.\n*   **Indirect Connections:** The connection between SAP and ODATA might be indirect, going through other systems or layers that aren't immediately apparent in the graph.\n*   **Security Restrictions:** Access to the information about these interfaces might be restricted.\n\n**Recommendations:**\n\nTo get a better understanding of SAP ODATA interfaces in your environment, consider the following:\n\n1.  **Verify Data Sources:** Ensure that the graph database is connected to all relevant systems and data sources that contain information about your SAP landscape and API definitions.\n2.  **Expand Search Terms:** Try searching for related terms like \"SAP Gateway,\" \"SAP Fiori,\" or specific SAP modules that expose ODATA services (e.g., \"SAP SD ODATA,\" \"SAP MM ODATA\").\n3.  **Check API Documentation:** Consult the official SAP documentation and API catalogs for your specific SAP system to identify available ODATA services.\n4.  **Investigate Middleware:** If you use middleware platforms (e.g., SAP Integration Suite, MuleSoft) to expose SAP data as ODATA, examine the configurations within those platforms.\n5.  **Review Security Permissions:** Confirm that you have the necessary permissions to access information about SAP interfaces and APIs.\n\nIn summary, while the graph analysis didn't find any direct matches for \"SAP ODATA interfaces,\" further investigation using the recommendations above should help you identify the relevant interfaces in your environment.\n",
+    "method": "graph_rag",
+    "model": "gemini-2.0-flash",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 7807.44,
+      "seeds_used": [
+        "Show SAP ODATA",
+        "Sap",
+        "SAP",
+        "ODATA"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": true
+    },
+    "id": 24
+  },
+  {
+    "timestamp": "2025-10-23T15:58:17.396049",
+    "question": "Show SAP ODATA interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n- ⚠️ No results found. Possible reasons:\n  • No data in Neo4j database\n  • Seeds not found in the data\n  • No relationships between the systems\n  • Neo4j connection issues\n\n---\n\n## 🤖 gemini-2.0-flash Response\n\nOkay, based on the graph analysis, I've looked for SAP ODATA interfaces.\n\n**Unfortunately, the analysis found no related systems or interfaces connected to the terms \"SAP\" and \"ODATA\" in the data I have access to.**\n\nThis means I couldn't identify any specific SAP ODATA interfaces or systems that are directly linked to those keywords within the analyzed data.\n\n**Possible Reasons for No Results:**\n\n*   **Data Scope:** The data I analyzed might not contain information about the specific SAP ODATA interfaces you're looking for. The data source might be limited in scope.\n*   **Naming Conventions:** The interfaces might be using different naming conventions or aliases that don't explicitly include \"SAP\" or \"ODATA.\"\n*   **Missing Connections:** The connections between systems and interfaces might not be explicitly defined in the data I analyzed.\n\n**Recommendations:**\n\nTo find the SAP ODATA interfaces you're looking for, you might need to:\n\n1.  **Expand the Data Source:** Ensure the data source includes all relevant systems and interfaces within your SAP landscape.\n2.  **Refine Search Terms:** Try using more specific search terms related to the particular SAP modules or functionalities that expose ODATA services (e.g., \"SAP FI ODATA,\" \"SAP SD ODATA\").\n3.  **Check SAP Documentation:** Consult SAP's official documentation and API catalogs for a comprehensive list of available ODATA services.\n4.  **Explore SAP Gateway:** If you're using SAP Gateway, investigate the services deployed and activated within the Gateway system.\n\nIn summary, while I couldn't find any SAP ODATA interfaces based on the current analysis, the recommendations above should help you locate the information you need.\n",
+    "method": "graph_rag",
+    "model": "gemini-2.0-flash",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 5841.535000000001,
+      "seeds_used": [
+        "Show SAP ODATA",
+        "Sap",
+        "SAP",
+        "ODATA"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": true
+    },
+    "id": 25
+  },
+  {
+    "timestamp": "2025-10-23T16:05:00.935992",
+    "question": "Find Azure interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n- ⚠️ No results found. Possible reasons:\n  • No data in Neo4j database\n  • Seeds not found in the data\n  • No relationships between the systems\n  • Neo4j connection issues\n\n---\n\n## 🤖 llama3.2:latest Response\n\nBased on the complete graph analysis results, I can see that there is limited connectivity to Azure-related systems and interfaces. Here's a summary of what we found:\n\n**Related Systems and Interfaces:**\n\nUnfortunately, our analysis did not reveal any directly related systems or interfaces beyond the seeds \"Find Azure\" and \"Azure\". This suggests that the system you are working with may not have a direct connection to Azure.\n\n**Seeds Identified:**\n\nThe seeds \"Find Azure\" and \"Azure\" indicate that these terms were identified as relevant during our analysis. However, without further context or information about how these seeds were connected to other systems or interfaces, we cannot draw any conclusions about their relevance.\n\n**Recommendations:**\n\nGiven the limited connectivity to Azure-related systems and interfaces, I would recommend exploring alternative solutions or APIs that may be more closely integrated with your system. If you are looking to integrate with Azure, you may need to consider using third-party services or APIs that provide a bridge between your system and Azure.\n\nIf you have any further questions or would like me to help with identifying potential alternatives or integrations, please let me know!",
+    "method": "graph_rag",
+    "model": "llama3.2:latest",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 41145.986,
+      "seeds_used": [
+        "Find Azure",
+        "Azure"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": true
+    },
+    "id": 26
+  },
+  {
+    "timestamp": "2025-10-23T16:07:04.581069",
+    "question": "Find Azure interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n- ⚠️ No results found. Possible reasons:\n  • No data in Neo4j database\n  • Seeds not found in the data\n  • No relationships between the systems\n  • Neo4j connection issues\n\n---\n\n## 🤖 llama3.2:latest Response\n\nBased on the complete graph analysis results, I can see that there is limited connectivity to Azure-related systems and interfaces. Here's a summary of what we've found:\n\n**Related Systems and Interfaces:**\n\nUnfortunately, our analysis did not reveal any directly related systems or interfaces beyond the seeds \"Find Azure\" and \"Azure\". This suggests that the system you're working with may not have a direct connection to Azure.\n\n**Seeds Identified:**\n\nThe seeds \"Find Azure\" and \"Azure\" indicate that these terms were used in your graph analysis, but they don't necessarily imply a direct connection. These seeds might be related to your query or search term, rather than actual systems or interfaces.\n\n**Recommendations:**\n\nGiven the limited connectivity to Azure-related systems and interfaces, I would recommend exploring alternative approaches to find what you're looking for. Here are some suggestions:\n\n1. **Refine your search terms**: Try rephrasing your question or using different keywords related to Azure to see if we can identify more relevant connections.\n2. **Check for indirect connections**: Although we didn't find any direct connections, it's possible that there might be an intermediate system or interface that connects to Azure. We can try to explore these possibilities further.\n3. **Consult additional resources**: If you're looking for information on Azure interfaces, I recommend consulting official Azure documentation, online forums, or other trusted sources.\n\nIf you'd like to proceed with refining your search terms or exploring alternative approaches, please let me know and we can work together to find a solution that suits your needs.",
+    "method": "graph_rag",
+    "model": "llama3.2:latest",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 51162.74,
+      "seeds_used": [
+        "Find Azure",
+        "Azure"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": true
+    },
+    "id": 27
+  },
+  {
+    "timestamp": "2025-10-23T16:14:35.140357",
+    "question": "Find Azure interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n🔍 **Found 30 related interfaces (by name):**\n\n  • WHINT IMS Azure IS - API Management (20)\n  • WHINT IFD Azure Service Bus (20)\n  • WHINT IFM Azure IS Event Grid (20)\n  • WHINT IFM Azure IS API Management (20)\n  • Azure DevOps - Bee360: Azure DevOps Interface (22)\n  • TestMsg_Out |  | AzureMsg_In (21)\n  • WHINT IMS Azure IS (20)\n  • Azure Active Directory - Bee360: AAD Interface (22)\n  • WHINT IMS Azure IS - Service Bus (20)\n  • WHINT IMS Azure IS - Event Grid (20)\n  • WHINT IFM Azure IS Service Bus (20)\n  • WHINT IFD Azure Event Grid (20)\n  • WHINT IMS Azure IS - Logic Apps (20)\n  • WHINT IFM Azure IS - Read API (20)\n  • WHINT IFD Azure API Management (20)\n  • WHINT IFD Azure Logic Apps (20)\n  • WHINT IFM Azure IS Logic Apps (20)\n  • SLBC_Azure_ APIM_Read (20)\n  • WHINT Integration Cockpit Azure App Monitoring (20)\n  • test-amq-java8 (AZURE_APIM)\n\n---\n\n## 🤖 gemini-2.0-flash Response\n\nOkay, based on the graph analysis, I found **no related systems or interfaces connected to \"Azure\"**.\n\nHere's a breakdown of what that means:\n\n*   **Seeds Identified:** The analysis successfully identified \"Find Azure\" and \"Azure\" as the starting points for the search. This confirms the system understood the user's intent to find Azure-related interfaces.\n*   **No Related Systems/Interfaces:** Despite identifying the seeds, the analysis didn't find any connections to other systems or specific interfaces associated with Azure within the analyzed data.\n*   **All Related Interfaces: (Empty)** The list of related interfaces is empty, further confirming the lack of connections.\n\n**In summary, while the system understood you were looking for Azure interfaces, the analysis didn't find any connections to Azure within the data it processed. This could mean:**\n\n*   **Azure interfaces are not represented in the analyzed data.** The data source might not contain information about the specific Azure interfaces you're interested in.\n*   **The connections to Azure are not explicitly defined in the data.** The relationships between systems and Azure might be implicit or described in a way that the analysis couldn't recognize.\n*   **There might be a data quality issue.** The data might be incomplete or inaccurate, preventing the analysis from identifying the connections.\n\nTo get more accurate results, you might need to:\n\n*   **Provide a different data source:** Ensure the data source contains information about the Azure interfaces you're looking for.\n*   **Refine the search terms:** If you're looking for specific Azure services (e.g., Azure Blob Storage, Azure Functions), include those in your search.\n*   **Adjust the analysis parameters:** If possible, adjust the analysis parameters to be more sensitive to implicit relationships or different naming conventions.\n",
+    "method": "graph_rag",
+    "model": "gemini-2.0-flash",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 7212.0,
+      "seeds_used": [
+        "Find Azure",
+        "Azure"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": true
+    },
+    "id": 28
+  },
+  {
+    "timestamp": "2025-10-23T16:15:12.177455",
+    "question": "Find SAP IDOC interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n🔍 **Found 60 related interfaces (by name):**\n\n  • CPI_EU_IDOC (24)\n  • DEMO_IDOC_TO_CPI (24)\n  • WPO_IDOC (24)\n  • DEMO Receive IDOC from ALM (20)\n  • IDOC Consumer WORKDAY EXCHANGE_RATE (20)\n  • Fraport Basis SAP IDoc v1_test retry (20)\n  • IDOC Consumer CPI EXCHANGE_RATE (20)\n  • IDOC Consumer SALESFORCE EXCHANGE_RATE (20)\n  • Fraport Basis SAP IDoc (20)\n  • IDOC_WIC_INBOUND (20)\n  • Fraport Template Basis SAP IDoc (20)\n  • SAP_IDoc_Dispatcher_ALM (20)\n  • TEST WIC Frequency IDOC (20)\n  • EPM_OIA_L_1_SRV_01 (SAP_IDOC)\n  • WDR_ADAPT_UI_SRV (SAP_IDOC)\n  • NOTIFICATIONSTORE (SAP_IDOC)\n  • AI_SMCP_GW_ODATA_SRV (SAP_IDOC)\n  • AGS_DSH_KPI_DATA_SRV (SAP_IDOC)\n  • LREP_SUPPORT_FRAMEWORK_SRV (SAP_IDOC)\n  • DAAG_MONOBJ (SAP_IDOC)\n\n---\n\n## 🤖 gemini-2.0-flash Response\n\nOkay, based on the graph analysis, I've investigated the connections related to your query \"Find SAP IDOC interfaces.\"\n\nUnfortunately, the analysis found **no related systems or interfaces** connected to the search terms \"SAP,\" \"IDOC,\" or \"SAP IDOC.\"\n\nThis means that, within the scope of the analyzed data, there are no explicitly defined interfaces or systems directly linked to SAP IDOCs.\n\n**Possible Reasons for No Results:**\n\n*   **Data Scope:** The data analyzed might not contain information about SAP IDOC interfaces. The graph analysis is only as good as the data it's analyzing.\n*   **Naming Conventions:** The interfaces might be using different naming conventions that don't include the terms \"SAP\" or \"IDOC.\"\n*   **Indirect Connections:** The connections to SAP IDOCs might be indirect and not explicitly represented in the graph data. For example, an interface might connect to a system that *then* processes IDOCs, but the direct link isn't visible.\n*   **Missing Documentation:** The interfaces might exist, but their documentation (which the graph analysis likely relies on) is incomplete or missing.\n\n**Recommendations:**\n\nGiven the lack of results, I recommend the following:\n\n1.  **Verify Data Scope:** Ensure the data being analyzed includes the relevant systems and interfaces that are expected to use SAP IDOCs.\n2.  **Expand Search Terms:** Try searching for related terms or systems that might be involved in IDOC processing, even if they don't explicitly mention \"SAP\" or \"IDOC.\" For example, look for interfaces related to specific SAP modules (e.g., \"SAP SD,\" \"SAP MM\") that are known to use IDOCs.\n3.  **Manual Investigation:** If possible, manually investigate the systems and interfaces that are *likely* to be involved in IDOC processing to see if you can identify the connections.\n4.  **Check Documentation:** Review system documentation and interface specifications to confirm the use of SAP IDOCs.\n\nIn summary, while the graph analysis didn't find any direct connections to SAP IDOC interfaces, it's important to consider the limitations of the data and explore alternative search strategies and investigation methods.\n",
+    "method": "graph_rag",
+    "model": "gemini-2.0-flash",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 12583.465,
+      "seeds_used": [
+        "Find SAP IDOC",
+        "Sap",
+        "SAP",
+        "IDOC"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": true
+    },
+    "id": 29
+  },
+  {
+    "timestamp": "2025-10-23T16:16:51.768931",
+    "question": "Find SAP IDOC interfaces",
+    "answer": "## 🔍 Neo4j Query Results\n\n🔍 **Found 60 related interfaces (by name):**\n\n  • CPI_EU_IDOC (24)\n  • DEMO_IDOC_TO_CPI (24)\n  • WPO_IDOC (24)\n  • DEMO Receive IDOC from ALM (20)\n  • IDOC Consumer WORKDAY EXCHANGE_RATE (20)\n  • Fraport Basis SAP IDoc v1_test retry (20)\n  • IDOC Consumer CPI EXCHANGE_RATE (20)\n  • IDOC Consumer SALESFORCE EXCHANGE_RATE (20)\n  • Fraport Basis SAP IDoc (20)\n  • IDOC_WIC_INBOUND (20)\n  • Fraport Template Basis SAP IDoc (20)\n  • SAP_IDoc_Dispatcher_ALM (20)\n  • TEST WIC Frequency IDOC (20)\n  • EPM_OIA_L_1_SRV_01 (SAP_IDOC)\n  • WDR_ADAPT_UI_SRV (SAP_IDOC)\n  • NOTIFICATIONSTORE (SAP_IDOC)\n  • AI_SMCP_GW_ODATA_SRV (SAP_IDOC)\n  • AGS_DSH_KPI_DATA_SRV (SAP_IDOC)\n  • LREP_SUPPORT_FRAMEWORK_SRV (SAP_IDOC)\n  • DAAG_MONOBJ (SAP_IDOC)\n\n---\n\n## 🤖 gemini-2.0-flash Response\n\nOkay, based on the graph analysis, I've looked for SAP IDOC interfaces within the system.\n\n**Unfortunately, the analysis found no related systems or interfaces connected to the search terms \"SAP,\" \"IDOC,\" or \"SAP IDOC.\"**\n\nThis means that, according to the data analyzed, there are no identified connections or relationships involving SAP IDOC interfaces within the scope of the graph.\n\n**Possible Reasons for No Results:**\n\n*   **Data Scope:** The graph data might not contain information about the specific SAP IDOC interfaces you're looking for. The data source might be incomplete or not cover the relevant systems.\n*   **Naming Conventions:** The interfaces might be named differently in the system than the terms used in the search (SAP, IDOC).\n*   **Missing Connections:** The connections between systems and interfaces involving SAP IDOCs might not be explicitly defined or captured in the graph data.\n\n**Recommendations:**\n\n*   **Verify Data Source:** Confirm that the data source used for the graph analysis is comprehensive and includes information about SAP systems and IDOC interfaces.\n*   **Expand Search Terms:** Try using more specific or alternative search terms related to the SAP IDOC interfaces you're looking for. Consider including specific IDOC types, transaction codes, or system names.\n*   **Investigate Manually:** If possible, manually investigate the SAP systems to identify IDOC interfaces and their connections to other systems.\n*   **Review Documentation:** Consult system documentation or technical specifications for information about SAP IDOC interfaces and their integration with other systems.\n\nIn summary, while I searched for SAP IDOC interfaces based on your request, the analysis did not find any related systems or interfaces within the analyzed data. Further investigation and a broader search scope might be necessary to locate the desired information.\n",
+    "method": "graph_rag",
+    "model": "gemini-2.0-flash",
+    "data_source": "neo4j",
+    "metadata": {
+      "execution_time_ms": 11751.896,
+      "seeds_used": [
+        "Find SAP IDOC",
+        "Sap",
+        "SAP",
+        "IDOC"
+      ],
+      "neighborhood_count": 0,
+      "llm_synthesis": true
+    },
+    "id": 30
   }
 ]

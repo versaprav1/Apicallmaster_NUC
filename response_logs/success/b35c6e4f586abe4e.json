@@ -1,0 +1,34 @@
+{
+  "log_id": "b35c6e4f586abe4e",
+  "timestamp": "2025-10-23T16:07:02.156473",
+  "question": "Find Azure interfaces",
+  "answer": "## \ud83d\udd0d Neo4j Query Results\n\n- \u26a0\ufe0f No results found. Possible reasons:\n  \u2022 No data in Neo4j database\n  \u2022 Seeds not found in the data\n  \u2022 No relationships between the systems\n  \u2022 Neo4j connection issues\n\n---\n\n## \ud83e\udd16 llama3.2:latest Response\n\nBased on the complete graph analysis results, I can see that there is limited connectivity to Azure-related systems and interfaces. Here's a summary of what we've found:\n\n**Related Systems and Interfaces:**\n\nUnfortunately, our analysis did not reveal any directly related systems or interfaces beyond the seeds \"Find Azure\" and \"Azure\". This suggests that the system you're working with may not have a direct connection to Azure.\n\n**Seeds Identified:**\n\nThe seeds \"Find Azure\" and \"Azure\" indicate that these terms were used in your graph analysis, but they don't necessarily imply a direct connection. These seeds might be related to your query or search term, rather than actual systems or interfaces.\n\n**Recommendations:**\n\nGiven the limited connectivity to Azure-related systems and interfaces, I would recommend exploring alternative approaches to find what you're looking for. Here are some suggestions:\n\n1. **Refine your search terms**: Try rephrasing your question or using different keywords related to Azure to see if we can identify more relevant connections.\n2. **Check for indirect connections**: Although we didn't find any direct connections, it's possible that there might be an intermediate system or interface that connects to Azure. We can try to explore these possibilities further.\n3. **Consult additional resources**: If you're looking for information on Azure interfaces, I recommend consulting official Azure documentation, online forums, or other trusted sources.\n\nIf you'd like to proceed with refining your search terms or exploring alternative approaches, please let me know and we can work together to find a solution that suits your needs.",
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "llama3.2:latest",
+  "data_source": "neo4j",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": "api",
+  "graph_seeds": [
+    "Azure interfaces",
+    "Find Azure"
+  ],
+  "api_query": null,
+  "endpoint": "neo4j",
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 51162.74,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": "neo4j",
+    "seeds_used": [
+      "Find Azure",
+      "Azure"
+    ],
+    "sender_receiver": null
+  }
+}

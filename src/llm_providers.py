@@ -530,8 +530,11 @@ class LLMProviderManager:
             error_msg = str(e)
             
             # Handle specific error types
-            if "429" in error_msg or "rate" in error_msg.lower():
-                # Rate limit error - suggest alternatives
+            # Don't apply rate limit detection to local providers (Ollama)
+            is_local_provider = config.provider == LLMProvider.OLLAMA
+            
+            if not is_local_provider and ("429" in error_msg or "rate" in error_msg.lower()):
+                # Rate limit error - suggest alternatives (only for API providers)
                 alternatives = self.get_alternative_models(model_name)
                 alt_text = f"\n\nSuggested alternatives: {', '.join(alternatives[:3])}" if alternatives else ""
                 raise Exception(f"Rate limit exceeded for {model_name}. This model is temporarily unavailable.{alt_text}")
@@ -539,6 +542,14 @@ class LLMProviderManager:
                 raise Exception(f"Authentication failed for {model_name}. Please check your API key.")
             elif "404" in error_msg or "not found" in error_msg.lower():
                 raise Exception(f"Model {model_name} not found or unavailable.")
+            elif is_local_provider:
+                # Specific error handling for local Ollama models
+                if "connection" in error_msg.lower() or "refused" in error_msg.lower():
+                    raise Exception(f"Cannot connect to Ollama at localhost:11434. Make sure Ollama is running and the model '{model_name}' is available.")
+                elif "model" in error_msg.lower() and "not found" in error_msg.lower():
+                    raise Exception(f"Model '{model_name}' not found in Ollama. Run: ollama pull {model_name}")
+                else:
+                    raise Exception(f"Ollama error for {model_name}: {error_msg}")
             else:
                 raise Exception(f"Error generating response with {model_name}: {error_msg}")
     

@@ -1,0 +1,43 @@
+{
+  "log_id": "6dd6b42ca1029ce8",
+  "timestamp": "2025-10-23T15:39:45.508128",
+  "question": "Find SAP IDOC interfaces",
+  "answer": [
+    "# \ud83d\udcca Vector RAG Analysis Report\n\n## \ud83d\udd0d Vector Search Results\n**Found:** 1000 items  \n**Strategy:** direct_search_filtered  \n\n### \ud83d\udcca Vector Search Statistics\n- **Total Results Found:** 1000\n- **Average Similarity:** 61.4%\n- **Similarity Range:** 69.7% - 57.2%\n- **Threshold Applied:** 30%\n\n---\n\n### \ud83d\udd0d Search Results\n\n#### Top 20 Results (Detailed View)\n\n**#1** - Similarity: **69.7%** \ud83d\udd25\n```\nName: AI_UXMON\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#2** - Similarity: **69.7%** \ud83d\udd25\n```\nName: AI_UXMON\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#3** - Similarity: **69.7%** \ud83d\udd25\n```\nName: ICMON_SRV\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#4** - Similarity: **69.2%** \ud83d\udd25\n```\nName: ICMON_SRV\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#5** - Similarity: **69.2%** \ud83d\udd25\n```\nName: CATALOGSERVICE\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#6** - Similarity: **68.8%** \ud83d\udd25\n```\nName: E2E_ICIDB_OD\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#7** - Similarity: **68.8%** \ud83d\udd25\n```\nName: CATALOGSERVICE\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#8** - Similarity: **68.7%** \ud83d\udd25\n```\nName: E2E_ICIDB_OD\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#9** - Similarity: **68.5%** \ud83d\udd25\n```\nName: EEMON\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#10** - Similarity: **68.5%** \ud83d\udd25\n```\nName: EEMON\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#11** - Similarity: **68.4%** \ud83d\udd25\n```\nName: AGS_AI\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#12** - Similarity: **68.4%** \ud83d\udd25\n```\nName: AGS_AI\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#13** - Similarity: **68.3%** \ud83d\udd25\n```\nName: ROADMAP_SAPUI5\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#14** - Similarity: **68.3%** \ud83d\udd25\n```\nName: ROADMAP_SAPUI5\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#15** - Similarity: **68.2%** \ud83d\udd25\n```\nName: CATALOGSERVICE\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#16** - Similarity: **68.2%** \ud83d\udd25\n```\nName: CATALOGSERVICE\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#17** - Similarity: **68.1%** \ud83d\udd25\n```\nName: IRWC\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#18** - Similarity: **68.1%** \ud83d\udd25\n```\nName: GWDEMO\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#19** - Similarity: **68.1%** \ud83d\udd25\n```\nName: GWDEMO\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n**#20** - Similarity: **67.7%** \ud83d\udd25\n```\nName: TECHMON\nType: SAP_IDOC\n**Receiver:** SAP Solution Manager\n\n```\n\n---\n\n#### \ud83d\udccb Remaining 980 Results (Summary by Type)\n\n**Type: SAP_IDOC** - 798 more items (Avg Similarity: 61.7%)\n  \u2022 IRWC (67.7%)\n  \u2022 E2EBPCC_UI_SRV (67.6%)\n  \u2022 E2EBPCC_UI_SRV (67.6%)\n  \u2022 CATALOGSERVICE (67.5%)\n  \u2022 CATALOGSERVICE (67.5%)\n  \u2022 ... and 793 more\n\n**Type: SAP_IS_APIM** - 98 more items (Avg Similarity: 60.2%)\n  \u2022 SR | ZWIC_XI_INBOUND (64.9%)\n  \u2022 SR | ZWIC_XI_INBOUND (64.9%)\n  \u2022 SR | ZWIC_XI_INBOUND (64.7%)\n  \u2022 SR | WS_DIAGLS_GET_TECH_SYSTS (64.5%)\n  \u2022 SR | WS_DIAGLS_GET_TECH_SYSTS (64.5%)\n  \u2022 ... and 93 more\n\n**Type: SAP_PO** - 70 more items (Avg Similarity: 60.1%)\n  \u2022 ALMCLNT001 | LS |  | RSINFO | OUT | RSINFO |  (65.7%)\n  \u2022 SALESFORCE | LS |  | ALEAUD | IN (64.5%)\n  \u2022 CPI | LS |  | RSINFO | OUT | RSINFO |  (64.4%)\n  \u2022 CPI | LS |  | RSINFO | OUT | RSINFO |  (64.4%)\n  \u2022 CPI | LS |  | RSINFO | OUT | RSINFO |  (64.4%)\n  \u2022 ... and 65 more\n\n**Type: 22** - 9 more items (Avg Similarity: 58.9%)\n  \u2022 I01-600 EHP7 f\u00fcr SAP ERP 6.0 ->> E41-000 SAP SOLUTION MANAGER 7.2 (60.5%)\n  \u2022 Manually created interface in SAP LeanIX (59.8%)\n  \u2022 I01-600 EHP7 f\u00fcr SAP ERP 6.0 ->> E41-066 SAP SOLUTION MANAGER 7.2 (59.5%)\n  \u2022 E41 SAP SOLUTION MANAGER 7.2 ->> I01-600 EHP7 f\u00fcr SAP ERP 6.0 (58.8%)\n  \u2022 E41 SAP SOLUTION MANAGER 7.2 ->> I01 EHP7 f\u00fcr SAP ERP 6.0 (58.8%)\n  \u2022 ... and 4 more\n\n**Type: 20** - 3 more items (Avg Similarity: 58.4%)\n  \u2022 Fraport Basis SAP IDoc (59.5%)\n  \u2022 SAP ABAP Backend Call RFC XI (58.0%)\n  \u2022 SAP ABAP Backend Call RFC XI option (57.9%)\n\n**Type: 24** - 2 more items (Avg Similarity: 57.2%)\n  \u2022 SAPIRCONTROLLER (57.2%)\n  \u2022 SAPIRCONTROLLER (57.2%)\n\n\n---\n\n## \u26a0\ufe0f LLM Synthesis Failed\n\n**Error:** Provider ollama not available (missing API key)\n\nThe raw vector search results are shown above. LLM synthesis could not be completed.",
+    {
+      "method": "vector_rag",
+      "retrieved": 1000,
+      "total_candidates": 2151,
+      "avg_similarity": 0.6142910081148147,
+      "strategy": "direct_search_filtered",
+      "prefiltered_count": 2151,
+      "original_count": 5771,
+      "llm_model_used": "deepseek-r1:32b",
+      "llm_synthesis": false,
+      "llm_error": "Provider ollama not available (missing API key)",
+      "raw_results_count": 1000,
+      "all_results_shown": true
+    }
+  ],
+  "status": "success",
+  "method_used": "vector_rag",
+  "model_used": "deepseek-r1:32b",
+  "data_source": "local_json",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": null,
+  "graph_seeds": null,
+  "api_query": null,
+  "endpoint": null,
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 68953.751,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "method": "vector_rag",
+    "top_k": 1000
+  }
+}

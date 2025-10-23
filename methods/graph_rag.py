@@ -193,31 +193,82 @@ def run(query: str, data: List[Dict[str, Any]] | None = None, max_hops: int = 2,
             debug_info.append(f"  • No relationships found, trying fallback search...")
             fallback_results = []
             try:
+                # Filter seeds to remove query words and keep actual system/interface names
+                # Common query words that aren't system names
+                query_words = {'find', 'show', 'get', 'all', 'list', 'the', 'and', 'what', 'which', 
+                              'how', 'from', 'to', 'between', 'connected', 'connection', 'interface',
+                              'interfaces', 'system', 'systems', 'path', 'paths', 'data', 'flow'}
+                
+                # Filter seeds: remove short seeds and query words, prioritize longer specific terms
+                filtered_seeds = []
                 for seed in seeds:
-                    # Search for interfaces that contain the seed name
+                    # Split multi-word seeds and check each word
+                    words = seed.split()
+                    if len(words) > 1:
+                        # Keep only non-query words from multi-word seeds
+                        meaningful_words = [w for w in words if w.lower() not in query_words and len(w) > 2]
+                        filtered_seeds.extend(meaningful_words)
+                    elif len(seed) > 2 and seed.lower() not in query_words:
+                        # Keep single meaningful words
+                        filtered_seeds.append(seed)
+                
+                # Remove duplicates while preserving order
+                seen = set()
+                unique_seeds = []
+                for s in filtered_seeds:
+                    if s.lower() not in seen:
+                        seen.add(s.lower())
+                        unique_seeds.append(s)
+                
+                seeds_to_search = unique_seeds if unique_seeds else seeds
+                debug_info.append(f"  • Filtered seeds for search: {seeds_to_search}")
+                
+                # Search for each seed with OR logic (any match is good)
+                # Prioritize longer, more specific seeds
+                seeds_by_length = sorted(seeds_to_search, key=len, reverse=True)
+                
+                for seed in seeds_by_length:
+                    # Skip very short seeds
+                    if len(seed) <= 2:
+                        continue
+                        
+                    # Use toString() to safely handle non-string type values
                     cypher = """
                     MATCH (i:Interface) 
-                    WHERE toLower(i.name) CONTAINS toLower($seed)
-                    RETURN i.name as name, i.type as type, labels(i) as labels
-                    LIMIT 10
+                    WHERE toLower(i.name) CONTAINS toLower($seed) 
+                       OR (i.type IS NOT NULL AND toLower(toString(i.type)) CONTAINS toLower($seed))
+                    RETURN DISTINCT i.name as name, i.type as type, labels(i) as labels
+                    LIMIT 30
                     """
                     results = store.run_tx(cypher, seed=seed)
                     fallback_results.extend(results)
+                    debug_info.append(f"  • Seed '{seed}' found {len(results)} interfaces")
                 
-                debug_info.append(f"  • Fallback search found {len(fallback_results)} interfaces")
+                # Remove duplicates while preserving order
+                seen_names = set()
+                unique_results = []
+                for result in fallback_results:
+                    name = result.get('name', '')
+                    if name and name not in seen_names:
+                        seen_names.add(name)
+                        unique_results.append(result)
                 
-                if fallback_results:
-                    summary_lines.append("- 🔍 Found related interfaces (by name):")
-                    for result in fallback_results[:10]:
+                debug_info.append(f"  • Fallback search found {len(unique_results)} unique interfaces")
+                
+                if unique_results:
+                    summary_lines.append(f"🔍 **Found {len(unique_results)} related interfaces (by name):**")
+                    summary_lines.append("")
+                    # Show up to 20 results instead of just 10
+                    for result in unique_results[:20]:
                         name = result.get('name', 'Unknown')
                         interface_type = result.get('type', 'Unknown')
                         summary_lines.append(f"  • {name} ({interface_type})")
                 else:
-                    summary_lines.append("- ⚠️ No results found. Possible reasons:")
+                    summary_lines.append("⚠️ **No results found.** Possible reasons:")
                     summary_lines.append("  • No data in Neo4j database")
                     summary_lines.append("  • Seeds not found in the data")
                     summary_lines.append("  • No relationships between the systems")
-                    summary_lines.append("  • Neo4j connection issues")
+                    summary_lines.append(f"  • Search terms used: {', '.join(seeds)}")
                     
             except Exception as e:
                 debug_info.append(f"  • Fallback search failed: {str(e)}")
@@ -233,17 +284,35 @@ def run(query: str, data: List[Dict[str, Any]] | None = None, max_hops: int = 2,
         # If LLM model and manager are provided, add LLM synthesis
         if llm_model and llm_manager:
             try:
+                # Collect all found results (from neighborhood OR fallback search)
+                all_found_interfaces = []
+                total_count = 0
+                
+                if neighborhood_lines:
+                    # Use neighborhood results if available
+                    all_found_interfaces = neighborhood_lines
+                    total_count = len(neighborhood)
+                elif 'unique_results' in locals() and unique_results:
+                    # Use fallback search results
+                    all_found_interfaces = [f"{r.get('name', 'Unknown')} (type: {r.get('type', 'Unknown')})" for r in unique_results]
+                    total_count = len(unique_results)
+                
                 # Create a synthesis prompt with ALL available data (not limited)
                 synthesis_prompt = f"""Based on the complete graph analysis results, provide a comprehensive and natural answer to the user's question.
 
 User Question: {query}
 
 Complete Graph Analysis Results:
-- Found {len(neighborhood)} related systems and interfaces
+- Search method: {"Relationship-based (k-hop neighborhood)" if neighborhood_lines else "Name-based search (fallback)"}
+- Found {total_count} related interfaces
 - Seeds identified: {', '.join(seeds)}
-- All related interfaces: {', '.join(neighborhood_lines)}
+- All found interfaces: {', '.join(all_found_interfaces[:50])}  # Limit to first 50 for context
 
-Please provide a clear, well-structured answer that explains what systems and interfaces are connected, focusing on the most relevant information for the user's question."""
+Please provide a clear, well-structured answer that:
+1. Confirms the interfaces were found
+2. Summarizes the main types or categories
+3. Highlights any notable patterns
+4. Answers the user's specific question"""
 
                 # Use the selected LLM model to generate response
                 llm_response = llm_manager.generate_response(

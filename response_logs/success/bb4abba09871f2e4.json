@@ -1,0 +1,36 @@
+{
+  "log_id": "bb4abba09871f2e4",
+  "timestamp": "2025-10-23T14:56:52.584161",
+  "question": "Find SAP IDOC interfaces",
+  "answer": "## \ud83d\udd0d Neo4j Query Results\n\n- \ud83d\udd0d Found related interfaces (by name):\n  \u2022 Replicate Business Partners from SAP S/4HANA to Salesforce marketing cloud (SAP_EVENTMESH)\n  \u2022 SAP HCM - SAP PS:  (22)\n  \u2022 RMQ Test Send via SAP Std Adapter (20)\n  \u2022 OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPCreateRequest_In (21)\n  \u2022 JMA Top-Byke App - SAP ERP ECC 6.0 #2 (22)\n  \u2022 SAP QM - SAP Signavio:  (22)\n  \u2022 SAP S/4 HANA Cloud - Bee360:  (22)\n  \u2022 OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPCreateRequest_In (21)\n  \u2022 OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPChangeRequest_In (21)\n  \u2022 BP Replication SAP to SSFS-1 (SAP_EVENTMESH)\n\n---\n\n## \u26a0\ufe0f LLM Synthesis Failed\n\nLLM synthesis failed with error: Rate limit exceeded for deepseek-r1:14b. This model is temporarily unavailable.\n\nSuggested alternatives: gpt-4o-mini, openai/gpt-4o-mini, llama-3.3-70b-versatile\nShowing raw Neo4j results above.",
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "deepseek-r1:14b",
+  "data_source": "neo4j",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": "api",
+  "graph_seeds": [
+    "Find",
+    "SAP IDOC"
+  ],
+  "api_query": null,
+  "endpoint": "neo4j",
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 173.028,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": "neo4j",
+    "seeds_used": [
+      "Find SAP IDOC",
+      "Sap",
+      "SAP",
+      "IDOC"
+    ],
+    "sender_receiver": null
+  }
+}

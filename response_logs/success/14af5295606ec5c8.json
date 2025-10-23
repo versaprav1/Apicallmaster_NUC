@@ -1,0 +1,36 @@
+{
+  "log_id": "14af5295606ec5c8",
+  "timestamp": "2025-10-23T16:16:51.767477",
+  "question": "Find SAP IDOC interfaces",
+  "answer": "## \ud83d\udd0d Neo4j Query Results\n\n\ud83d\udd0d **Found 60 related interfaces (by name):**\n\n  \u2022 CPI_EU_IDOC (24)\n  \u2022 DEMO_IDOC_TO_CPI (24)\n  \u2022 WPO_IDOC (24)\n  \u2022 DEMO Receive IDOC from ALM (20)\n  \u2022 IDOC Consumer WORKDAY EXCHANGE_RATE (20)\n  \u2022 Fraport Basis SAP IDoc v1_test retry (20)\n  \u2022 IDOC Consumer CPI EXCHANGE_RATE (20)\n  \u2022 IDOC Consumer SALESFORCE EXCHANGE_RATE (20)\n  \u2022 Fraport Basis SAP IDoc (20)\n  \u2022 IDOC_WIC_INBOUND (20)\n  \u2022 Fraport Template Basis SAP IDoc (20)\n  \u2022 SAP_IDoc_Dispatcher_ALM (20)\n  \u2022 TEST WIC Frequency IDOC (20)\n  \u2022 EPM_OIA_L_1_SRV_01 (SAP_IDOC)\n  \u2022 WDR_ADAPT_UI_SRV (SAP_IDOC)\n  \u2022 NOTIFICATIONSTORE (SAP_IDOC)\n  \u2022 AI_SMCP_GW_ODATA_SRV (SAP_IDOC)\n  \u2022 AGS_DSH_KPI_DATA_SRV (SAP_IDOC)\n  \u2022 LREP_SUPPORT_FRAMEWORK_SRV (SAP_IDOC)\n  \u2022 DAAG_MONOBJ (SAP_IDOC)\n\n---\n\n## \ud83e\udd16 gemini-2.0-flash Response\n\nOkay, based on the graph analysis, I've looked for SAP IDOC interfaces within the system.\n\n**Unfortunately, the analysis found no related systems or interfaces connected to the search terms \"SAP,\" \"IDOC,\" or \"SAP IDOC.\"**\n\nThis means that, according to the data analyzed, there are no identified connections or relationships involving SAP IDOC interfaces within the scope of the graph.\n\n**Possible Reasons for No Results:**\n\n*   **Data Scope:** The graph data might not contain information about the specific SAP IDOC interfaces you're looking for. The data source might be incomplete or not cover the relevant systems.\n*   **Naming Conventions:** The interfaces might be named differently in the system than the terms used in the search (SAP, IDOC).\n*   **Missing Connections:** The connections between systems and interfaces involving SAP IDOCs might not be explicitly defined or captured in the graph data.\n\n**Recommendations:**\n\n*   **Verify Data Source:** Confirm that the data source used for the graph analysis is comprehensive and includes information about SAP systems and IDOC interfaces.\n*   **Expand Search Terms:** Try using more specific or alternative search terms related to the SAP IDOC interfaces you're looking for. Consider including specific IDOC types, transaction codes, or system names.\n*   **Investigate Manually:** If possible, manually investigate the SAP systems to identify IDOC interfaces and their connections to other systems.\n*   **Review Documentation:** Consult system documentation or technical specifications for information about SAP IDOC interfaces and their integration with other systems.\n\nIn summary, while I searched for SAP IDOC interfaces based on your request, the analysis did not find any related systems or interfaces within the analyzed data. Further investigation and a broader search scope might be necessary to locate the desired information.\n",
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "neo4j",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": "api",
+  "graph_seeds": [
+    "SAP IDOC",
+    "Find"
+  ],
+  "api_query": null,
+  "endpoint": "neo4j",
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 11751.896,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": "neo4j",
+    "seeds_used": [
+      "Find SAP IDOC",
+      "Sap",
+      "SAP",
+      "IDOC"
+    ],
+    "sender_receiver": null
+  }
+}
