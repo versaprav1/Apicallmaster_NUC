@@ -643,16 +643,25 @@ def analyze_response(user_question: str, api_response: Dict[str, Any], openai_ap
         response_text = json.dumps(api_response, indent=2)
         estimated_tokens = len(response_text) // 4
         
-        # Handle different intents intelligently
+        # Get result count
+        total_items = 0
+        if isinstance(api_response, dict) and 'data' in api_response:
+            total_items = len(api_response.get('data', []))
+        elif isinstance(api_response, list):
+            total_items = len(api_response)
+        
+        # For large datasets (>100 items), use chunked analysis regardless of intent
+        if total_items > 100 or estimated_tokens > 25000:
+            st.info(f"📊 Large dataset detected ({total_items} items). Using smart chunked analysis...")
+            return analyze_response_chunked(user_question, api_response, openai_api_key)
+        
+        # Handle different intents intelligently for smaller datasets
         if intent == "list_all":
             return generate_list_response(api_response, user_question)
         elif intent == "count":
             return generate_count_response(api_response, user_question)
         elif intent == "search":
             return generate_search_response(api_response, user_question)
-        elif intent == "analyze" and estimated_tokens > 25000:
-            # Only chunk for analysis requests when data is large
-            return analyze_response_chunked(user_question, api_response, openai_api_key)
         elif intent == "analyze":
             # For smaller analysis requests, use direct analysis
             return analyze_response_direct(user_question, api_response, openai_api_key)
@@ -1333,7 +1342,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -1971,7 +1980,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -1997,12 +2006,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ")
                         
                         try:
                             start_time = datetime.now()
@@ -2050,6 +2059,33 @@ def chat_page():
                                 
                                 st.markdown("### Answer (from DuckDB)")
                                 st.markdown(analysis)
+                                
+                                # Show data summary prominently
+                                if duckdb_response and 'data' in duckdb_response:
+                                    total_items = duckdb_response.get('total', 0)
+                                    data_items = duckdb_response.get('data', [])
+                                    
+                                    st.markdown(f"**📊 Results:** {total_items} interfaces returned")
+                                    
+                                    # Show first few results in a nice table
+                                    if data_items and len(data_items) > 0:
+                                        with st.expander(f"📋 View Results ({min(10, len(data_items))} of {total_items} shown)", expanded=False):
+                                            import pandas as pd
+                                            # Convert first 10 items to DataFrame for nice display
+                                            preview_data = data_items[:10]
+                                            if preview_data:
+                                                df = pd.DataFrame(preview_data)
+                                                st.dataframe(df, use_container_width=True)
+                                        
+                                        # Download option for all data
+                                        if total_items > 10:
+                                            csv = pd.DataFrame(data_items).to_csv(index=False)
+                                            st.download_button(
+                                                label=f"⬇️ Download All {total_items} Results as CSV",
+                                                data=csv,
+                                                file_name=f"sap_interfaces_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
+                                                mime="text/csv"
+                                            )
                                 
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")

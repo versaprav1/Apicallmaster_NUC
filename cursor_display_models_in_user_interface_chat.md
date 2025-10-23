@@ -1274,7 +1274,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -1744,7 +1744,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -1770,12 +1770,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -1827,7 +1827,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -3536,7 +3536,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -4006,7 +4006,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -4032,12 +4032,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -4089,7 +4089,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -5942,7 +5942,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -6412,7 +6412,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -6438,12 +6438,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -6495,7 +6495,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -8305,7 +8305,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -8775,7 +8775,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -8801,12 +8801,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -8858,7 +8858,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -10671,7 +10671,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -11141,7 +11141,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -11167,12 +11167,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -11224,7 +11224,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -13088,7 +13088,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -13578,7 +13578,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -13604,12 +13604,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -13661,7 +13661,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -18934,7 +18934,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -19429,7 +19429,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -19455,12 +19455,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -19512,7 +19512,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -22402,7 +22402,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -22901,7 +22901,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -22927,12 +22927,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -22984,7 +22984,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -26503,7 +26503,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -27008,7 +27008,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -27034,12 +27034,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -27091,7 +27091,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -28917,7 +28917,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -29438,7 +29438,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -29464,12 +29464,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -29521,7 +29521,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -31344,7 +31344,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
         elif source == "Neo4j Graph":
             st.info("🕸️ Neo4j Graph: Relationship analysis using graph database")
             st.markdown("**Perfect for:** Finding connections, paths, and relationships between systems")
@@ -31858,7 +31858,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -31884,12 +31884,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             start_time = datetime.now()
@@ -31941,7 +31941,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics

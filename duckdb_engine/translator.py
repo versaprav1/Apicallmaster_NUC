@@ -185,6 +185,18 @@ class DuckDBTranslator:
                 if value is not None:
                     sql_operator = self.operator_mapping.get(operator, '=')
                     
+                    # Helper function to format type value (add quotes for string types)
+                    def format_type_value(v):
+                        v_str = str(v)
+                        # If it's a numeric string, keep as-is
+                        if v_str.isdigit():
+                            return v_str
+                        # If it's already quoted, keep as-is
+                        if v_str.startswith('"') and v_str.endswith('"'):
+                            return v_str
+                        # Otherwise, add quotes (for string types like SAP_IDOC)
+                        return f'"{v_str}"'
+                    
                     # Handle IN operator for multiple types
                     if operator in ['in', 'not_in']:
                         if isinstance(value, list):
@@ -192,7 +204,7 @@ class DuckDBTranslator:
                             placeholders = []
                             for i, v in enumerate(value):
                                 param_name = f"param_{param_counter}_{i}"
-                                params[param_name] = str(v)  # Cast to string
+                                params[param_name] = format_type_value(v)
                                 placeholders.append(f":{param_name}")
                             param_counter += len(value)
                             
@@ -200,7 +212,7 @@ class DuckDBTranslator:
                     else:
                         # Single value comparison - use string comparison
                         param_name = f"param_{param_counter}"
-                        params[param_name] = str(value)
+                        params[param_name] = format_type_value(value)
                         return f"CAST(norm_type AS VARCHAR) {sql_operator} :{param_name}", params
             else:
                 # Regular field condition

@@ -166,7 +166,7 @@
    │ Translate to SQL                │
    │ Execute query on DuckDB         │
    │ Return structured results       │
-   │ No caching (always fresh)       │
+   │ No caching ()       │
    └─────────────────────────────────┘
 
 5. RESULT

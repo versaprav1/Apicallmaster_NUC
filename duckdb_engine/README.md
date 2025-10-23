@@ -5,7 +5,7 @@ This module provides a high-performance local execution engine for WHINT Integra
 ## Features
 
 - **High Performance**: DuckDB provides fast SQL execution on large datasets
-- **Always Fresh**: No caching - always executes against current data
+- ****: No caching - always executes against current data
 - **Query Translation**: Converts WHINT JSON queries to optimized SQL
 - **Rich Schema Support**: Handles complex nested data (metadata, properties, tags)
 - **Diagnostics**: Built-in debugging and diagnostic capabilities
@@ -209,7 +209,7 @@ uv run python duckdb/loader.py --db duckdb/wic.duckdb --validate
 The DuckDB engine integrates with the main Streamlit app as a third data source option:
 
 1. **UI Toggle**: "Local Engine (DuckDB)" in data source selector
-2. **Always Fresh**: No caching - always executes against current data
+2. ****: No caching - always executes against current data
 3. **Same Interface**: Uses same WHINT query format as API and Local JSON modes
 4. **Diagnostics**: Built-in debugging for query issues
 

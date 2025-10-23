@@ -46,7 +46,7 @@ local_file = "path/to/data.json"
 1. Translates user query to DuckDB SQL
 2. Executes SQL query directly on database
 3. Returns structured results
-4. Always fresh execution (no caching)
+4.  execution (no caching)
 
 **Use cases:**
 - Complex filtering and aggregation
@@ -66,7 +66,7 @@ duckdb_path = "duckdb_engine/wic.duckdb"
 ```
 
 **Key Features:**
-- ✅ Always fresh execution
+- ✅  execution
 - ✅ No caching
 - ✅ Direct SQL translation
 - ✅ High performance for structured queries
@@ -137,7 +137,7 @@ GRAPH_BACKEND=neo4j
 2. If relationships are needed → uses `graph_rag`
 3. Otherwise, follows priority order
 4. Executes against live API
-5. No caching (always fresh)
+5. No caching ()
 
 **Use cases:**
 - Real-time data access

@@ -66,7 +66,7 @@ ls duckdb_engine/wic.duckdb
 ```
 ✅ Using DuckDB for direct SQL queries...
 🗄️ Direct SQL results
-🚀 Always fresh execution (no caching)
+🚀  execution (no caching)
 ```
 
 ---

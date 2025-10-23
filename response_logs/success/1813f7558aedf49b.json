@@ -1,0 +1,6970 @@
+{
+  "log_id": "1813f7558aedf49b",
+  "timestamp": "2025-10-23T13:27:37.350011",
+  "question": "Find SAP IDOC interfaces",
+  "answer": "No analysis available",
+  "status": "success",
+  "method_used": "duckdb",
+  "model_used": "gpt-oss:20b-cloud",
+  "data_source": "duckdb",
+  "intent": "specific_search",
+  "requires_graph": false,
+  "query_type": null,
+  "graph_seeds": null,
+  "api_query": {
+    "query": {
+      "entity": "inventory",
+      "fields": [
+        "name",
+        "sender_name",
+        "receiver_name",
+        "description",
+        "type"
+      ],
+      "where": [
+        {
+          "option": 1,
+          "conditions": [
+            {
+              "field": {
+                "name": "type",
+                "eq": "SAP_IDOC"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "endpoint": "https://whint.prod.apimanagement.eu10.hana.ondemand.com:443/wic/interfaces",
+  "sql_query": "SELECT norm_name, norm_sender_name, norm_receiver_name, norm_description, norm_type FROM inventory_view WHERE (CAST(norm_type AS VARCHAR) = :param_0) ORDER BY norm_name ",
+  "response_data": {
+    "data": [
+      {
+        "name": "ABR_FACET_SELECTOR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ABR_FACET_SELECTOR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ABR_FACET_SELECTOR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ABR_FACET_SELECTOR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ABR_FACET_SELECTOR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_AI",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_AI",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_AI",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_AI",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_AI",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_ADMIN",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_ADMIN",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_ADMIN",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_ADMIN",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_ADMIN",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_EXRATE_SETUP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_EXRATE_SETUP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_EXRATE_SETUP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_EXRATE_SETUP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_EXRATE_SETUP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GEO_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GEO_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GEO_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GEO_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GEO_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_ACR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_ACR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_ACR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_ACR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_ACR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_ARC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_ARC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_ARC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_ARC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_ARC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_BCC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_BCC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_BCC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_BCC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_BCC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_BPIMP_LP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_BPIMP_LP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_BPIMP_LP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_BPIMP_LP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_BPIMP_LP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_COMMON_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_COMMON_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_COMMON_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_COMMON_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_COMMON_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_KPI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_KPI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_KPI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_KPI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_KPI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_MLCHANGE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_MLCHANGE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_MLCHANGE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_MLCHANGE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_MLCHANGE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_PROGRESS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_PROGRESS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_PROGRESS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_PROGRESS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_GW_PROGRESS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_KPI_CATALOG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_KPI_CATALOG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_KPI_CATALOG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_KPI_CATALOG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_KPI_CATALOG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_PF_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_PF_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_PF_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_PF_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_BPA_PF_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_CC_ODATA_CCITY",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_CC_ODATA_CCITY",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_CC_ODATA_CCITY",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_CC_ODATA_CCITY",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_CC_ODATA_CCITY",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_CC_ODATA_DASHBOARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_CC_ODATA_DASHBOARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_CC_ODATA_DASHBOARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_CC_ODATA_DASHBOARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_CC_ODATA_DASHBOARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DCM_IFDOCU_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DCM_IFDOCU_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DCM_IFDOCU_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DCM_IFDOCU_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DCM_IFDOCU_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DCM_INR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DCM_INR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DCM_INR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DCM_INR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DCM_INR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_CHAR_SEARCH_HELP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_CHAR_SEARCH_HELP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_CHAR_SEARCH_HELP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_CHAR_SEARCH_HELP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_CHAR_SEARCH_HELP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_CURRENCY_VP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_CURRENCY_VP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_CURRENCY_VP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_CURRENCY_VP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_CURRENCY_VP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_KPI_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_KPI_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_KPI_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_KPI_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_KPI_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_META_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_META_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_META_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_META_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_META_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_TILE_META_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_TILE_META_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_TILE_META_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_TILE_META_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_DSH_TILE_META_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_EJR_JOB_ANALYSIS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_EJR_JOB_ANALYSIS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_EJR_JOB_ANALYSIS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_EJR_JOB_ANALYSIS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_EJR_JOB_ANALYSIS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_ISSUE_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_ISSUE_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_ISSUE_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_ISSUE_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_ISSUE_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_ISSUE_REPORT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_ISSUE_REPORT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_ISSUE_REPORT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_ISSUE_REPORT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_ISSUE_REPORT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_OVP_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_OVP_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_OVP_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_OVP_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_ESD_OVP_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_BPMN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_BPMN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_BPMN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_BPMN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_BPMN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_GBM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_GBM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_GBM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_GBM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_GBM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_GOM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_GOM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_GOM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_GOM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GBC_ODATA_GOM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GENC_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GENC_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GENC_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GENC_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GENC_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GPA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GPA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GPA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GPA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GPA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GPA_ODATA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GPA_ODATA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GPA_ODATA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GPA_ODATA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GPA_ODATA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_ANALYSIS",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_ANALYSIS",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_ANALYSIS",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_ANALYSIS",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_ANALYSIS",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_DOC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_DOC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_DOC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_DOC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_DOC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_MON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_MON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_MON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_MON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_MON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_MON_EXT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_MON_EXT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_MON_EXT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_MON_EXT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_JOB_MON_EXT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_PB_DATA",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_PB_DATA",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_PB_DATA",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_PB_DATA",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_GWRT_PB_DATA",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_KPI_HIERARCHY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_KPI_HIERARCHY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_KPI_HIERARCHY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_KPI_HIERARCHY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_KPI_HIERARCHY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SDS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SDS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SDS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SDS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SDS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SDS_SYSTEM_INFO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SDS_SYSTEM_INFO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SDS_SYSTEM_INFO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SDS_SYSTEM_INFO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SDS_SYSTEM_INFO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SISE_SESSION_READER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SISE_SESSION_READER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SISE_SESSION_READER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SISE_SESSION_READER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SISE_SESSION_READER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SYSREC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SYSREC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SYSREC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SYSREC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AGS_SYSREC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AIC_CM_MONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AIC_CM_MONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AIC_CM_MONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AIC_CM_MONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AIC_CM_MONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AIC_RELEASE_PLANNING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AIC_RELEASE_PLANNING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AIC_RELEASE_PLANNING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AIC_RELEASE_PLANNING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AIC_RELEASE_PLANNING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_CRO_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_CRO_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_CRO_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_CRO_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_CRO_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_SMART_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_SMART_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_SMART_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_SMART_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_SMART_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_WLO_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_WLO_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_WLO_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_WLO_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_CD_WLO_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_PROVIDER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_PROVIDER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_PROVIDER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_PROVIDER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_PROVIDER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_RFC_SMART_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_RFC_SMART_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_RFC_SMART_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_RFC_SMART_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CM_TGW_TCM_RFC_SMART_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CREATE_INCIDENT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CREATE_INCIDENT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CREATE_INCIDENT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CREATE_INCIDENT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_CREATE_INCIDENT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_MYBUSI_REQUIRE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_MYBUSI_REQUIRE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_MYBUSI_REQUIRE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_MYBUSI_REQUIRE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_MYBUSI_REQUIRE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_MYMESSAGE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_MYMESSAGE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_MYMESSAGE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_MYMESSAGE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_MYMESSAGE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_RES_DISP_INCIDENTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_RES_DISP_INCIDENTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_RES_DISP_INCIDENTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_RES_DISP_INCIDENTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_CRM_GW_RES_DISP_INCIDENTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SMCP_GW_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SMCP_GW_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SMCP_GW_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SMCP_GW_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SMCP_GW_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SMMIG_MA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SMMIG_MA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SMMIG_MA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SMMIG_MA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SMMIG_MA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SOLMAN_ALERTINBOX_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SOLMAN_ALERTINBOX_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SOLMAN_ALERTINBOX_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SOLMAN_ALERTINBOX_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SOLMAN_ALERTINBOX_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SYSMON_OVERVIEW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SYSMON_OVERVIEW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SYSMON_OVERVIEW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SYSMON_OVERVIEW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_SYSMON_OVERVIEW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_UXMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_UXMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_UXMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_UXMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AI_UXMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALERTTICKER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALERTTICKER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALERTTICKER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALERTTICKER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALERTTICKER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AOSSERV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AOSSERV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AOSSERV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AOSSERV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AOSSERV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AOS_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AOS_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AOS_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AOS_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "AOS_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BIMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BIMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BIMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BIMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BIMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPCC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPCC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPCC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPCC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPCC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPMON_HIERARCHY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPMON_HIERARCHY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPMON_HIERARCHY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPMON_HIERARCHY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPMON_HIERARCHY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPMON_SELOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPMON_SELOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPMON_SELOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPMON_SELOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BPMON_SELOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CATALOGSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CATALOGSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CATALOGSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CATALOGSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CATALOGSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CATALOGSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CATALOGSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CATALOGSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CATALOGSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CATALOGSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CCM_NAMESPACES_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CCM_NAMESPACES_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CCM_NAMESPACES_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CCM_NAMESPACES_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CCM_NAMESPACES_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CCM_OBJECT_LIST_REPORT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CCM_OBJECT_LIST_REPORT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CCM_OBJECT_LIST_REPORT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CCM_OBJECT_LIST_REPORT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CCM_OBJECT_LIST_REPORT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CENTRALJOB_OVERVIEW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CENTRALJOB_OVERVIEW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CENTRALJOB_OVERVIEW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CENTRALJOB_OVERVIEW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CENTRALJOB_OVERVIEW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CNM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CNM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CNM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CNM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CNM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CONFANA720_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CONFANA720_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CONFANA720_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CONFANA720_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CONFANA720_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_ANA_ODATA_REPORTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_ANA_ODATA_REPORTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_ANA_ODATA_REPORTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_ANA_ODATA_REPORTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_ANA_ODATA_REPORTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_IU_HSS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_IU_HSS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_IU_HSS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_IU_HSS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_IU_HSS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_IU_UI5_PFC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_IU_UI5_PFC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_IU_UI5_PFC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_IU_UI5_PFC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_IU_UI5_PFC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_ML_STI_TRAINING_AUTOMATION_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_ML_STI_TRAINING_AUTOMATION_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_ML_STI_TRAINING_AUTOMATION_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_ML_STI_TRAINING_AUTOMATION_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_ML_STI_TRAINING_AUTOMATION_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_NOTES",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_NOTES",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_NOTES",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_NOTES",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CRM_NOTES",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DAAG_MNGGRP",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DAAG_MNGGRP",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DAAG_MNGGRP",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DAAG_MNGGRP",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DAAG_MNGGRP",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DAAG_MONOBJ",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DAAG_MONOBJ",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DAAG_MONOBJ",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DAAG_MONOBJ",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DAAG_MONOBJ",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBB_SIMULATE_SB_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBB_SIMULATE_SB_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBB_SIMULATE_SB_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBB_SIMULATE_SB_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBB_SIMULATE_SB_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBS_SAI_APP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBS_SAI_APP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBS_SAI_APP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBS_SAI_APP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBS_SAI_APP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBS_SAI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBS_SAI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBS_SAI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBS_SAI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DBS_SAI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DFWK_DASHBOARD",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DFWK_DASHBOARD",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DFWK_DASHBOARD",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DFWK_DASHBOARD",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DFWK_DASHBOARD",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGLS_FILTERBARAPP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGLS_FILTERBARAPP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGLS_FILTERBARAPP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGLS_FILTERBARAPP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGLS_FILTERBARAPP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGLS_FILTERBAR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGLS_FILTERBAR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGLS_FILTERBAR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGLS_FILTERBAR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGLS_FILTERBAR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGST_CCDB_READ_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGST_CCDB_READ_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGST_CCDB_READ_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGST_CCDB_READ_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIAGST_CCDB_READ_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIGIOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIGIOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIGIOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIGIOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DIGIOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRM_REPORT_BW_2_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRM_REPORT_BW_2_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRM_REPORT_BW_2_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRM_REPORT_BW_2_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRM_REPORT_BW_2_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRM_REPORT_BW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRM_REPORT_BW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRM_REPORT_BW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRM_REPORT_BW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DRM_REPORT_BW_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DR_REPORTDATA_1_SRV_03",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DR_REPORTDATA_1_SRV_03",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DR_REPORTDATA_1_SRV_03",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DR_REPORTDATA_1_SRV_03",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DR_REPORTDATA_1_SRV_03",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DR_REPORTDATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DR_REPORTDATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DR_REPORTDATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DR_REPORTDATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DR_REPORTDATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DSWP_CDC_DYNAMIC_TILE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DSWP_CDC_DYNAMIC_TILE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DSWP_CDC_DYNAMIC_TILE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DSWP_CDC_DYNAMIC_TILE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DSWP_CDC_DYNAMIC_TILE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DSWP_CDC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DSWP_CDC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DSWP_CDC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DSWP_CDC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DSWP_CDC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_AGING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_AGING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_AGING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_AGING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_AGING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_AGING_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_AGING_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_AGING_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_AGING_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_AGING_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_BW_HOUSEKEEPING_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_BW_HOUSEKEEPING_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_BW_HOUSEKEEPING_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_BW_HOUSEKEEPING_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_BW_HOUSEKEEPING_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_NLS_UNUSED_IPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_NLS_UNUSED_IPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_NLS_UNUSED_IPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_NLS_UNUSED_IPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_NLS_UNUSED_IPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_REORG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_REORG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_REORG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_REORG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_REORG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_UNUSED_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_UNUSED_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_UNUSED_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_UNUSED_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVM_UNUSED_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVW_BW_HOUSEKEEPING_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVW_BW_HOUSEKEEPING_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVW_BW_HOUSEKEEPING_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVW_BW_HOUSEKEEPING_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "DVW_BW_HOUSEKEEPING_ADMIN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2EBPCC_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2EBPCC_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2EBPCC_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2EBPCC_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2EBPCC_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2EEM_MF_TS",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2EEM_MF_TS",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2EEM_MF_TS",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2EEM_MF_TS",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2EEM_MF_TS",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2E_ICIDB_OD",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2E_ICIDB_OD",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2E_ICIDB_OD",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2E_ICIDB_OD",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2E_ICIDB_OD",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2E_ICIDB_ODATASERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2E_ICIDB_ODATASERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2E_ICIDB_ODATASERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2E_ICIDB_ODATASERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "E2E_ICIDB_ODATASERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EEMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EEMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EEMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EEMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EEMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_LANES_DEMO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_LANES_DEMO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_LANES_DEMO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_LANES_DEMO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_LANES_DEMO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_APPS_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_APPS_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_APPS_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_APPS_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_APPS_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_BPFACTSHEET_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_BPFACTSHEET_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_BPFACTSHEET_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_BPFACTSHEET_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_BPFACTSHEET_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_BPOPENINV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_BPOPENINV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_BPOPENINV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_BPOPENINV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_BPOPENINV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_CTRYSALESTREND_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_CTRYSALESTREND_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_CTRYSALESTREND_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_CTRYSALESTREND_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_CTRYSALESTREND_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_DFG_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_DFG_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_DFG_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_DFG_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_DFG_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_FIORI_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_FIORI_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_FIORI_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_FIORI_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_FIORI_GW_SERVICE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_FIORI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_FIORI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_FIORI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_FIORI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_FIORI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_GW_SALES_HISTORY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_GW_SALES_HISTORY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_GW_SALES_HISTORY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_GW_SALES_HISTORY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_GW_SALES_HISTORY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_L_1_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_L_1_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_L_1_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_L_1_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_L_1_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_L_1_SRV_02",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_L_1_SRV_02",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_L_1_SRV_02",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_L_1_SRV_02",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_L_1_SRV_02",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_OPENINV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_OPENINV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_OPENINV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_OPENINV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_OPENINV_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_PRODSALESTREND_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_PRODSALESTREND_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_PRODSALESTREND_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_PRODSALESTREND_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_OIA_PRODSALESTREND_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_LT_30_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_LT_30_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_LT_30_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_LT_30_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_LT_30_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_BT_30_60_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_BT_30_60_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_BT_30_60_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_BT_30_60_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_BT_30_60_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_BT_60_90_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_BT_60_90_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_BT_60_90_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_BT_60_90_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_BT_60_90_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_DUN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_DUN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_DUN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_DUN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_DUN_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_GT_90_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_GT_90_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_GT_90_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_GT_90_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "EPM_VP_L_GT_90_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "FDT_TRACE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "FDT_TRACE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "FDT_TRACE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "FDT_TRACE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "FDT_TRACE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GPA_ODATA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GPA_ODATA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GPA_ODATA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GPA_ODATA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GPA_ODATA_DOC_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GPA_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GPA_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GPA_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GPA_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GPA_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GWDEMO",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GWDEMO",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GWDEMO",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GWDEMO",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GWDEMO",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GWSAMPLE_BASIC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GWSAMPLE_BASIC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GWSAMPLE_BASIC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GWSAMPLE_BASIC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "GWSAMPLE_BASIC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ICMON_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ICMON_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ICMON_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ICMON_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ICMON_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ILM_ARCH_VARIANT_DIST_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ILM_ARCH_VARIANT_DIST_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ILM_ARCH_VARIANT_DIST_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ILM_ARCH_VARIANT_DIST_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ILM_ARCH_VARIANT_DIST_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ILM_JOB_MONITOR_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ILM_JOB_MONITOR_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ILM_JOB_MONITOR_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ILM_JOB_MONITOR_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ILM_JOB_MONITOR_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IRWC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IRWC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IRWC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IRWC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IRWC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IT_CALENDAR",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IT_CALENDAR",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IT_CALENDAR",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IT_CALENDAR",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IT_CALENDAR",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IT_EVENTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IT_EVENTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IT_EVENTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IT_EVENTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "IT_EVENTS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JBIMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JBIMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JBIMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JBIMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JBIMON_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JOBMON_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JOBMON_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JOBMON_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JOBMON_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JOBMON_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JOBMON_SYSTEMS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JOBMON_SYSTEMS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JOBMON_SYSTEMS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JOBMON_SYSTEMS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "JOBMON_SYSTEMS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LANDSCAPE_API",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LANDSCAPE_API",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LANDSCAPE_API",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LANDSCAPE_API",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LANDSCAPE_API",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LREPSUPPORT_FRAMEWORK_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LREPSUPPORT_FRAMEWORK_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LREPSUPPORT_FRAMEWORK_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LREPSUPPORT_FRAMEWORK_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LREPSUPPORT_FRAMEWORK_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LREP_SUPPORT_FRAMEWORK_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LREP_SUPPORT_FRAMEWORK_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LREP_SUPPORT_FRAMEWORK_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LREP_SUPPORT_FRAMEWORK_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "LREP_SUPPORT_FRAMEWORK_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "MA_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "MA_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "MA_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "MA_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "MA_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "MSGFLOWMONITOR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "MSGFLOWMONITOR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "MSGFLOWMONITOR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "MSGFLOWMONITOR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "MSGFLOWMONITOR_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "NOTIFICATIONSTORE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "NOTIFICATIONSTORE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "NOTIFICATIONSTORE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "NOTIFICATIONSTORE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "NOTIFICATIONSTORE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATAMSGFLOWMONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATAMSGFLOWMONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATAMSGFLOWMONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATAMSGFLOWMONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATAMSGFLOWMONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATA_DRM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATA_DRM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATA_DRM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATA_DRM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATA_DRM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATA_PI_MONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATA_PI_MONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATA_PI_MONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATA_PI_MONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ODATA_PI_MONITORING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMDCPT_APV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMDCPT_APV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMDCPT_APV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMDCPT_APV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMDCPT_APV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMITPR_CHG",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMITPR_CHG",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMITPR_CHG",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMITPR_CHG",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMITPR_CHG",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMITPR_CRE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMITPR_CRE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMITPR_CRE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMITPR_CRE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PPM_PFMITPR_CRE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PROCESSMANAGEMENT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PROCESSMANAGEMENT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PROCESSMANAGEMENT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PROCESSMANAGEMENT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "PROCESSMANAGEMENT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RCA_EXM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RCA_EXM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RCA_EXM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RCA_EXM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RCA_EXM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RFC_MONITORING",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RFC_MONITORING",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RFC_MONITORING",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RFC_MONITORING",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RFC_MONITORING",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ROADMAP_SAPUI5",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ROADMAP_SAPUI5",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ROADMAP_SAPUI5",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ROADMAP_SAPUI5",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ROADMAP_SAPUI5",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RSAO_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RSAO_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RSAO_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RSAO_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RSAO_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RS_BCT_ICI_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RS_BCT_ICI_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RS_BCT_ICI_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RS_BCT_ICI_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "RS_BCT_ICI_SERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SAM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SAM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SAM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SAM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SAM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SAP_BPM_ALREP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SAP_BPM_ALREP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SAP_BPM_ALREP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SAP_BPM_ALREP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SAP_BPM_ALREP_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SECATT_PING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SECATT_PING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SECATT_PING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SECATT_PING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SECATT_PING_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SEPM_HANA_EXT_PAL_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SEPM_HANA_EXT_PAL_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SEPM_HANA_EXT_PAL_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SEPM_HANA_EXT_PAL_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SEPM_HANA_EXT_PAL_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SERVICE_EXPLORER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SERVICE_EXPLORER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SERVICE_EXPLORER_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SERVICE_GDAPI",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SERVICE_GDAPI",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SERVICE_GDAPI",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SERVICE_GDAPI",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SERVICE_GDAPI",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SISE_SO_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SISE_SO_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SISE_SO_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SISE_SO_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SISE_SO_ODATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SMKPI_CAT_OFFLINE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SMKPI_CAT_OFFLINE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SMKPI_CAT_OFFLINE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SMKPI_CAT_OFFLINE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SMKPI_CAT_OFFLINE_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_EWA_SYSTEM_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_EWA_SYSTEM_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_EWA_SYSTEM_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_EWA_SYSTEM_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_EWA_SYSTEM_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_QGM_QM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_QGM_QM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_QGM_QM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_QGM_QM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_QGM_QM_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_AUT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_AUT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_AUT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_AUT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_AUT_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_FAV_TRANSACTION_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_FAV_TRANSACTION_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_FAV_TRANSACTION_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_FAV_TRANSACTION_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_FAV_TRANSACTION_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_MANDATORY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_MANDATORY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_MANDATORY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_MANDATORY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_MANDATORY_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_USER_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_USER_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_USER_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_USER_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_OVP_USER_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_SESSION_READER",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_SESSION_READER",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_SESSION_READER",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_SESSION_READER",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_SESSION_READER",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_SYSTEM_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_SYSTEM_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_SYSTEM_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_SYSTEM_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SISE_SYSTEM_CARD_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_LOG_INFO_LIST_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_LOG_INFO_LIST_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_LOG_INFO_LIST_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_LOG_INFO_LIST_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_LOG_INFO_LIST_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_SRV_BAL",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_SRV_BAL",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_SRV_BAL",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_SRV_BAL",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_SRV_BAL",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_TPCK_CH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_TPCK_CH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_TPCK_CH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_TPCK_CH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_TPCK_CH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_TPLN_CHG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_TPLN_CHG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_TPLN_CHG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_TPLN_CHG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SM_SMT_TPLN_CHG_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOLMAN_COMMONS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOLMAN_COMMONS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOLMAN_COMMONS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOLMAN_COMMONS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOLMAN_COMMONS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMI_DEFINE_SUBJECT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMI_DEFINE_SUBJECT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMI_DEFINE_SUBJECT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMI_DEFINE_SUBJECT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMI_DEFINE_SUBJECT",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMO_DO_DIGIOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMO_DO_DIGIOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMO_DO_DIGIOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMO_DO_DIGIOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMO_DO_DIGIOPS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMO_DO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMO_DO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMO_DO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMO_DO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SOMO_DO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_SEARCH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_SEARCH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_SEARCH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_SEARCH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_SEARCH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_SUGGEST_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_SUGGEST_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_SUGGEST_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_SUGGEST_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_SUGGEST_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_TERMINOLOGY_SEARCH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_TERMINOLOGY_SEARCH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_TERMINOLOGY_SEARCH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_TERMINOLOGY_SEARCH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "STERM_TERMINOLOGY_SEARCH_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "S_EPM_SADL_GW_DEV_SCEN_RO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "S_EPM_SADL_GW_DEV_SCEN_RO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "S_EPM_SADL_GW_DEV_SCEN_RO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "S_EPM_SADL_GW_DEV_SCEN_RO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "S_EPM_SADL_GW_DEV_SCEN_RO_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TECHMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TECHMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TECHMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TECHMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TECHMON",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TECHMON_UI5_TABS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TECHMON_UI5_TABS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TECHMON_UI5_TABS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TECHMON_UI5_TABS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TECHMON_UI5_TABS_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TEST_RFC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TEST_RFC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TEST_RFC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TEST_RFC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "TEST_RFC",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "UI5LIB_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "UI5LIB_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "UI5LIB_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "UI5LIB_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "UI5LIB_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USAGEEXTRACTOR",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USAGEEXTRACTOR",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USAGEEXTRACTOR",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USAGEEXTRACTOR",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USAGEEXTRACTOR",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USERSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USERSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USERSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USERSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USERSERVICE",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USER_MENU",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USER_MENU",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USER_MENU",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USER_MENU",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "USER_MENU",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "VATID_CHECK_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "VATID_CHECK_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "VATID_CHECK_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "VATID_CHECK_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "VATID_CHECK_SRV_01",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "VBI_APPL_DEF_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "VBI_APPL_DEF_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "VBI_APPL_DEF_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "VBI_APPL_DEF_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "VBI_APPL_DEF_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WDR_ADAPT_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WDR_ADAPT_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WDR_ADAPT_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WDR_ADAPT_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WDR_ADAPT_UI_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WMM_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WMM_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WMM_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WMM_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WMM_DATA_SRV",
+        "type": "\"SAP_IDOC\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      }
+    ],
+    "total": 988,
+    "offset": 0,
+    "entity": "inventory"
+  },
+  "total_items": 988,
+  "execution_time_ms": 10333.976,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": null
+}

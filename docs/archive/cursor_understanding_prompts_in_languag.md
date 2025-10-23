@@ -10279,7 +10279,7 @@ to avoid cache in api mode, lets use cache with local json mode.
   - Small UI note (optional): Add a hint near source selector saying “API mode: live only; Local JSON: cache-first.”
 
 - Resulting behavior:
-  - API mode: Always fresh data; no cache influence.
+  - API mode:  data; no cache influence.
   - Local JSON mode: Fast replays from cache; executes locally only on miss; still analyzed and saved back.
 
 Confirm and I’ll implement exactly this.
@@ -11576,7 +11576,7 @@ Yes. Here’s a concise plan for Option 2 (DuckDB/Polars), no code yet.
     - translator.py: WHINT JSON → SQL.
     - executor.py: run SQL and return API-shaped response.
   - UI toggle: “Local Engine (DuckDB)” in the same source section.
-  - Cache: same behavior as Local JSON mode (cache-first optional), or “always fresh” toggle if preferred.
+  - Cache: same behavior as Local JSON mode (cache-first optional), or “” toggle if preferred.
 
 - Diagnostics
   - On zero results: show type distribution and example rows from base table.
@@ -11599,17 +11599,17 @@ Confirm:
 
 **User**
 
-duckdb,always fresh for duckdb path,keep local json path alongside,in a new folderduckdb
+duckdb, for duckdb path,keep local json path alongside,in a new folderduckdb
 
 ---
 
 **Cursor**
 
-- Acknowledged: DuckDB path, always fresh, keep Local JSON path, new folder `duckdb`.
+- Acknowledged: DuckDB path, , keep Local JSON path, new folder `duckdb`.
 - I’ll implement:
   - `ApiCallMaster/duckdb/` with `loader.py` (ingest JSON/NDJSON → DuckDB), `translator.py` (WHINT JSON → SQL), `executor.py` (run SQL → API-shaped response), `README.md`.
   - UI toggle: add “Local Engine (DuckDB)” alongside API and Local JSON.
-  - Behavior: DuckDB path bypasses cache (no read/write), always fresh; Local JSON remains cache-first.
+  - Behavior: DuckDB path bypasses cache (no read/write), ; Local JSON remains cache-first.
 - I’ll start now and report back when wired.
 
 ---
@@ -12019,7 +12019,7 @@ can you give me detailed flow how this can be achieved
 ### Detailed flow to achieve accurate results at scale (no code, actionable steps)
 
 - Data source selection
-  - UI offers three sources: API (live, no cache), Local JSON (cache-first), Local Engine (DuckDB, always fresh).
+  - UI offers three sources: API (live, no cache), Local JSON (cache-first), Local Engine (DuckDB, ).
   - On selection, the pipeline branches; the rest of the flow is consistent (query → execute → analyze).
 
 - NL → WHINT JSON query (LLM)
@@ -12040,7 +12040,7 @@ can you give me detailed flow how this can be achieved
     - Check KnowledgeStore (exact then fuzzy).
     - On miss: stream file (array/data:[...]/NDJSON), route to the right collection, filter with type normalization, project fields/with-relations, apply limit/offset.
     - Store API-shaped response in cache.
-  - Local Engine (DuckDB, always fresh)
+  - Local Engine (DuckDB, )
     - One-time load:
       - Detect file shape; ingest JSON/NDJSON; optionally convert to Parquet for subsequent fast loads.
       - Normalize nested structures (metadata/properties/tags/sender/receiver) into child tables or keep as struct/list columns.
@@ -12082,7 +12082,7 @@ can you give me detailed flow how this can be achieved
 - Caching policy
   - API: disabled (live only).
   - Local JSON: cache-first and write-back (for repeated queries).
-  - DuckDB: always fresh by default; optionally enable a small result cache for expensive aggregations.
+  - DuckDB:  by default; optionally enable a small result cache for expensive aggregations.
 
 - Evaluation and quality loop
   - Maintain a golden set of Q→A pairs spanning each endpoint/entity and complexity level.
@@ -12189,7 +12189,7 @@ in ui i want to see the prompt which is built using prompt_builder, then now we 
     - `executor.py`: run SQL, return API-shaped response (data list).
     - `README.md`: usage, schema mapping notes, performance tips.
   - UI toggle: add “Local Engine (DuckDB)” next to API and Local JSON.
-    - Always fresh (no cache) for DuckDB path.
+    -  (no cache) for DuckDB path.
 
 - Integrate DuckDB with API-live workflow (pipeline to process live data)
   - API mode (unchanged for fetch):
@@ -13960,7 +13960,7 @@ This module provides a high-performance local execution engine for WHINT Integra
 ## Features
 
 - **High Performance**: DuckDB provides fast SQL execution on large datasets
-- **Always Fresh**: No caching - always executes against current data
+- ****: No caching - always executes against current data
 - **Query Translation**: Converts WHINT JSON queries to optimized SQL
 - **Rich Schema Support**: Handles complex nested data (metadata, properties, tags)
 - **Diagnostics**: Built-in debugging and diagnostic capabilities
@@ -14164,7 +14164,7 @@ uv run python duckdb/loader.py --db duckdb/wic.duckdb --validate
 The DuckDB engine integrates with the main Streamlit app as a third data source option:
 
 1. **UI Toggle**: "Local Engine (DuckDB)" in data source selector
-2. **Always Fresh**: No caching - always executes against current data
+2. ****: No caching - always executes against current data
 3. **Same Interface**: Uses same WHINT query format as API and Local JSON modes
 4. **Diagnostics**: Built-in debugging for query issues
 
@@ -17575,7 +17575,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("ApiCallMaster/duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -18820,7 +18820,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("ApiCallMaster/duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -19021,9 +19021,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -19036,7 +19036,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -20117,7 +20117,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("ApiCallMaster/duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -20318,9 +20318,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -20333,7 +20333,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -21418,7 +21418,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("ApiCallMaster/duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -21639,9 +21639,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -21654,7 +21654,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -21806,10 +21806,10 @@ I've successfully integrated the DuckDB engine into the Streamlit UI! Here's wha
 1. **Data Source Selector Updated:**
    - Added "Local Engine (DuckDB)" as a third option alongside "API" and "Local JSON File"
    - Default path: `ApiCallMaster/duckdb_engine/wic.duckdb`
-   - Clear indication that DuckDB mode is "always fresh, no caching"
+   - Clear indication that DuckDB mode is ", no caching"
 
 2. **DuckDB Execution Logic:**
-   - Always fresh execution (no cache read/write)
+   -  execution (no cache read/write)
    - Full error handling with detailed diagnostics
    - SQL translation display for debugging
    - Type distribution and sample data in diagnostics
@@ -21821,7 +21821,7 @@ I've successfully integrated the DuckDB engine into the Streamlit UI! Here's wha
 
 ### 🚀 **Key Features:**
 
-- **Always Fresh**: DuckDB mode bypasses all caching for real-time results
+- ****: DuckDB mode bypasses all caching for real-time results
 - **Rich Diagnostics**: Shows translated SQL, parameters, type distribution, and sample data
 - **Error Handling**: Comprehensive error messages with debugging information
 - **Seamless Integration**: Works alongside existing API and Local JSON modes
@@ -22000,7 +22000,7 @@ The DuckDB engine is now fully integrated and tested! Users can:
 - **Fast execution** on 5,771 records
 - **Efficient SQL queries** with proper parameter binding
 - **Rich diagnostics** for debugging and optimization
-- **Always fresh data** without cache dependencies
+- ** data** without cache dependencies
 
 The integration is complete and ready for production use! 🎯
 
@@ -22976,7 +22976,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("ApiCallMaster/duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -23194,9 +23194,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -23209,7 +23209,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -23422,7 +23422,7 @@ Local Engine (DuckDB)
 DuckDB database path
 
 D:\versa\project_Files\replit_dell\ApiCallMaster\ApiCallMaster\duckdb_engine\wic.duckdb
-🚀 DuckDB Engine: Always fresh execution, no caching
+🚀 DuckDB Engine:  execution, no caching
 
 Ask Your Question
 Example Presets
@@ -23450,7 +23450,7 @@ Generated API Query
 "offset":0
 }
 }
-🚀 Executing query against DuckDB (always fresh)...
+🚀 Executing query against DuckDB ()...
 
 DuckDB execution failed: SQL execution failed
 
@@ -24430,7 +24430,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -24648,9 +24648,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -24663,7 +24663,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -24862,7 +24862,7 @@ Local Engine (DuckDB)
 DuckDB database path
 
 D:\versa\project_Files\replit_dell\ApiCallMaster\duckdb_engine\wic.duckdb
-🚀 DuckDB Engine: Always fresh execution, no caching
+🚀 DuckDB Engine:  execution, no caching
 
 Ask Your Question
 Example Presets
@@ -24891,7 +24891,7 @@ Generated API Query
 "offset":0
 }
 }
-🚀 Executing query against DuckDB (always fresh)...
+🚀 Executing query against DuckDB ()...
 
 Answer (from DuckDB)
 Of course. As an expert in WHINT Integration Cockpit data, I have analyzed the API response.
@@ -24961,7 +24961,7 @@ Generated API Query:
 "offset":0
 }
 }
-DuckDB Response: (always fresh)
+DuckDB Response: ()
 
 {
 "data":
@@ -25004,7 +25004,7 @@ Looking at your results, the DuckDB integration is working correctly! Let me ana
 
 ### **Why This is Good:**
 
-- **Always Fresh:** No caching, so you're getting current data
+- **:** No caching, so you're getting current data
 - **Fast Execution:** DuckDB processed 300 records quickly
 - **Rich Analysis:** LLM provided meaningful categorization and summary
 - **Proper Formatting:** Clean, organized output with type breakdown
@@ -26760,7 +26760,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -26978,9 +26978,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -26993,7 +26993,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -27195,7 +27195,7 @@ Local Engine (DuckDB)
 DuckDB database path
 
 D:\versa\project_Files\replit_dell\ApiCallMaster\duckdb_engine\wic.duckdb
-🚀 DuckDB Engine: Always fresh execution, no caching
+🚀 DuckDB Engine:  execution, no caching
 
 Ask Your Question
 Example Presets
@@ -27221,7 +27221,7 @@ Generated API Query
 ]
 }
 }
-🚀 Executing query against DuckDB (always fresh)...
+🚀 Executing query against DuckDB ()...
 
 Answer (from DuckDB)
 Of course. Based on the WHINT Integration Cockpit data, here is a detailed analysis of all interfaces.
@@ -27288,7 +27288,7 @@ Generated API Query:
 ]
 }
 }
-DuckDB Response: (always fresh)
+DuckDB Response: ()
 
 {
 "data":
@@ -27319,7 +27319,7 @@ User: "list all interfaces"
 ↓
 UI: User selects "Local Engine (DuckDB)"
 ↓
-UI: Shows DuckDB path and "always fresh" message
+UI: Shows DuckDB path and "" message
 ```
 
 ### **2. Query Generation**
@@ -27364,7 +27364,7 @@ User: "list all interfaces"
 ↓
 UI: User selects "Local Engine (DuckDB)"
 ↓
-UI: Shows DuckDB path and "always fresh" message
+UI: Shows DuckDB path and "" message
 ```
 
 ```plaintext
@@ -28290,7 +28290,7 @@ User: "list all interfaces"
 ↓
 UI: User selects "Local Engine (DuckDB)"
 ↓
-UI: Shows DuckDB path and "always fresh" message
+UI: Shows DuckDB path and "" message
 ```
 
 ### **2. Query Generation**
@@ -28350,7 +28350,7 @@ User: "list all interfaces"
 ↓
 UI: User selects "Local Engine (DuckDB)"
 ↓
-UI: Shows DuckDB path and "always fresh" message
+UI: Shows DuckDB path and "" message
 ```
 
 ```plaintext
@@ -28382,7 +28382,7 @@ User: "list all interfaces"
 ↓
 UI: User selects "Local Engine (DuckDB)"
 ↓
-UI: Shows DuckDB path and "always fresh" message
+UI: Shows DuckDB path and "" message
 ```
 
 ```plaintext
@@ -29408,7 +29408,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -29626,10 +29626,10 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     st.info(f"🔍 DEBUG: Source selected: '{source}'")
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -29642,7 +29642,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -30732,7 +30732,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -30950,10 +30950,10 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     st.info(f"🔍 DEBUG: Source selected: '{source}'")
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -30966,7 +30966,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -31140,7 +31140,7 @@ Local Engine (DuckDB)
 DuckDB database path
 
 D:\versa\project_Files\replit_dell\ApiCallMaster\duckdb_engine\wic.duckdb
-🚀 DuckDB Engine: Always fresh execution, no caching
+🚀 DuckDB Engine:  execution, no caching
 
 Ask Your Question
 Example Presets
@@ -31166,7 +31166,7 @@ Generated API Query
 ]
 }
 }
-🚀 Executing query against DuckDB (always fresh)...
+🚀 Executing query against DuckDB ()...
 
 [DEBUG] Using LLM for chunking: gemini-2.5-pro
 
@@ -31323,7 +31323,7 @@ Generated API Query:
 ]
 }
 }
-DuckDB Response: (always fresh)
+DuckDB Response: ()
 
 {
 "data":
@@ -32507,7 +32507,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -32725,10 +32725,10 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     st.info(f"🔍 DEBUG: Source selected: '{source}'")
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -32741,7 +32741,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -33868,7 +33868,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -34086,10 +34086,10 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     st.info(f"🔍 DEBUG: Source selected: '{source}'")
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -34102,7 +34102,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -35232,7 +35232,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -35450,9 +35450,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -35465,7 +35465,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -36589,7 +36589,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -36807,9 +36807,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -36822,7 +36822,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -37023,7 +37023,7 @@ when chunks are made are they stored or everytime it has to call api?
   - Effect: If a cache hit occurs, no re-chunking; otherwise, local execute → analyze/chunk → then cache.
 
 - Local Engine (DuckDB):
-  - Cache: Disabled (“always fresh”).
+  - Cache: Disabled (“”).
   - Chunks: Not stored.
   - Effect: Each run reads from DuckDB and re-chunks the result.
 
@@ -37050,7 +37050,7 @@ ow i selected local engine but its calling API
   - The DB path is invalid/missing.
 
 Quick checks:
-- Confirm you see “🚀 Executing query against DuckDB (always fresh)”. If you instead see “📡 Fetching data from WHINT API…”, the API branch ran.
+- Confirm you see “🚀 Executing query against DuckDB ()”. If you instead see “📡 Fetching data from WHINT API…”, the API branch ran.
 - Verify the path shows …\duckdb_engine\wic.duckdb (no duplicate ApiCallMaster) and that the file exists.
 - Try a tiny test query (e.g., “count interfaces”) to see if DuckDB returns; if that errors, the app will fall back to API.
 - If it still happens, I’ll re-enable debug to print the selected source and show DuckDB diagnostics inline so we can pinpoint the fallthrough reason.
@@ -38063,7 +38063,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -38281,10 +38281,10 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     st.info(f"🔍 DEBUG: Source selected: '{source}'")
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -38297,7 +38297,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -39420,7 +39420,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -39638,10 +39638,10 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     st.info(f"🔍 DEBUG: Source selected: '{source}'")
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -39654,7 +39654,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -40781,7 +40781,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -40999,10 +40999,10 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     st.info(f"🔍 DEBUG: Source selected: '{source}'")
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             st.info(f"🔍 DEBUG: DuckDB path: {duckdb_path}")
                             duckdb_executor = DuckDBExecutor(duckdb_path)
@@ -41018,7 +41018,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -41185,7 +41185,7 @@ Local Engine (DuckDB)
 DuckDB database path
 
 D:\versa\project_Files\replit_dell\ApiCallMaster\duckdb_engine\wic.duckdb
-🚀 DuckDB Engine: Always fresh execution, no caching
+🚀 DuckDB Engine:  execution, no caching
 
 Ask Your Question
 Example Presets
@@ -41204,7 +41204,7 @@ Generated API Query
 
 🔍 DEBUG: Source selected: 'Local Engine (DuckDB)'
 
-🚀 Executing query against DuckDB (always fresh)...
+🚀 Executing query against DuckDB ()...
 
 🔍 DEBUG: DuckDB path: D:\versa\project_Files\replit_dell\ApiCallMaster\duckdb_engine\wic.duckdb
 
@@ -42234,7 +42234,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -42452,9 +42452,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -42467,7 +42467,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -43591,7 +43591,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -43809,9 +43809,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -43824,7 +43824,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -43998,7 +43998,7 @@ Local Engine (DuckDB)
 DuckDB database path
 
 D:\versa\project_Files\replit_dell\ApiCallMaster\duckdb_engine\wic.duckdb
-🚀 DuckDB Engine: Always fresh execution, no caching
+🚀 DuckDB Engine:  execution, no caching
 
 Ask Your Question
 Example Presets
@@ -44013,7 +44013,7 @@ list all interfaces
 
 Generated API Query
 
-🚀 Executing query against DuckDB (always fresh)...
+🚀 Executing query against DuckDB ()...
 
 [DEBUG] Using LLM for chunking: gemini-2.5-pro
 
@@ -44115,7 +44115,7 @@ Generated API Query:
 ]
 }
 }
-DuckDB Response: (always fresh)
+DuckDB Response: ()
 
 {
 "data":
@@ -45293,7 +45293,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -45511,9 +45511,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -45526,7 +45526,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -46830,7 +46830,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -47048,9 +47048,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
 
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -47063,7 +47063,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -48345,7 +48345,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -48563,9 +48563,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -48578,7 +48578,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -49866,7 +49866,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -50084,9 +50084,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -50099,7 +50099,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -51381,7 +51381,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -51599,9 +51599,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -51614,7 +51614,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -52899,7 +52899,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -53117,9 +53117,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -53132,7 +53132,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -54420,7 +54420,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -54638,9 +54638,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -54653,7 +54653,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -55938,7 +55938,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -56156,9 +56156,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -56171,7 +56171,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -57456,7 +57456,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -57674,9 +57674,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -57689,7 +57689,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -58974,7 +58974,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -59192,9 +59192,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -59207,7 +59207,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -60489,7 +60489,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -60707,9 +60707,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -60722,7 +60722,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -62007,7 +62007,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -62225,9 +62225,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -62240,7 +62240,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -63525,7 +63525,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -63743,9 +63743,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -63758,7 +63758,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -66302,7 +66302,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -66520,9 +66520,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -66535,7 +66535,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -67823,7 +67823,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -68041,9 +68041,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -68056,7 +68056,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -69344,7 +69344,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -69562,9 +69562,9 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
-                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                        st.info("🚀 Executing query against DuckDB ()...")
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
                             duckdb_response = duckdb_executor.execute_query(api_query)
@@ -69597,7 +69597,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -70884,7 +70884,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -71102,7 +71102,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -71128,12 +71128,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
@@ -71167,7 +71167,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -72457,7 +72457,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -72697,7 +72697,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -72723,12 +72723,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
@@ -72762,7 +72762,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics
@@ -74050,7 +74050,7 @@ def chat_page():
         elif source == "Local Engine (DuckDB)":
             default_duckdb = str(Path("duckdb_engine/wic.duckdb").resolve())
             duckdb_path = st.text_input("DuckDB database path", value=default_duckdb, help="Path to DuckDB database file")
-            st.info("🚀 DuckDB Engine: Always fresh execution, no caching")
+            st.info("🚀 DuckDB Engine:  execution, no caching")
 
     # Sidebar with connection info
     with st.sidebar:
@@ -74290,7 +74290,7 @@ def chat_page():
                         st.json(api_query)
                     api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
                     
-                    # DuckDB mode: always fresh execution (no cache)
+                    # DuckDB mode:  execution (no cache)
                     if source == "Local Engine (DuckDB)":
                         # Check for similar questions in vector store first
                         try:
@@ -74316,12 +74316,12 @@ def chat_page():
                                         return
                                     
                                     if st.button("Continue with DuckDB Query", key="continue_duckdb"):
-                                        st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                        st.info("🚀 Executing query against DuckDB ()...")
                             else:
-                                st.info("🚀 Executing query against DuckDB (always fresh)...")
+                                st.info("🚀 Executing query against DuckDB ()...")
                         except Exception as e:
                             st.warning(f"⚠️ Could not check similar questions: {str(e)}")
-                            st.info("🚀 Executing query against DuckDB (always fresh)...")
+                            st.info("🚀 Executing query against DuckDB ()...")
                         
                         try:
                             duckdb_executor = DuckDBExecutor(duckdb_path)
@@ -74355,7 +74355,7 @@ def chat_page():
                                 with st.expander("Technical Details"):
                                     st.markdown("**Generated API Query:**")
                                     st.json(api_query)
-                                    st.markdown("**DuckDB Response:** (always fresh)")
+                                    st.markdown("**DuckDB Response:** ()")
                                     st.json(duckdb_response)
                                     
                                     # Show diagnostics

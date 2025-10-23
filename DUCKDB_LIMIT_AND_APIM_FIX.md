@@ -108,11 +108,11 @@ CAST(norm_type AS VARCHAR) IN (:param_0_0, :param_0_1, :param_0_2)
 
 ## UI Improvements
 
-### Removed "(always fresh)" Text
+### Removed "()" Text
 Changed `app.py` line 1998:
 ```python
 # Before:
-st.markdown("**DuckDB Response:** (always fresh)")
+st.markdown("**DuckDB Response:** ()")
 
 # After:
 st.markdown("**DuckDB Response:**")
@@ -243,7 +243,7 @@ To verify the fixes work:
 2. ✅ `src/inventory_types.py` - Added type aliases and search function
 3. ✅ `src/nlp_processor.py` - Improved type extraction and filtering
 4. ✅ `src/prompt_builder.py` - Updated LLM instructions for string types
-5. ✅ `app.py` - Removed "(always fresh)" text
+5. ✅ `app.py` - Removed "()" text
 
 ---
 
