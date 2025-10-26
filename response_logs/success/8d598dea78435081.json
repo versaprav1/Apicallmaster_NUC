@@ -1,0 +1,36 @@
+{
+  "log_id": "8d598dea78435081",
+  "timestamp": "2025-10-23T16:38:57.910152",
+  "question": "List SAP interfaces",
+  "answer": "## \ud83d\udd0d Neo4j Query Results\n\n\ud83d\udd0d **Found 30 related interfaces (by name):**\n\n  \u2022 SAP HCM - SAP PS:  (22)\n  \u2022 RMQ Test Send via SAP Std Adapter (20)\n  \u2022 OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPCreateRequest_In (21)\n  \u2022 JMA Top-Byke App - SAP ERP ECC 6.0 #2 (22)\n  \u2022 SAP QM - SAP Signavio:  (22)\n  \u2022 SAP S/4 HANA Cloud - Bee360:  (22)\n  \u2022 OrderCreateRequest |  | RIC_SAP_ERP | SalesOrderERPChangeRequest_In (21)\n  \u2022 BP Replication SAP to SSFS-1 (SAP_EVENTMESH)\n  \u2022 SAP CO - Bee360: Actuals Import (SAP) (22)\n  \u2022 OTC Customer Salesforce SC SAP (22)\n  \u2022 Web Orders to SAP LUY Demo (22)\n  \u2022 SAP CO - SAP PS:  (22)\n  \u2022 SAP SuccessFactors - SAP SCM:  (22)\n  \u2022 SAP FI - SAP PS:  (22)\n  \u2022 SAP CO - Bee360: Time Reporting (SAP) (22)\n  \u2022 SAP Solution Manager - Bee360: SAP Solution Manager Interface (22)\n  \u2022 SAP MM - SAP ERP Plants:  (22)\n  \u2022 I01-811 EHP7 f\u00fcr SAP ERP 6.0 ->> E43-800 EHP7 f\u00fcr SAP ERP 6.0 (22)\n  \u2022 SAP ERP Plants - SAP PP:  (22)\n  \u2022 SAP ERP Plants - SAP QM:  (22)\n\n---\n\n## \u26a0\ufe0f LLM Synthesis Failed\n\nLLM synthesis failed with error: Cannot connect to Ollama at localhost:11434. Make sure Ollama is running and the model 'mistral-nemo:latest' is available.\nShowing raw Neo4j results above.",
+  "status": "success",
+  "method_used": "graph_rag",
+  "model_used": "mistral-nemo:latest",
+  "data_source": "neo4j",
+  "intent": "api",
+  "requires_graph": false,
+  "query_type": "api",
+  "graph_seeds": [
+    "SAP interfaces",
+    "List"
+  ],
+  "api_query": null,
+  "endpoint": "neo4j",
+  "sql_query": null,
+  "response_data": null,
+  "total_items": 0,
+  "execution_time_ms": 300745.81,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": {
+    "backend": "neo4j",
+    "seeds_used": [
+      "List SAP",
+      "Sap",
+      "List",
+      "SAP"
+    ],
+    "sender_receiver": null
+  }
+}

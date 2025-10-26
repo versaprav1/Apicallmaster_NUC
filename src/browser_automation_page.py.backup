@@ -1,0 +1,468 @@
+"""
+Browser Automation Page for Streamlit App
+
+@file purpose: Provides dedicated UI for browser automation with interactive Q&A and batch processing.
+
+What this file does:
+- Dedicated page for WHINT dashboard browser automation
+- User-selectable models (OpenAI, Google, Anthropic, Groq, Ollama)
+- Interactive Q&A mode for single questions
+- Batch processing mode for multiple tasks
+- Auto-login to WHINT with Microsoft credentials
+- Visible browser for testing and debugging
+
+How it fits into the system:
+- Integrated into app.py as "🌐 Browser Automation" page
+- Uses methods/browser_automation.py core engine
+- Shares model infrastructure with main chat
+"""
+
+import streamlit as st
+import asyncio
+import sys
+from typing import Dict, Any, Optional, List
+from datetime import datetime
+import json
+import traceback
+
+# Import browser automation engine
+from methods.browser_automation import BrowserAutomationEngine
+
+
+def _run_async(coro):
+    """Helper to run async code in Streamlit with Windows subprocess support."""
+    import platform
+    
+    # Fix Windows asyncio subprocess support
+    if platform.system() == 'Windows':
+        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+    
+    try:
+        loop = asyncio.get_event_loop()
+        if loop.is_closed():
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    
+        return loop.run_until_complete(coro)
+
+
+def browser_automation_page():
+    """Main browser automation page with interactive Q&A and batch processing."""
+    
+    st.title("🌐 Browser Automation")
+    st.markdown("Automate WHINT dashboard interactions with AI-powered browser control")
+    
+    # Initialize session state
+    if 'browser_engine' not in st.session_state:
+        st.session_state.browser_engine = None
+        st.session_state.browser_active = False
+        st.session_state.task_history = []
+    
+    # ==================== SIDEBAR: Settings ====================
+    with st.sidebar:
+        st.markdown("### ⚙️ Browser Settings")
+        
+        # Model selection (using same logic as main sidebar)
+        st.markdown("#### 🤖 Model Configuration")
+        
+        # Get available models dynamically
+        if 'llm_manager' not in st.session_state:
+            from src.llm_providers import LLMProviderManager
+            st.session_state.llm_manager = LLMProviderManager()
+        
+        available_models = st.session_state.llm_manager.get_available_models(show_all=True)
+        model_names = list(available_models.keys())
+        
+        # Add local Ollama models dynamically
+        try:
+            import requests
+            response = requests.get("http://localhost:11434/api/tags", timeout=2)
+            if response.status_code == 200:
+                data = response.json()
+                ollama_models = [m["name"] for m in data.get("models", []) if "name" in m]
+                # Add Ollama models to the list if not already present
+                for ollama_model in ollama_models:
+                    if ollama_model not in model_names:
+                        model_names.append(ollama_model)
+        except:
+            pass  # Ollama not available
+        
+        # Add "None" option for fallback
+        fallback_model_names = model_names + ["None"]
+        
+        # Primary model selection
+        primary_model = st.selectbox(
+            "Primary Model",
+            options=model_names,
+            index=0 if len(model_names) > 0 else 0,
+            help="Main model for browser automation",
+            key="browser_primary_model"
+        )
+        
+        # Fallback model selection
+        fallback_model_raw = st.selectbox(
+            "Fallback Model",
+            options=fallback_model_names,
+            index=1 if len(fallback_model_names) > 1 else 0,
+            help="Used if primary model fails",
+            key="browser_fallback_model"
+        )
+        fallback_model = None if fallback_model_raw == "None" else fallback_model_raw
+        
+        # Browser settings
+        st.markdown("#### 🖥️ Browser Mode")
+        headless = not st.checkbox(
+            "Show browser window",
+            value=True,
+            help="Uncheck for headless mode"
+        )
+        
+        # Login credentials
+        st.markdown("#### 🔐 WHINT Login")
+        auto_login = st.checkbox("Auto-login on start", value=True)
+        
+        username = st.text_input(
+            "Microsoft Username",
+            value="",
+            placeholder="user@company.com",
+            help="Your Microsoft login email"
+        )
+        
+        password = st.text_input(
+            "Microsoft Password",
+            value="",
+            type="password",
+            help="Your Microsoft password"
+        )
+        
+        whint_url = st.text_input(
+            "WHINT URL",
+            value="https://whintic-test.cfapps.eu10.hana.ondemand.com/",
+            help="WHINT dashboard URL"
+        )
+        
+        st.markdown("---")
+        
+        # Browser control
+        st.markdown("### 🎮 Browser Control")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("🚀 Start Browser", disabled=st.session_state.browser_active, use_container_width=True):
+                if not username or not password:
+                    st.error("❌ Please enter username and password")
+                        else:
+                    with st.spinner("🌐 Starting browser..."):
+                        try:
+                            # Create browser engine
+                            engine = BrowserAutomationEngine(
+                                primary_model=primary_model,
+                                fallback_model=fallback_model,
+                                headless=headless,
+                                whint_url=whint_url,
+                                auto_login=auto_login,
+                                username=username,
+                                password=password
+                            )
+                            
+                            # Initialize browser
+                            result = _run_async(engine.initialize_browser())
+                            
+                            if result["status"] == "initialized":
+                                st.session_state.browser_engine = engine
+                                st.session_state.browser_active = True
+                                
+                                if result.get("login_success"):
+                                    st.success(f"✅ Browser started and logged in!")
+                                else:
+                                    st.success(f"✅ Browser started (login skipped)")
+                                
+                            st.rerun()
+                            else:
+                                st.error(f"❌ Failed: {result.get('error', 'Unknown error')}")
+                        
+                    except Exception as e:
+                            st.error(f"❌ Error: {str(e)}")
+                            st.code(traceback.format_exc())
+        
+        with col2:
+            if st.button("🛑 Stop Browser", disabled=not st.session_state.browser_active, use_container_width=True):
+                if st.session_state.browser_engine:
+                    try:
+                        _run_async(st.session_state.browser_engine.close())
+                        st.session_state.browser_engine = None
+                        st.session_state.browser_active = False
+                        st.success("✅ Browser stopped")
+                    st.rerun()
+                    except Exception as e:
+                        st.error(f"❌ Error stopping: {str(e)}")
+        
+        # Status indicator
+        if st.session_state.browser_active:
+            st.success("🟢 Browser Active")
+            if st.session_state.browser_engine:
+                st.info(f"**Model:** {st.session_state.browser_engine.primary_model}")
+        else:
+            st.warning("🔴 Browser Inactive")
+    
+        st.markdown("---")
+        
+        # Info
+        with st.expander("ℹ️ About Models"):
+            st.markdown("""
+            **Recommended Models:**
+            - **Gemini 2.0 Flash**: Best price/performance (~$0.001/step)
+            - **GPT-4o Mini**: Reliable and fast
+            - **Ollama (Local)**: Free, runs on your machine
+            
+            **Model Selection:**
+            - Cloud models: Faster, more reliable
+            - Ollama: Free, private, requires local setup
+            
+            **Fallback:**
+            - Automatically switches if primary fails
+            - Ensures tasks complete successfully
+            """)
+    
+    # ==================== MAIN AREA ====================
+    
+    if not st.session_state.browser_active:
+        st.info("👈 Click **'Start Browser'** in the sidebar to begin")
+        
+        # Example tasks
+        with st.expander("📖 Example Tasks", expanded=True):
+            st.markdown("""
+            ### Interactive Q&A Examples:
+            - "Navigate to the Objects section and count total interfaces"
+            - "Click Analyze on the first object and summarize the findings"
+            - "Go to the dashboard and tell me the system status"
+            - "Find the most recent interface and extract its details"
+            
+            ### Batch Processing Examples:
+            ```
+            Navigate to Objects and count interfaces
+            Click Analyze on the first object
+            Extract the interface name and status
+            Go back to dashboard
+            ```
+            
+            **Tip:** Be specific about what you want to see or extract!
+            """)
+        
+        return
+    
+    # ==================== TABS: Interactive Q&A & Batch Processing ====================
+    
+    tab1, tab2, tab3 = st.tabs(["💬 Interactive Q&A", "📦 Batch Processing", "📊 History"])
+    
+    # ==================== TAB 1: Interactive Q&A ====================
+    with tab1:
+        st.markdown("### 💬 Ask Questions About WHINT Dashboard")
+        st.markdown("The browser will navigate and answer your question in real-time.")
+        
+        # Quick presets
+        presets = {
+            "Custom Question": "",
+            "Count interfaces in Objects": "Navigate to Objects section and count how many interfaces are listed",
+            "Check dashboard status": "Go to the dashboard and tell me the overall system status",
+            "Analyze first object": "Navigate to Objects, click Analyze on the first object, and summarize what you find",
+            "Extract interface details": "Find the most recent interface and extract its name, status, and description",
+        }
+        
+        preset_choice = st.selectbox("Quick Presets", list(presets.keys()))
+        
+        # Task input
+        task = st.text_area(
+            "Your Question",
+            value=presets[preset_choice],
+            height=100,
+            placeholder="e.g., Navigate to Objects and tell me how many interfaces have errors",
+            help="Describe what you want the browser to do and what information to extract"
+        )
+        
+        # Context (optional)
+        with st.expander("🎯 Add Context (Optional)"):
+            context = st.text_area(
+                "Additional Context",
+                placeholder="e.g., Focus on SAP interfaces only, or look for errors in the last 24 hours",
+                height=80,
+                help="Provide extra context to guide the browser automation"
+            )
+        
+        # Execute button
+        col1, col2, col3 = st.columns([2, 1, 1])
+        with col1:
+            execute_btn = st.button("▶️ Execute Task", type="primary", use_container_width=True, disabled=not task.strip())
+        
+        if execute_btn and task.strip():
+            st.markdown("---")
+            st.markdown("### 🤖 Executing Task...")
+            
+            progress = st.progress(0, text="Initializing browser agent...")
+            status_text = st.empty()
+            
+            try:
+                progress.progress(20, text="Sending task to browser agent...")
+                
+                # Execute task
+                status_text.info("🌐 Browser is working... This may take 30-60 seconds")
+                    result = _run_async(
+                    st.session_state.browser_engine.execute_task(
+                        task=task,
+                        context=context if 'context' in locals() else None
+                    )
+                )
+                
+                progress.progress(100, text="Task completed!")
+                status_text.empty()
+                
+                # Display result
+                if result["status"] == "success":
+                    st.success(f"✅ Task completed in {result['duration_seconds']:.1f}s")
+                    
+                    st.markdown("### 📊 Result")
+                    st.markdown(result["result"])
+                    
+                    # Save to history
+                    st.session_state.task_history.append({
+                        "timestamp": datetime.now().isoformat(),
+                        "type": "interactive",
+                        "task": task,
+                        "result": result["result"],
+                        "duration": result["duration_seconds"]
+                    })
+                
+                else:
+                    st.error(f"❌ Task failed")
+                    st.error(result.get("error", "Unknown error"))
+                    if "traceback" in result:
+                        with st.expander("🔍 Error Details"):
+                            st.code(result["traceback"])
+                    
+                except Exception as e:
+                st.error(f"❌ Error: {str(e)}")
+                st.code(traceback.format_exc())
+    
+    # ==================== TAB 2: Batch Processing ====================
+    with tab2:
+        st.markdown("### 📦 Batch Processing")
+        st.markdown("Execute multiple tasks in sequence. Enter one task per line.")
+        
+        # Batch tasks input
+        batch_tasks_text = st.text_area(
+            "Tasks (one per line)",
+            height=200,
+            placeholder="""Navigate to Objects and count interfaces
+Click Analyze on the first object
+Extract the interface name and status
+Go to dashboard and check system status""",
+            help="Each line will be executed as a separate task in order"
+        )
+        
+        # Parse tasks
+        batch_tasks = [t.strip() for t in batch_tasks_text.split('\n') if t.strip()]
+        
+        if batch_tasks:
+            st.info(f"📋 {len(batch_tasks)} tasks ready to execute")
+        
+        # Execute batch
+        if st.button("▶️ Run Batch", type="primary", disabled=not batch_tasks, use_container_width=True):
+        st.markdown("---")
+            st.markdown("### 🤖 Executing Batch...")
+            
+            progress_bar = st.progress(0, text="Starting batch execution...")
+            
+            try:
+                # Execute batch
+                result = _run_async(
+                    st.session_state.browser_engine.execute_batch(batch_tasks)
+                )
+                
+                progress_bar.progress(100, text="Batch completed!")
+                
+                # Display summary
+                if result["status"] == "completed":
+                    st.success(f"✅ Batch completed: {result['successful']}/{result['total_tasks']} successful")
+                    st.info(f"⏱️ Total duration: {result['total_duration_seconds']:.1f}s")
+                    
+                    # Display each result
+                    st.markdown("### 📊 Results")
+                    
+                    for task_result in result["results"]:
+                        task_num = task_result["task_number"]
+                        task_text = task_result["task"]
+                        task_output = task_result["result"]
+                        
+                        with st.expander(f"Task {task_num}: {task_text[:60]}..."):
+                            if task_output["status"] == "success":
+                                st.success(f"✅ Success ({task_output['duration_seconds']:.1f}s)")
+                                st.markdown(task_output["result"])
+                            else:
+                                st.error(f"❌ Failed")
+                                st.error(task_output.get("error", "Unknown error"))
+                    
+                    # Save to history
+                    st.session_state.task_history.append({
+                        "timestamp": datetime.now().isoformat(),
+                        "type": "batch",
+                        "tasks": batch_tasks,
+                        "results": result,
+                        "duration": result["total_duration_seconds"]
+                    })
+                
+                else:
+                    st.error(f"❌ Batch failed")
+                    st.error(result.get("error", "Unknown error"))
+            
+            except Exception as e:
+                st.error(f"❌ Error: {str(e)}")
+                st.code(traceback.format_exc())
+    
+    # ==================== TAB 3: History ====================
+    with tab3:
+        st.markdown("### 📊 Task History")
+        
+        if not st.session_state.task_history:
+            st.info("No tasks executed yet. Use Interactive Q&A or Batch Processing to get started!")
+        else:
+            # Show recent tasks
+            st.markdown(f"**Total tasks:** {len(st.session_state.task_history)}")
+            
+            for i, entry in enumerate(reversed(st.session_state.task_history[-10:])):
+                with st.expander(f"{entry['type'].title()} - {entry['timestamp'][:19]}"):
+                    if entry['type'] == 'interactive':
+                        st.markdown(f"**Task:** {entry['task']}")
+                        st.markdown(f"**Duration:** {entry['duration']:.1f}s")
+                        st.markdown("**Result:**")
+                        st.markdown(entry['result'][:500] + "..." if len(entry['result']) > 500 else entry['result'])
+                    else:  # batch
+                        st.markdown(f"**Tasks:** {len(entry['tasks'])}")
+                        st.markdown(f"**Duration:** {entry['duration']:.1f}s")
+                        st.markdown(f"**Success Rate:** {entry['results']['successful']}/{entry['results']['total_tasks']}")
+            
+            # Export history
+            if st.button("💾 Export History as JSON"):
+                json_str = json.dumps(st.session_state.task_history, indent=2)
+                st.download_button(
+                    label="Download JSON",
+                    data=json_str,
+                    file_name=f"browser_automation_history_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                    mime="application/json"
+                )
+
+
+# Cleanup on app shutdown
+import atexit
+
+def cleanup_browser():
+    """Clean up browser on app shutdown."""
+    if 'browser_engine' in st.session_state and st.session_state.browser_engine:
+        try:
+            asyncio.run(st.session_state.browser_engine.close())
+        except:
+            pass
+
+atexit.register(cleanup_browser)

@@ -13,6 +13,120 @@ This implementation focuses on system/interface relationships:
 from typing import Any, Dict, List, Tuple
 import os
 
+def _chunked_llm_synthesis(query: str, all_interfaces: List[str], total_count: int, 
+                          seeds: List[str], is_neighborhood: bool, llm_model: str, 
+                          llm_manager, debug_info: List[str]) -> str:
+    """
+    Process large result sets in chunks to avoid token limits.
+    Similar to analyze_response_chunked in app.py
+    """
+    # Calculate chunk size based on total count
+    if total_count > 200:
+        chunk_size = max(50, min(100, total_count // 10))  # Larger chunks for big datasets
+    else:
+        chunk_size = max(20, min(50, total_count // 5))  # Smaller chunks
+    
+    chunk_summaries = []
+    
+    # Process each chunk
+    for i in range(0, total_count, chunk_size):
+        chunk = all_interfaces[i:i + chunk_size]
+        chunk_end = min(i + chunk_size, total_count)
+        
+        debug_info.append(f"  • Processing chunk {len(chunk_summaries)+1}: interfaces {i+1}-{chunk_end}")
+        
+        chunk_prompt = f"""Analyze this chunk of Neo4j graph interfaces (items {i+1}-{chunk_end} of {total_count}).
+
+USER QUESTION: {query}
+
+CHUNK INTERFACES:
+{chr(10).join([f"  • {iface}" for iface in chunk])}
+
+Provide a brief summary of this chunk including:
+- Key interfaces that match the user's question
+- Common patterns or types
+- Notable systems or connections
+
+Keep the summary concise but informative."""
+
+        try:
+            chunk_summary = llm_manager.generate_response(
+                model_name=llm_model,
+                system_prompt="You are analyzing a chunk of graph database results. Be concise but thorough.",
+                user_prompt=chunk_prompt,
+                temperature=0.1,
+                max_tokens=1024
+            )
+            chunk_summaries.append(f"**Chunk {len(chunk_summaries)+1} (Interfaces {i+1}-{chunk_end}):**\n{chunk_summary}")
+        except Exception as e:
+            chunk_summaries.append(f"**Chunk {len(chunk_summaries)+1}:** Error: {str(e)}")
+            debug_info.append(f"  • Chunk {len(chunk_summaries)} failed: {str(e)}")
+    
+    # Hierarchical summarization for very large result sets
+    if len(chunk_summaries) > 10:
+        debug_info.append(f"  • Using hierarchical summarization for {len(chunk_summaries)} chunks")
+        group_size = 5
+        grouped_summaries = []
+        
+        for i in range(0, len(chunk_summaries), group_size):
+            group = chunk_summaries[i:i + group_size]
+            group_prompt = f"""Summarize these {len(group)} chunk summaries from a Neo4j graph analysis:
+
+{chr(10).join(group)}
+
+Provide a concise summary of the key findings from these chunks."""
+
+            try:
+                group_summary = llm_manager.generate_response(
+                    model_name=llm_model,
+                    system_prompt="You are summarizing a group of chunk summaries.",
+                    user_prompt=group_prompt,
+                    temperature=0.1,
+                    max_tokens=512
+                )
+                grouped_summaries.append(f"**Group {len(grouped_summaries)+1}:** {group_summary}")
+            except Exception as e:
+                grouped_summaries.append(f"**Group {len(grouped_summaries)+1}:** Error: {str(e)}")
+        
+        final_summaries = grouped_summaries
+    else:
+        final_summaries = chunk_summaries
+    
+    # Create final synthesis from summaries
+    final_prompt = f"""Based on these summaries from a Neo4j graph analysis, provide a comprehensive answer to the user's question.
+
+USER QUESTION: {query}
+
+SEARCH METHOD: {"Relationship-based (k-hop neighborhood)" if is_neighborhood else "Name-based search"}
+SEEDS IDENTIFIED: {', '.join(seeds)}
+TOTAL INTERFACES ANALYZED: {total_count}
+
+SUMMARIES:
+{chr(10).join(final_summaries)}
+
+Please provide:
+1. A direct answer to the user's question
+2. Overall statistics and key insights
+3. Summary of important patterns across all interfaces
+4. Notable findings or recommendations
+
+Format your response clearly and mention that this analysis covers {total_count} interfaces."""
+
+    try:
+        final_summary = llm_manager.generate_response(
+            model_name=llm_model,
+            system_prompt="You are providing a final comprehensive analysis based on summaries from graph database results.",
+            user_prompt=final_prompt,
+            temperature=0.1,
+            max_tokens=2048
+        )
+        return final_summary or "No analysis available"
+    except Exception as e:
+        debug_info.append(f"  • Final synthesis failed: {str(e)}")
+        # Return chunk summaries if final fails
+        return "\n\n".join(chunk_summaries)
+
+
 def _extract_names_from_query(q: str) -> List[str]:
     # Enhanced heuristic: extract system names from queries
     import re
@@ -233,12 +347,12 @@ def run(query: str, data: List[Dict[str, Any]] | None = None, max_hops: int = 2,
                         continue
                         
                     # Use toString() to safely handle non-string type values
+                    # No LIMIT - return ALL matching interfaces
                     cypher = """
                     MATCH (i:Interface) 
                     WHERE toLower(i.name) CONTAINS toLower($seed) 
                        OR (i.type IS NOT NULL AND toLower(toString(i.type)) CONTAINS toLower($seed))
                     RETURN DISTINCT i.name as name, i.type as type, labels(i) as labels
-                    LIMIT 30
                     """
                     results = store.run_tx(cypher, seed=seed)
                     fallback_results.extend(results)
@@ -258,8 +372,8 @@ def run(query: str, data: List[Dict[str, Any]] | None = None, max_hops: int = 2,
                 if unique_results:
                     summary_lines.append(f"🔍 **Found {len(unique_results)} related interfaces (by name):**")
                     summary_lines.append("")
-                    # Show up to 20 results instead of just 10
-                    for result in unique_results[:20]:
+                    # Show ALL results (no limit)
+                    for result in unique_results:
                         name = result.get('name', 'Unknown')
                         interface_type = result.get('type', 'Unknown')
                         summary_lines.append(f"  • {name} ({interface_type})")
@@ -297,16 +411,26 @@ def run(query: str, data: List[Dict[str, Any]] | None = None, max_hops: int = 2,
                     all_found_interfaces = [f"{r.get('name', 'Unknown')} (type: {r.get('type', 'Unknown')})" for r in unique_results]
                     total_count = len(unique_results)
                 
-                # Create a synthesis prompt with ALL available data (not limited)
-                synthesis_prompt = f"""Based on the complete graph analysis results, provide a comprehensive and natural answer to the user's question.
+                # Smart chunking for large result sets (similar to DuckDB method)
+                if total_count > 50:
+                    # Use chunked analysis for large result sets
+                    debug_info.append(f"  • Using chunked LLM analysis for {total_count} results")
+                    llm_response = _chunked_llm_synthesis(
+                        query, all_found_interfaces, total_count, seeds, 
+                        neighborhood_lines, llm_model, llm_manager, debug_info
+                    )
+                else:
+                    # Direct synthesis for small result sets
+                    debug_info.append(f"  • Using direct LLM synthesis for {total_count} results")
+                    synthesis_prompt = f"""Based on the complete graph analysis results, provide a comprehensive and natural answer to the user's question.
 
 User Question: {query}
 
 Complete Graph Analysis Results:
 - Search method: {"Relationship-based (k-hop neighborhood)" if neighborhood_lines else "Name-based search (fallback)"}
-- Found {total_count} related interfaces
+- Found {total_count} related interfaces in total
 - Seeds identified: {', '.join(seeds)}
-- All found interfaces: {', '.join(all_found_interfaces[:50])}  # Limit to first 50 for context
+- All interfaces: {', '.join(all_found_interfaces)}
 
 Please provide a clear, well-structured answer that:
 1. Confirms the interfaces were found
@@ -314,12 +438,12 @@ Please provide a clear, well-structured answer that:
 3. Highlights any notable patterns
 4. Answers the user's specific question"""
 
-                # Use the selected LLM model to generate response
-                llm_response = llm_manager.generate_response(
-                    model_name=llm_model,
-                    system_prompt="You are an expert in system integration and API analysis. Provide clear, helpful answers based on graph analysis results.",
-                    user_prompt=synthesis_prompt
-                )
+                    # Use the selected LLM model to generate response
+                    llm_response = llm_manager.generate_response(
+                        model_name=llm_model,
+                        system_prompt="You are an expert in system integration and API analysis. Provide clear, helpful answers based on graph analysis results.",
+                        user_prompt=synthesis_prompt
+                    )
                 
                 # Combine raw results and LLM response with clear headings
                 combined_response = f"""## 🔍 Neo4j Query Results

@@ -517,7 +517,7 @@ class LLMProviderManager:
                 response = requests.post(
                     f"{base_url}/api/generate",
                     json=payload,
-                    timeout=300  # 5 minute timeout for local models
+                    timeout=600  # 10 minute timeout for large local models
                 )
                 response.raise_for_status()
                 result = response.json()
@@ -544,8 +544,10 @@ class LLMProviderManager:
                 raise Exception(f"Model {model_name} not found or unavailable.")
             elif is_local_provider:
                 # Specific error handling for local Ollama models
-                if "connection" in error_msg.lower() or "refused" in error_msg.lower():
-                    raise Exception(f"Cannot connect to Ollama at localhost:11434. Make sure Ollama is running and the model '{model_name}' is available.")
+                if "timeout" in error_msg.lower() or "timed out" in error_msg.lower():
+                    raise Exception(f"Ollama request timed out for {model_name}. The model may be processing or overloaded. Try a smaller model or check Ollama logs. (Actual error: {error_msg})")
+                elif "connection" in error_msg.lower() or "refused" in error_msg.lower():
+                    raise Exception(f"Cannot connect to Ollama at localhost:11434. Make sure Ollama is running and accessible from this machine. Check if Ollama is on a different machine or port. (Actual error: {error_msg})")
                 elif "model" in error_msg.lower() and "not found" in error_msg.lower():
                     raise Exception(f"Model '{model_name}' not found in Ollama. Run: ollama pull {model_name}")
                 else:

@@ -1333,10 +1333,81 @@ def chat_page():
     
     # Data Source Selector
     with st.expander("Data Source", expanded=False):
-        source = st.radio("Select data source", ["API", "Local JSON File", "Local Engine (DuckDB)", "Neo4j Graph"], index=0)
+        source = st.radio("Select data source", ["API", "Local JSON File", "Local Engine (DuckDB)", "Neo4j Graph", "Browser Automation"], index=0)
         local_file = ""
         duckdb_path = ""
-        if source == "Local JSON File":
+        
+        # Browser Automation Settings
+        if source == "Browser Automation":
+            st.info("🌐 Browser Automation: AI-powered web navigation and data extraction")
+            st.markdown("**Perfect for:** Interacting with WHINT dashboard, extracting data from web pages")
+            st.markdown("**Note:** This will open a visible browser window (for testing)")
+            
+            # Get available models dynamically (same as main sidebar)
+            available_models_dict = st.session_state.llm_manager.get_available_models(show_all=True)
+            available_model_names = list(available_models_dict.keys())
+            
+            # Add local Ollama models
+            try:
+                ollama_models_local = get_local_ollama_models()
+                for ollama_model in ollama_models_local:
+                    if ollama_model not in available_model_names:
+                        available_model_names.append(ollama_model)
+            except:
+                pass
+            
+            # Add "None" for fallback
+            fallback_model_options = available_model_names + ["None"]
+            
+            with st.form("browser_config_form"):
+                col1, col2 = st.columns(2)
+                with col1:
+                    browser_username = st.text_input("Microsoft Username", value="", placeholder="user@company.com", help="Microsoft login credentials")
+                    browser_primary_model = st.selectbox(
+                        "Primary Model",
+                        available_model_names,
+                        index=0 if len(available_model_names) > 0 else 0,
+                        help="Select any available model"
+                    )
+                with col2:
+                    browser_password = st.text_input("Microsoft Password", value="", type="password", help="Microsoft password")
+                    browser_fallback_model_raw = st.selectbox(
+                        "Fallback Model",
+                        fallback_model_options,
+                        index=1 if len(fallback_model_options) > 1 else 0,
+                        help="Backup model if primary fails"
+                    )
+                    browser_fallback_model = None if browser_fallback_model_raw == "None" else browser_fallback_model_raw
+                
+                browser_whint_url = st.text_input("WHINT URL", value="https://whintic-test.cfapps.eu10.hana.ondemand.com/")
+                browser_headless = st.checkbox("Headless mode (hidden browser)", value=False)
+                
+                submitted = st.form_submit_button("💾 Save Browser Settings")
+                if submitted:
+                    st.session_state.browser_settings_saved = {
+                        "username": browser_username,
+                        "password": browser_password,
+                        "whint_url": browser_whint_url,
+                        "primary_model": browser_primary_model,
+                        "fallback_model": browser_fallback_model,
+                        "headless": browser_headless
+                    }
+                    st.success("✅ Browser automation settings saved!")
+            
+            # Show example queries
+            with st.expander("💡 Example Browser Automation Queries", expanded=False):
+                st.markdown("""
+                **Dashboard Queries:**
+                - "Navigate to Objects and count how many interfaces are listed"
+                - "Go to the dashboard and tell me the system status"
+                - "Click Analyze on the first object and summarize findings"
+                - "Find the most recent interface and extract its details"
+                - "Navigate to Reports and extract the summary statistics"
+                
+                **Note:** Make sure to click 'Save Browser Settings' before asking questions.
+                """)
+        
+        elif source == "Local JSON File":
             default_local = str(Path("23-09-2025.json").resolve())
             local_file = st.text_input("Local JSON path", value=default_local, help="Path to large JSON file to query")
         elif source == "Local Engine (DuckDB)":
@@ -1760,6 +1831,8 @@ def chat_page():
                     data_source_type = "duckdb"
                 elif source == "Neo4j Graph":
                     data_source_type = "neo4j"
+                elif source == "Browser Automation":
+                    data_source_type = "browser_automation"
                 else:  # API
                     data_source_type = "api"
                 
@@ -1792,8 +1865,153 @@ def chat_page():
                         "enabled_methods": routing_info["enabled_methods"]
                     })
                 
+                # Handle browser_automation method
+                if method_name == "browser_automation":
+                    st.info("🌐 Using Browser Automation for web interaction...")
+                    
+                    # Check if browser settings are saved
+                    if 'browser_settings_saved' not in st.session_state:
+                        st.error("❌ Please configure Browser Automation settings in the Data Source section first!")
+                        return
+                    
+                    browser_settings = st.session_state.browser_settings_saved
+                    
+                    if not browser_settings.get('username') or not browser_settings.get('password'):
+                        st.error("❌ Please provide Microsoft credentials in Browser Automation settings!")
+                        return
+                    
+                    start_time = datetime.now()
+                    try:
+                        from methods.browser_automation import BrowserAutomationEngine
+                        import asyncio
+                        
+                        # Create browser engine
+                        engine = BrowserAutomationEngine(
+                            primary_model=browser_settings.get('primary_model', 'gemini-2.0-flash-exp'),
+                            fallback_model=browser_settings.get('fallback_model', 'gpt-4o-mini'),
+                            headless=browser_settings.get('headless', False),
+                            whint_url=browser_settings.get('whint_url', 'https://whintic-test.cfapps.eu10.hana.ondemand.com/'),
+                            auto_login=True,
+                            username=browser_settings['username'],
+                            password=browser_settings['password']
+                        )
+                        
+                        # Run async task
+                        async def run_browser_task():
+                            try:
+                                # Initialize browser
+                                init_result = await engine.initialize_browser()
+                                if init_result["status"] != "initialized":
+                                    return {"status": "error", "error": f"Browser initialization failed: {init_result.get('error')}"}
+                                
+                                # Execute task
+                                result = await engine.execute_task(user_question)
+                                
+                                # Close browser
+                                await engine.close()
+                                
+                                return result
+                            except Exception as e:
+                                await engine.close()
+                                raise e
+                        
+                        # Execute with proper event loop (Windows needs ProactorEventLoop for subprocess)
+                        import sys
+                        import platform
+                        
+                        if platform.system() == 'Windows':
+                            asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+                        
+                        # Get or create event loop
+                        try:
+                            loop = asyncio.get_event_loop()
+                            if loop.is_closed():
+                                loop = asyncio.new_event_loop()
+                                asyncio.set_event_loop(loop)
+                        except RuntimeError:
+                            loop = asyncio.new_event_loop()
+                            asyncio.set_event_loop(loop)
+                        
+                        result = loop.run_until_complete(run_browser_task())
+                        
+                        execution_time = (datetime.now() - start_time).total_seconds() * 1000
+                        
+                        if result["status"] == "success":
+                            # Show success response
+                            st.success(f"✅ Browser automation completed in {execution_time/1000:.1f}s")
+                            
+                            with st.expander("🌐 Browser Automation Details", expanded=False):
+                                st.markdown(f"**Model Used:** {browser_settings['primary_model']}")
+                                st.markdown(f"**Duration:** {result.get('duration_seconds', 0):.1f}s")
+                                st.markdown(f"**Auto-Login:** ✅ Success")
+                            
+                            # Display result
+                            st.markdown("### 📊 Result")
+                            st.markdown(result["result"])
+                            
+                            # Log response
+                            st.session_state.response_logger.log_response(
+                                question=user_question,
+                                answer=result["result"],
+                                status="success",
+                                method_used="browser_automation",
+                                model_used=browser_settings['primary_model'],
+                                data_source="browser_automation",
+                                intent="web_interaction",
+                                execution_time_ms=execution_time,
+                                metadata={
+                                    "whint_url": browser_settings['whint_url'],
+                                    "headless": browser_settings['headless']
+                                }
+                            )
+                            
+                            # Save result
+                            st.session_state.result_saver.save_result(
+                                question=user_question,
+                                answer=result["result"],
+                                method="browser_automation",
+                                model=browser_settings['primary_model'],
+                                data_source="browser_automation",
+                                metadata={
+                                    "execution_time_ms": execution_time,
+                                    "duration_seconds": result.get("duration_seconds", 0)
+                                }
+                            )
+                        
+                        else:
+                            st.error(f"❌ Browser automation failed")
+                            st.error(result.get("error", "Unknown error"))
+                            
+                            # Log error
+                            st.session_state.response_logger.log_response(
+                                question=user_question,
+                                answer="",
+                                status="error",
+                                method_used="browser_automation",
+                                model_used=browser_settings['primary_model'],
+                                data_source="browser_automation",
+                                error_message=result.get("error", "Unknown error"),
+                                execution_time_ms=execution_time
+                            )
+                    
+                    except Exception as e:
+                        execution_time = (datetime.now() - start_time).total_seconds() * 1000
+                        st.error(f"❌ Browser automation error: {str(e)}")
+                        
+                        # Log error
+                        st.session_state.response_logger.log_response(
+                            question=user_question,
+                            answer="",
+                            status="error",
+                            method_used="browser_automation",
+                            model_used=browser_settings.get('primary_model', 'unknown'),
+                            data_source="browser_automation",
+                            error_message=str(e),
+                            execution_time_ms=execution_time
+                        )
+                
                 # Handle graph_rag method (Neo4j only)
-                if method_name == "graph_rag":
+                elif method_name == "graph_rag":
                     st.info("🕸️ Using Graph RAG for Neo4j relationship analysis...")
                     start_time = datetime.now()
                     try:

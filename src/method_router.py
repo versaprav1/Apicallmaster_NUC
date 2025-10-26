@@ -63,6 +63,7 @@ class MethodRouter:
             - local_json: Always use vector_rag (simple vector search)
             - duckdb: Always use db_lookup (direct SQL queries)
             - neo4j: Always use graph_rag (graph relationships)
+            - browser_automation: Always use browser_automation (web automation)
             - api: Use intent-based routing with priority
         """
         
@@ -75,6 +76,9 @@ class MethodRouter:
         
         elif data_source == "neo4j":
             return 'graph_rag'
+        
+        elif data_source == "browser_automation":
+            return 'browser_automation'
         
         # API mode: use intent-based routing
         # Only use graph_rag if explicitly required by intent
@@ -97,7 +101,19 @@ class MethodRouter:
             "intent": intent
         }
         
-        if method_name == 'graph_rag':
+        if method_name == 'browser_automation':
+            base_params.update({
+                "task": intent.get('original_query', ''),
+                "primary_model": kwargs.get('primary_model', 'gemini-2.0-flash-exp'),
+                "fallback_model": kwargs.get('fallback_model', 'gpt-4o-mini'),
+                "username": kwargs.get('username'),
+                "password": kwargs.get('password'),
+                "whint_url": kwargs.get('whint_url', 'https://whintic-test.cfapps.eu10.hana.ondemand.com/'),
+                "headless": kwargs.get('headless', False),
+                "auto_login": kwargs.get('auto_login', True)
+            })
+        
+        elif method_name == 'graph_rag':
             return {
                 **base_params,
                 "max_hops": self.graph_max_hops,
