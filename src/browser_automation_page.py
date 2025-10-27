@@ -76,23 +76,44 @@ def browser_automation_page():
         headless = not st.checkbox("Show browser window", value=True)
         whint_url = st.text_input("WHINT URL", value="https://whintic-test.cfapps.eu10.hana.ondemand.com/")
         
-        # Session Management (Storage State)
-        st.markdown("**Session Management**")
+        # Login Settings
+        st.markdown("**Login Settings**")
+        
+        from pathlib import Path
         storage_state_file = st.text_input(
             "Session file", 
             value="whint_session.json",
             help="Cookie file to save/load your login session"
         )
         
-        from pathlib import Path
-        if Path(storage_state_file).exists():
-            st.success("✅ Saved session found - you should already be logged in!")
+        has_saved_session = Path(storage_state_file).exists()
+        
+        if has_saved_session:
+            st.success("✅ Saved session found")
+            st.caption("Will use saved cookies - no login needed!")
             if st.button("🗑️ Clear saved session", help="Delete saved cookies to login fresh"):
                 Path(storage_state_file).unlink()
                 st.success("Session cleared! Refresh to see changes.")
                 st.rerun()
         else:
-            st.info("ℹ️ First time: You'll login manually and session will be saved")
+            st.info("ℹ️ First time: Agent will login for you")
+            
+            # Username and password inputs
+            username = st.text_input(
+                "Username/Email",
+                value="",
+                placeholder="your-email@example.com",
+                help="Login username or email"
+            )
+            password = st.text_input(
+                "Password",
+                type="password",
+                value="",
+                placeholder="Your password",
+                help="Login password (not saved, only used once)"
+            )
+            
+            st.caption("⚠️ Agent can handle simple login forms. For 2FA/CAPTCHA, you may need to intervene manually.")
         
         st.markdown("---")
         
@@ -101,6 +122,12 @@ def browser_automation_page():
         
         with col1:
             if st.button("🚀 Start", disabled=st.session_state.browser_active, use_container_width=True):
+                # Check if we need credentials (first time, no saved session)
+                if not has_saved_session:
+                    if not username or not password:
+                        st.error("❌ Please enter username and password (first time login)")
+                        st.stop()
+                
                 with st.spinner("Starting browser..."):
                     try:
                         engine = BrowserAutomationEngine(
@@ -111,33 +138,56 @@ def browser_automation_page():
                             storage_state_file=storage_state_file
                         )
                         
-                        # Initialize browser
-                        result = _run_async(engine.initialize_browser())
+                        st.session_state.browser_engine = engine
+                        st.session_state.browser_active = True
                         
-                        if result["status"] == "initialized":
-                            st.session_state.browser_engine = engine
-                            st.session_state.browser_active = True
-                            
-                            # Navigate to WHINT (Streamlit-friendly - no input() wait)
-                            async def navigate_to_whint():
-                                page = await engine.browser_session.get_current_page()
-                                await page.goto(engine.whint_url)
-                                return {"status": "navigated"}
-                            
-                            nav_result = _run_async(navigate_to_whint())
-                            
-                            if nav_result["status"] == "navigated":
-                                if result.get("has_saved_session"):
-                                    st.success("✅ Browser started! Using saved session - you should be logged in.")
+                        # Decide: Auto-login with Agent OR use saved session
+                        if has_saved_session:
+                            # Use saved session (fast!)
+                            with st.spinner("Loading saved session..."):
+                                result = _run_async(engine.initialize_browser(use_saved_session=True))
+                                
+                                if result["status"] == "initialized":
+                                    # Navigate to WHINT
+                                    async def navigate_to_whint():
+                                        page = await engine.browser_session.get_current_page()
+                                        await page.goto(engine.whint_url)
+                                        return {"status": "navigated"}
+                                    
+                                    nav_result = _run_async(navigate_to_whint())
+                                    
+                                    if nav_result["status"] == "navigated":
+                                        st.success("✅ Browser started with saved session!")
+                                        st.rerun()
+                                    else:
+                                        st.error("❌ Navigation failed")
                                 else:
-                                    st.warning("⏸️ Browser started! Please login manually in the browser window, then use the task panel below.")
-                                st.rerun()
-                            else:
-                                st.error("❌ Navigation failed")
+                                    st.error(f"❌ Failed: {result.get('error', 'Unknown')}")
                         else:
-                            st.error(f"❌ Failed: {result.get('error', 'Unknown')}")
+                            # First time: Agent handles login
+                            with st.spinner("🤖 Agent is logging in... (watch the browser)"):
+                                result = _run_async(engine.auto_login_with_agent(
+                                    username=username,
+                                    password=password,
+                                    url=whint_url,
+                                    save_session=True
+                                ))
+                                
+                                if result["status"] == "success":
+                                    st.success("✅ Agent logged in successfully!")
+                                    st.info(f"Session saved! Next time, no login needed.")
+                                    st.rerun()
+                                elif "CAPTCHA" in result.get("error", "") or "2FA" in result.get("error", ""):
+                                    st.warning("⚠️ Agent encountered CAPTCHA or 2FA. Please complete it in the browser.")
+                                    st.info("After completing, click 'Save Session' in sidebar to save your login.")
+                                else:
+                                    st.error(f"❌ Login failed: {result.get('error', 'Unknown')}")
+                                    st.error("Try again or use manual login if needed.")
+                    
                     except Exception as e:
                         st.error(f"❌ Error: {str(e)}")
+                        st.session_state.browser_active = False
+                        st.session_state.browser_engine = None
         
         with col2:
             if st.button("🛑 Stop", disabled=not st.session_state.browser_active, use_container_width=True):

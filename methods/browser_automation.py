@@ -87,10 +87,13 @@ class BrowserAutomationEngine:
             else:
                 raise Exception(f"Primary model failed and no fallback: {e}")
     
-    async def initialize_browser(self) -> Dict[str, Any]:
+    async def initialize_browser(self, use_saved_session: bool = True) -> Dict[str, Any]:
         """
-        Initialize browser with storage state (cookie-based persistence).
-        Fast startup, no profile lock issues.
+        Initialize browser with optional storage state.
+        
+        Args:
+            use_saved_session: If True, load saved cookies (default). 
+                             If False, start fresh (needed for auto-login to avoid timeout)
         """
         try:
             from browser_use.browser import BrowserSession, BrowserProfile
@@ -99,15 +102,14 @@ class BrowserAutomationEngine:
             self.current_llm = self._get_llm_with_fallback()
             
             # Check if we have saved session
-            has_saved_session = self.storage_state_file and self.storage_state_file.exists()
+            has_saved_session = use_saved_session and self.storage_state_file and self.storage_state_file.exists()
             
             print("\n" + "="*70)
             if has_saved_session:
                 print(f"Found saved session: {self.storage_state_file}")
                 print("Loading cookies... (you should already be logged in!)")
             else:
-                print("No saved session found")
-                print("You'll need to login manually this first time")
+                print("Starting fresh browser session")
             print("="*70 + "\n")
             
             # Anti-bot detection arguments
@@ -118,7 +120,7 @@ class BrowserAutomationEngine:
                 '--no-default-browser-check',
             ]
             
-            # Create browser profile with storage state
+            # Create browser profile (with or without storage state)
             browser_profile = BrowserProfile(
                 headless=self.headless,
                 disable_security=False,
@@ -127,7 +129,7 @@ class BrowserAutomationEngine:
                 storage_state=str(self.storage_state_file) if has_saved_session else None
             )
             
-            print("Starting browser... (fast startup with storage state)")
+            print("Starting browser...")
             self.browser_session = BrowserSession(browser_profile=browser_profile)
             
             await self.browser_session.start()
@@ -240,6 +242,142 @@ class BrowserAutomationEngine:
                 "traceback": traceback.format_exc()
             }
     
+    async def auto_login_with_agent(
+        self,
+        username: str,
+        password: str,
+        url: Optional[str] = None,
+        save_session: bool = True
+    ) -> Dict[str, Any]:
+        """
+        Automatic login using Agent (AI model handles everything).
+        
+        This approach:
+        - Starts browser WITHOUT storage state (avoids timeout)
+        - Uses Agent to navigate and login automatically
+        - Handles simple login forms (username/password)
+        - Saves session after successful login
+        - For 2FA/MFA/CAPTCHA, use navigate_and_wait_for_manual_login instead
+        
+        Args:
+            username: Login username/email
+            password: Login password
+            url: URL to navigate to (default: WHINT URL)
+            save_session: Save session after login (default: True)
+        
+        Returns:
+            Dict with status and details
+        """
+        try:
+            from browser_use import Agent
+            
+            if url is None:
+                url = self.whint_url
+            
+            # Initialize browser WITHOUT storage state to avoid timeout
+            if not self.browser_session:
+                init_result = await self.initialize_browser(use_saved_session=False)
+                if init_result["status"] == "error":
+                    return init_result
+            
+            print(f"\n🤖 Agent will now handle login to: {url}")
+            print(f"   Username: {username}")
+            print(f"   Password: {'*' * len(password)}")
+            print("\nWatch the browser - the AI is working...\n")
+            
+            # Build the login task for the Agent
+            login_task = f"""
+Navigate to {url} and login with these credentials:
+- Username/Email: {username}
+- Password: {password}
+
+Steps:
+1. Go to the login page
+2. If you see Single-Sign-On (Microsoft/SAP), click the appropriate button
+3. Find the username/email input field and enter: {username}
+4. Click Next (if needed)
+5. Find the password input field and enter: {password}
+6. Click Sign In / Login button
+7. Wait 5 seconds for page to load
+8. Check the URL - if it contains "whint" or shows a dashboard, you're done!
+9. Use the 'done' action to finish
+
+Important:
+- If you see a CAPTCHA or 2FA prompt, STOP and report it using 'done' with success=False
+- If you see the WHINT dashboard or the URL changes to the main app, use 'done' with success=True
+- If you're stuck on the same page after entering credentials, use 'done' with success=False
+- Maximum 15 steps - if not done by then, report failure
+"""
+            
+            # Create and run the agent with max steps limit
+            agent = Agent(
+                task=login_task,
+                llm=self.current_llm,
+                browser_session=self.browser_session,
+                max_steps=15  # Prevent infinite loops
+            )
+            
+            start_time = datetime.now()
+            result = await agent.run()
+            duration = (datetime.now() - start_time).total_seconds()
+            
+            print(f"\n✅ Agent completed in {duration:.1f} seconds")
+            print(f"   Result: {result}\n")
+            
+            # Check if we're actually on the dashboard (regardless of Agent's reported success)
+            page = await self.browser_session.get_current_page()
+            current_url = page.url
+            
+            print(f"🔍 Current URL: {current_url}")
+            
+            # Check if login succeeded by looking at URL
+            is_on_dashboard = (
+                "whint" in current_url.lower() and 
+                "login" not in current_url.lower() and
+                "microsoft.com" not in current_url.lower()
+            )
+            
+            if is_on_dashboard:
+                print("✅ Detected WHINT dashboard - login successful!")
+                
+                # Save session if requested
+                if save_session and self.storage_state_file:
+                    print("💾 Saving session cookies...")
+                    context = page.context
+                    storage_state = await context.storage_state()
+                    
+                    with open(self.storage_state_file, 'w') as f:
+                        json.dump(storage_state, f, indent=2)
+                    
+                    print(f"✅ Session saved to {self.storage_state_file}")
+                    print("   Next time you run this, you'll already be logged in!\n")
+                
+                self.is_logged_in = True
+                
+                return {
+                    "status": "success",
+                    "message": "Login successful - dashboard detected",
+                    "agent_result": str(result),
+                    "duration_seconds": duration,
+                    "url": current_url,
+                    "session_saved": save_session
+                }
+            else:
+                print(f"⚠️ Not on dashboard yet. Current URL: {current_url}")
+                return {
+                    "status": "error",
+                    "error": f"Login may have failed - still on: {current_url}",
+                    "agent_result": str(result),
+                    "duration_seconds": duration
+                }
+        
+        except Exception as e:
+            return {
+                "status": "error",
+                "error": str(e),
+                "traceback": traceback.format_exc()
+            }
+    
     async def execute_task(
         self,
         task: str,
@@ -306,7 +444,8 @@ You are already logged into the WHINT dashboard.
         """Close browser session."""
         if self.browser_session:
             try:
-                await self.browser_session.close()
+                # BrowserSession uses stop() not close()
+                await self.browser_session.stop()
                 print("Browser session closed")
             except Exception as e:
                 print(f"Error closing browser: {str(e)}")
