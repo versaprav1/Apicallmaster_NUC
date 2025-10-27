@@ -74,11 +74,25 @@ def browser_automation_page():
         
         # Browser settings
         headless = not st.checkbox("Show browser window", value=True)
-        auto_login = st.checkbox("Auto-login on start", value=True)
-        
-        username = st.text_input("Microsoft Username", value="", placeholder="user@company.com")
-        password = st.text_input("Microsoft Password", value="", type="password")
         whint_url = st.text_input("WHINT URL", value="https://whintic-test.cfapps.eu10.hana.ondemand.com/")
+        
+        # Session Management (Storage State)
+        st.markdown("**Session Management**")
+        storage_state_file = st.text_input(
+            "Session file", 
+            value="whint_session.json",
+            help="Cookie file to save/load your login session"
+        )
+        
+        from pathlib import Path
+        if Path(storage_state_file).exists():
+            st.success("✅ Saved session found - you should already be logged in!")
+            if st.button("🗑️ Clear saved session", help="Delete saved cookies to login fresh"):
+                Path(storage_state_file).unlink()
+                st.success("Session cleared! Refresh to see changes.")
+                st.rerun()
+        else:
+            st.info("ℹ️ First time: You'll login manually and session will be saved")
         
         st.markdown("---")
         
@@ -87,31 +101,43 @@ def browser_automation_page():
         
         with col1:
             if st.button("🚀 Start", disabled=st.session_state.browser_active, use_container_width=True):
-                if not username or not password:
-                    st.error("❌ Enter credentials")
-                else:
-                    with st.spinner("Starting..."):
-                        try:
-                            engine = BrowserAutomationEngine(
-                                primary_model=primary_model,
-                                fallback_model=fallback_model,
-                                headless=headless,
-                                whint_url=whint_url,
-                                auto_login=auto_login,
-                                username=username,
-                                password=password
-                            )
-                            result = _run_async(engine.initialize_browser())
+                with st.spinner("Starting browser..."):
+                    try:
+                        engine = BrowserAutomationEngine(
+                            primary_model=primary_model,
+                            fallback_model=fallback_model,
+                            headless=headless,
+                            whint_url=whint_url,
+                            storage_state_file=storage_state_file
+                        )
+                        
+                        # Initialize browser
+                        result = _run_async(engine.initialize_browser())
+                        
+                        if result["status"] == "initialized":
+                            st.session_state.browser_engine = engine
+                            st.session_state.browser_active = True
                             
-                            if result["status"] == "initialized":
-                                st.session_state.browser_engine = engine
-                                st.session_state.browser_active = True
-                                st.success("✅ Started!")
+                            # Navigate to WHINT (Streamlit-friendly - no input() wait)
+                            async def navigate_to_whint():
+                                page = await engine.browser_session.get_current_page()
+                                await page.goto(engine.whint_url)
+                                return {"status": "navigated"}
+                            
+                            nav_result = _run_async(navigate_to_whint())
+                            
+                            if nav_result["status"] == "navigated":
+                                if result.get("has_saved_session"):
+                                    st.success("✅ Browser started! Using saved session - you should be logged in.")
+                                else:
+                                    st.warning("⏸️ Browser started! Please login manually in the browser window, then use the task panel below.")
                                 st.rerun()
                             else:
-                                st.error(f"❌ Failed: {result.get('error', 'Unknown')}")
-                        except Exception as e:
-                            st.error(f"❌ Error: {str(e)}")
+                                st.error("❌ Navigation failed")
+                        else:
+                            st.error(f"❌ Failed: {result.get('error', 'Unknown')}")
+                    except Exception as e:
+                        st.error(f"❌ Error: {str(e)}")
         
         with col2:
             if st.button("🛑 Stop", disabled=not st.session_state.browser_active, use_container_width=True):
@@ -125,9 +151,32 @@ def browser_automation_page():
                     except Exception as e:
                         st.error(f"❌ Error: {str(e)}")
         
-        # Status
+        # Status & Session Save
         if st.session_state.browser_active:
             st.success("🟢 Active")
+            
+            # Save session button (if not already saved)
+            if st.session_state.browser_engine:
+                storage_file = Path(st.session_state.browser_engine.storage_state_file)
+                if not storage_file.exists():
+                    if st.button("💾 Save Session", help="Save your login for next time"):
+                        try:
+                            async def save_session():
+                                engine = st.session_state.browser_engine
+                                page = await engine.browser_session.get_current_page()
+                                context = page.context
+                                storage_state = await context.storage_state()
+                                import json
+                                with open(storage_file, 'w') as f:
+                                    json.dump(storage_state, f, indent=2)
+                                return {"status": "saved"}
+                            
+                            result = _run_async(save_session())
+                            if result["status"] == "saved":
+                                st.success(f"✅ Session saved to {storage_file}!")
+                                st.rerun()
+                        except Exception as e:
+                            st.error(f"❌ Save failed: {str(e)}")
         else:
             st.warning("🔴 Inactive")
     
