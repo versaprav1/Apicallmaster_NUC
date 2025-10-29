@@ -1,0 +1,1461 @@
+{
+  "log_id": "34df9b805728830b",
+  "timestamp": "2025-10-28T15:26:53.118989",
+  "question": "List SAP Process Orchestration (PO) interfaces",
+  "answer": "### 1. Direct Answer to the User's Question:\nThe SAP Process Orchestration (PO) interfaces identified from the WHINT API data are primarily related to exchange rate data and order change processes. These interfaces involve internal and external communications within SAP systems, particularly focusing on the SAP Solution Manager as a central component. Key interface types include \"EXCHANGE_RATE\", \"ORDCHG\", \"RSINFO\", \"ALEAUD\", and \"TIMESHEETHRCONNECTOR_DATATRANS\".\n\n### 2. Overall Statistics and Key Insights:\n- **Total Items Processed**: 201\n- **Interface Types**: All items are of type `\"SAP_PO\"`, indicating they are SAP Process Orchestration interfaces.\n- **Common Interfaces**: The most frequently occurring interfaces are related to \"EXCHANGE_RATE\" and \"ORDCHG\".\n- **Directionality**: Interfaces are categorized as either \"IN\" or \"OUT\", indicating the flow of data.\n- **Sender/Receiver**: The \"SAP Solution Manager\" is frequently involved, either as a sender or receiver.\n\n### 3. Summary of Important Patterns Across All Data:\n- **Repetition**: There is a significant repetition of interface names, suggesting multiple instances or configurations of the same interface.\n- **Internal Communication**: Many interfaces involve internal communication within the SAP Solution Manager, indicating its central role in data processing.\n- **Lack of Descriptions**: All entries lack detailed descriptions, which limits the understanding of specific functionalities.\n- **External Data Integration**: Some interfaces, such as those involving \"EXCHANGE_RATE\", suggest integration with external data sources like \"ECB\" and \"OANDA\".\n\n### 4. Recommendations or Notable Findings:\n- **Data Enrichment**: The absence of descriptions and incomplete sender/receiver information suggests a need for data enrichment to provide better context and understanding of each interface's role.\n- **Standardization**: The repetition of interface configurations indicates a potential for standardization or optimization to reduce redundancy.\n- **Focus on Exchange Rates**: Given the prominence of \"EXCHANGE_RATE\" interfaces, ensuring accurate and timely data integration from external sources is crucial.\n- **Role of SAP Solution Manager**: The central role of the SAP Solution Manager in these interfaces highlights its importance in orchestrating data flows and managing processes within SAP systems.\n\nThis analysis was performed on 201 items, providing a comprehensive overview of the SAP PO interfaces as captured in the WHINT API data.",
+  "status": "success",
+  "method_used": "duckdb",
+  "model_used": "gpt-4o",
+  "data_source": "duckdb",
+  "intent": "analysis",
+  "requires_graph": false,
+  "query_type": null,
+  "graph_seeds": null,
+  "api_query": {
+    "query": {
+      "entity": "inventory",
+      "fields": [
+        "name",
+        "sender_name",
+        "receiver_name",
+        "description",
+        "type"
+      ],
+      "where": [
+        {
+          "option": 1,
+          "conditions": [
+            {
+              "field": {
+                "name": "type",
+                "eq": "SAP_PO"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "endpoint": "https://whint.prod.apimanagement.eu10.hana.ondemand.com:443/wic/interfaces",
+  "sql_query": "SELECT norm_name, norm_sender_name, norm_receiver_name, norm_description, norm_type FROM inventory_view WHERE (CAST(norm_type AS VARCHAR) = :param_0) ORDER BY norm_name ",
+  "response_data": {
+    "data": [
+      {
+        "name": "0000004711 | LI |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI | LF | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI | LF | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI | LF | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI | LF | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI | LF | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "0000004711 | LI | LF | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "B2B Supplier"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | ORDCHG | OUT | ORDERS05 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | ORDCHG | OUT | ORDERS05 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | ORDCHG | OUT | ORDERS05 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | ORDCHG | OUT | ORDERS05 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | ORDCHG | OUT | ORDERS05 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSRQST | OUT | RSREQUST | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSRQST | OUT | RSREQUST | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSRQST | OUT | RSREQUST | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSRQST | OUT | RSREQUST | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSRQST | OUT | RSREQUST | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSRQST | OUT | RSREQUST | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSSEND | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSSEND | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSSEND | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSSEND | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSSEND | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ALMCLNT001 | LS |  | RSSEND | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BITCOIN | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BITCOIN | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BITCOIN | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BITCOIN | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BITCOIN | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "BITCOIN | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE TST AKI | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE TST AKI | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE TST AKI | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | RSINFO | OUT | RSINFO | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI | ZW |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "CPI_EU | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_EU | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_EU | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_EU | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_EU | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_HIG | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_HIG | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_HIG | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_LOW | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_LOW | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_LOW | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_MED | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_MED | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_MED | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_VER | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_VER | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_FR_VER | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_DAI | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_DAI | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_DAI | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_MNTL | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_MNTL | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_MNTL | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_RNDM | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_RNDM | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_RNDM | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_WD | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_WD | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_WD | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_WKLY | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_WKLY | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "CPI_T_WKLY | LS |  | ORDCHG | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE MC1 MF1 | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE MC1 MF1 | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE MC1 MF1 | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE MC1 MF1 | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE MC1 MF1 | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE MC1 MF1 | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE MC2 MF2 | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE MC2 MF2 | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE MC2 MF2 | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "ECB | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "OANDA | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "OANDA | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "OANDA | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "OANDA | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "OANDA | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "OANDA | LS |  | EXCHANGE_RATE | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "REQUESTBIN | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "REQUESTBIN | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "REQUESTBIN | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "REQUESTBIN | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "REQUESTBIN | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "REQUESTBIN | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "SALESFORCE | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SALESFORCE | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SALESFORCE | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SALESFORCE | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SALESFORCE | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SALESFORCE | LS |  | ALEAUD | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "SALESFORCE | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WEBTIMER | LS |  | TIMESHEETHRCONNECTOR_DATATRANS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WEBTIMER | LS |  | TIMESHEETHRCONNECTOR_DATATRANS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WEBTIMER | LS |  | TIMESHEETHRCONNECTOR_DATATRANS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WEBTIMER | LS |  | TIMESHEETHRCONNECTOR_DATATRANS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WEBTIMER | LS |  | TIMESHEETHRCONNECTOR_DATATRANS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WEBTIMER | LS |  | TIMESHEETHRCONNECTOR_DATATRANS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WORKDAY | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WORKDAY | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WORKDAY | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WORKDAY | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WORKDAY | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WORKDAY | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WORKDAY | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WORKDAY | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WORKDAY | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WORKDAY | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WORKDAY | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WORKDAY | LS |  | STATUS | IN",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": null,
+        "receiver_name": "SAP Solution Manager"
+      },
+      {
+        "name": "WPO | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WPO | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WPO | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WPO | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WPO | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      },
+      {
+        "name": "WPO | LS |  | EXCHANGE_RATE | OUT | EXCHANGE_RATE01 | ",
+        "type": "\"SAP_PO\"",
+        "description": null,
+        "sender_name": "SAP Solution Manager",
+        "receiver_name": null
+      }
+    ],
+    "total": 201,
+    "offset": 0,
+    "entity": "inventory"
+  },
+  "total_items": 201,
+  "execution_time_ms": 115323.834,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": null
+}

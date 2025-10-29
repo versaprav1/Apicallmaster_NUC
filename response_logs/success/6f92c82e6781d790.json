@@ -1,0 +1,59 @@
+{
+  "log_id": "6f92c82e6781d790",
+  "timestamp": "2025-10-28T14:01:53.502944",
+  "question": "Find interfaces from SAP Solution Manager",
+  "answer": "Failed to analyze response: Error generating response with gemini-2.0-flash: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVAILABLE'}}",
+  "status": "success",
+  "method_used": "duckdb",
+  "model_used": "gemini-2.0-flash",
+  "data_source": "duckdb",
+  "intent": "specific_search",
+  "requires_graph": false,
+  "query_type": null,
+  "graph_seeds": null,
+  "api_query": {
+    "query": {
+      "entity": "inventory",
+      "fields": [
+        "name",
+        "sender_name",
+        "receiver_name",
+        "description",
+        "type"
+      ],
+      "where": [
+        {
+          "option": 1,
+          "conditions": [
+            {
+              "field": {
+                "name": "type",
+                "in": [
+                  "SAP_ODATA",
+                  "SAP_SOAP",
+                  "SAP_IDOC",
+                  "SAP_IS_APIM",
+                  "SAP_PO"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "endpoint": "https://whint.prod.apimanagement.eu10.hana.ondemand.com:443/wic/interfaces",
+  "sql_query": "SELECT norm_name, norm_sender_name, norm_receiver_name, norm_description, norm_type FROM inventory_view WHERE (CAST(norm_type AS VARCHAR) = :param_0) ORDER BY norm_name ",
+  "response_data": {
+    "data": [],
+    "total": 0,
+    "offset": 0,
+    "entity": "inventory"
+  },
+  "total_items": 0,
+  "execution_time_ms": 1519.092,
+  "error_message": null,
+  "error_type": null,
+  "error_traceback": null,
+  "metadata": null
+}

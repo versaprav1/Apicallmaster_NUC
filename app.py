@@ -1450,6 +1450,102 @@ def chat_page():
                 
                 **Note:** These queries only work when Neo4j Graph is selected as the data source.
                 """)
+        
+        # Live Data Sync Section (for all sources)
+        st.markdown("---")
+        st.markdown("### 🔄 Live Data Sync")
+        st.markdown("Fetch live data from API and update all storage systems")
+        
+        with st.expander("Sync Options", expanded=False):
+            col1, col2 = st.columns(2)
+            with col1:
+                sync_to_json = st.checkbox("Update JSON file", value=True, help="Save to timestamped JSON file")
+                sync_to_duckdb = st.checkbox("Update DuckDB", value=True, help="Update DuckDB database")
+            with col2:
+                sync_to_neo4j = st.checkbox("Update Neo4j", value=False, help="Update Neo4j graph database")
+                sync_max_records = st.number_input("Max records (0 = all)", min_value=0, max_value=100000, value=0, step=1000, help="Limit for testing (0 = fetch all)")
+            
+            if st.button("🚀 Start Live Sync", type="primary", key="start_live_sync"):
+                try:
+                    from live_data_sync import LiveDataSync
+                    
+                    with st.spinner("🔄 Syncing live data..."):
+                        # Create progress display
+                        progress_text = st.empty()
+                        progress_bar = st.progress(0)
+                        
+                        # Initialize syncer
+                        progress_text.text("📡 Connecting to WHINT API...")
+                        progress_bar.progress(10)
+                        
+                        syncer = LiveDataSync()
+                        
+                        # Fetch data
+                        progress_text.text("📥 Fetching live data from API...")
+                        progress_bar.progress(20)
+                        
+                        max_recs = sync_max_records if sync_max_records > 0 else None
+                        data = syncer.fetch_live_data(max_records=max_recs)
+                        
+                        if not data:
+                            st.error("❌ No data fetched from API")
+                        else:
+                            progress_bar.progress(40)
+                            
+                            # Save to JSON
+                            json_file = None
+                            if sync_to_json:
+                                progress_text.text("💾 Saving to JSON...")
+                                json_file = syncer.save_to_json(data)
+                                progress_bar.progress(50)
+                            else:
+                                # Save to temp file for other syncs
+                                import tempfile
+                                temp_fd, json_file = tempfile.mkstemp(suffix='.json', prefix='sync_')
+                                with os.fdopen(temp_fd, 'w') as f:
+                                    json.dump(data, f)
+                                progress_bar.progress(50)
+                            
+                            # Update DuckDB
+                            if sync_to_duckdb and json_file:
+                                progress_text.text("🦆 Updating DuckDB...")
+                                duckdb_success = syncer.update_duckdb(json_file)
+                                progress_bar.progress(70)
+                            
+                            # Update Neo4j
+                            if sync_to_neo4j and json_file:
+                                progress_text.text("🕸️  Updating Neo4j...")
+                                neo4j_success = syncer.update_neo4j(json_file)
+                                progress_bar.progress(90)
+                            
+                            # Cleanup temp file if used
+                            if not sync_to_json and json_file and os.path.exists(json_file):
+                                os.remove(json_file)
+                            
+                            progress_bar.progress(100)
+                            progress_text.text("✅ Sync completed!")
+                            
+                            # Show results
+                            st.success(f"✅ Successfully synced {len(data)} records!")
+                            
+                            with st.expander("📊 Sync Summary", expanded=True):
+                                st.markdown(f"**Records Fetched:** {len(data)}")
+                                st.markdown(f"**Timestamp:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+                                if sync_to_json and json_file:
+                                    st.markdown(f"**JSON File:** `{json_file}`")
+                                if sync_to_duckdb:
+                                    st.markdown(f"**DuckDB:** {'✅ Updated' if 'duckdb_success' in locals() and duckdb_success else '⏭️  Skipped'}")
+                                if sync_to_neo4j:
+                                    st.markdown(f"**Neo4j:** {'✅ Updated' if 'neo4j_success' in locals() and neo4j_success else '⏭️  Skipped'}")
+                            
+                            st.info("💡 Tip: Now you can query the updated data using any data source!")
+                
+                except ImportError:
+                    st.error("❌ Live Data Sync module not found. Make sure `live_data_sync.py` exists.")
+                except Exception as e:
+                    st.error(f"❌ Sync failed: {str(e)}")
+                    with st.expander("Error Details"):
+                        st.code(traceback.format_exc())
 
     # Sidebar with connection info
     with st.sidebar:
@@ -1836,7 +1932,98 @@ def chat_page():
                 else:  # API
                     data_source_type = "api"
                 
+                # SPECIAL HANDLING FOR API MODE: Skip routing, use direct API fetch
+                # This preserves the original simple behavior: fetch live data → chunk → analyze
+                if source == "API":
+                    st.info("📡 Fetching live data from WHINT API...")
+                    
+                    # Create API query
+                    api_query = create_api_query(user_question, selected_model)
+                    api_endpoint = determine_api_endpoint(api_query, st.session_state.credentials['api_url'])
+                    
+                    if api_query:
+                        start_time = datetime.now()
+                        
+                        # Execute live API call
+                        api_response = execute_api_query(api_query, st.session_state.credentials)
+                        if api_response:
+                            # Analyze with chunking mechanism (handles large responses)
+                            analysis = analyze_response(user_question, api_response, st.session_state.credentials['openai_key'])
+                            
+                            execution_time = (datetime.now() - start_time).total_seconds() * 1000
+                            
+                            # Store Q&A pair in vector database
+                            try:
+                                intent = analyze_user_intent(user_question)
+                                
+                                qa_id = st.session_state.vector_store.store_qa_pair(
+                                    question=user_question,
+                                    answer=analysis,
+                                    query=api_query,
+                                    endpoint=api_endpoint,
+                                    intent=intent,
+                                    data_source="api",
+                                    response_data=api_response,
+                                    method="api_direct"
+                                )
+                                
+                                if qa_id:
+                                    st.success(f"✅ Fetched live data and stored in vector database (ID: {qa_id[:8]}...)")
+                            except Exception as e:
+                                st.warning(f"⚠️ Data fetched but storage failed: {str(e)}")
+                            
+                            # Log the response
+                            try:
+                                st.session_state.response_logger.log_response(
+                                    question=user_question,
+                                    answer=analysis,
+                                    status="success",
+                                    method_used="api_direct",
+                                    model_used=selected_model,
+                                    data_source="api",
+                                    intent=intent,
+                                    api_query=api_query,
+                                    endpoint=api_endpoint,
+                                    response_data=api_response,
+                                    execution_time_ms=execution_time
+                                )
+                            except Exception as e:
+                                pass  # Non-fatal
+                            
+                            st.markdown("### Answer (from Live API)")
+                            st.markdown(analysis)
+                            
+                            with st.expander("📊 Response Details", expanded=False):
+                                st.markdown(f"**⏱️ Execution Time:** {execution_time:.0f}ms")
+                                st.markdown(f"**🔗 API Endpoint:** `{api_endpoint}`")
+                                
+                                # Show data summary
+                                if isinstance(api_response, dict) and 'data' in api_response:
+                                    data_count = len(api_response.get('data', []))
+                                    st.markdown(f"**📊 Records Returned:** {data_count}")
+                                    st.markdown(f"**💾 Storage:** Vector database (ChromaDB)")
+                                    st.markdown(f"**📝 Log:** `response_logs/daily/responses_{datetime.now().strftime('%Y-%m-%d')}.jsonl`")
+                                    
+                                    if data_count > 0:
+                                        st.markdown("**Sample (first 3 records):**")
+                                        st.json(api_response['data'][:3])
+                                else:
+                                    st.json(api_response)
+                            
+                            with st.expander("🔧 Technical Details", expanded=False):
+                                st.markdown("**Generated API Query:**")
+                                st.json(api_query)
+                                st.markdown("**Full API Response:**")
+                                st.json(api_response)
+                        else:
+                            st.error("Failed to fetch data from API.")
+                    else:
+                        st.error("Failed to create API query from your question.")
+                    
+                    return  # Exit early for API mode
+                
                 # Step 2: Route query to appropriate method based on data source
+                # (Only for non-API sources: Local JSON, DuckDB, Neo4j, Browser)
                 st.info(f"🔍 Analyzing your question and routing to best method for {data_source_type}...")
                 
                 # Initialize method router
@@ -2402,22 +2589,9 @@ def chat_page():
                             else:
                                 st.error("Local execution failed. Check file path or content, or switch back to API.")
                                 return
-
-                    # API mode: bypass cache (no read, no write)
-                    else:  # source == "API"
-                        st.info("📡 Fetching data from WHINT API (cache disabled)...")
-                        api_response = execute_api_query(api_query, st.session_state.credentials)
-                        if api_response:
-                            analysis = analyze_response(user_question, api_response, st.session_state.credentials['openai_key'])
-                            st.markdown("### Answer")
-                            st.markdown(analysis)
-                            with st.expander("Technical Details"):
-                                st.markdown("**Generated API Query:**")
-                                st.json(api_query)
-                                st.markdown("**API Response:** (live)")
-                                st.json(api_response)
-                        else:
-                            st.error("Failed to fetch data from API.")
+                    
+                    # Note: API mode is handled earlier (line ~1937) with direct fetch
+                    # This section only handles Local JSON and DuckDB
                 else:
                     st.error("Failed to create API query from your question.")
         else:
